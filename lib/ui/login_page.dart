@@ -18,14 +18,18 @@ class _LoginPageState extends State<LoginPage> {
 
   void subtractNumbers() async {
     var sdff = await sfg.login("bso@gmail.com", "dfgfdg");
-
-    print(sdff);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage("images/background.png"),
+          fit: BoxFit.fitHeight,
+        ),
+      ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -34,8 +38,7 @@ class _LoginPageState extends State<LoginPage> {
               hint: "E-mail",
               keyboardType: TextInputType.emailAddress,
             ),
-            new PasswordTextField(
-                hint: "Hasło"),
+            new PasswordTextField(hint: "Hasło"),
             new MyButton(onPressed: subtractNumbers, buttonText: "LOG IN")
           ],
         ),
