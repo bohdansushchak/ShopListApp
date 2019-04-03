@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
 
 abstract class BaseTextField extends StatelessWidget {
@@ -68,9 +69,8 @@ class PasswordTextField extends BaseTextField {
             focusedBorder: border,
             suffixIcon: new IconButton(
                 onPressed: _showPassword,
-                icon: new Image(
-                  image: AssetImage('images/eye.png'),
-                )),
+                icon: new SvgPicture.asset('assets/images/eye.svg'),
+                ),
           )),
     );
   }

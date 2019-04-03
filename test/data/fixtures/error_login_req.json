@@ -1,0 +1,9 @@
+{
+    "error": {
+      "code": 0,
+      "message": "",
+      "exception": "Symfony\\Component\\HttpKernel\\Exception\\MethodNotAllowedHttpException",
+      "line": 233,
+      "path": "/var/www/test_api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php"
+    }
+  }

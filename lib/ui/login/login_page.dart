@@ -8,7 +8,7 @@ import 'package:shop_list_app/ui/widget/custom_text_field.dart';
 class LoginPage extends StatefulWidget {
   final Widget child;
 
-  LoginPage({Key key, this.child}) : super(key: key);
+  LoginPage({Key key, this.child}) : super(key: key); 
 
   _LoginPageState createState() => _LoginPageState();
 }
@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
         body: new Container(
       decoration: new BoxDecoration(
         image: new DecorationImage(
-          image: new AssetImage("images/background.png"),
+          image: new AssetImage("assets/images/background.png"),
           fit: BoxFit.fitHeight,
         ),
       ),
