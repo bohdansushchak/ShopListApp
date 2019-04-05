@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:kiwi/kiwi.dart' as kiwi;
 import 'package:shop_list_app/ui/login/login_bloc.dart';
+import 'package:shop_list_app/ui/login/login_state.dart';
 import 'package:shop_list_app/ui/widget/custom_buttons.dart';
 import 'package:shop_list_app/ui/widget/custom_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_list_app/ui/widget/password_field.dart';
 
 class LoginPage extends StatefulWidget {
   final Widget child;
@@ -29,7 +31,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(bloc: _loginBloc, child: _buildScafold());
+    return BlocProvider(
+      bloc: _loginBloc,
+      child: _buildScafold(),
+    );
   }
 
   Scaffold _buildScafold() {
@@ -41,23 +46,37 @@ class _LoginPageState extends State<LoginPage> {
           fit: BoxFit.fitHeight,
         ),
       ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new CustomTextField(
-              hint: "E-mail",
-              keyboardType: TextInputType.emailAddress,
-              controller: emailTextController,
-            ),
-            new PasswordTextField(
-              hint: "Hasło",
-              controller: passwordTextController,
-            ),
-            new MyButton(onPressed: _login, buttonText: "LOG IN")
-          ],
+      child: new Stack(children: <Widget>[
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new CustomTextField(
+                hint: "E-mail",
+                keyboardType: TextInputType.emailAddress,
+                controller: emailTextController,
+              ),
+              new PasswordTextField(
+                hint: "Hasło",
+                controller: passwordTextController,
+              ),
+              new MyButton(onPressed: _login, buttonText: "LOG IN"),
+            ],
+          ),
         ),
-      ),
+        new Align(
+            child: new BlocBuilder(
+                bloc: _loginBloc,
+                builder: (context, LoginState state) {
+                  if (state.isLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else
+                    return new Container();
+                }),
+            alignment: FractionalOffset.center)
+      ]),
     ));
   }
 
