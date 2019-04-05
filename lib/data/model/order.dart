@@ -33,4 +33,10 @@ abstract class Order implements Built<Order, OrderBuilder> {
   }
 
   static Serializer<Order> get serializer => _$orderSerializer;
+  
+/*
+  factory Order.fromMapJson(Map<String, dynamic> mapJson) {
+    return Order._
+  }
+  */
 }
