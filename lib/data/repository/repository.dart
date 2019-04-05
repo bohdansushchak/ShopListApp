@@ -2,27 +2,23 @@ import 'package:built_collection/built_collection.dart';
 import 'package:shop_list_app/data/model/login_result.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/data/network/shop_list_data_source.dart';
+import 'package:shop_list_app/internal/token_manager.dart';
+
 
 class Repository {
   ShopListDataSource _dataSource;
-
-  Repository(this._dataSource);
-
-  String get token => _getSavedToken();
+  TokenManager _tokenManager;
+  
+  Repository(this._dataSource, this._tokenManager);
 
   Future<LoginResult> login(String email, String password) async {
     final loginResult = await _dataSource.login(email, password);
-    _saveToken(loginResult.apiToken);
+    await _tokenManager.saveToken(loginResult);
     return loginResult;
   }
 
-  void _saveToken(String apiToken) {}
-
-  String _getSavedToken() {
-    return "";
-  }
-
   Future<BuiltList<Order>> getOrders() async {
+    final token = await _tokenManager.getSavedToken();
     final ordersResult = await _dataSource.getOrders(token: token);
 
     var ordersBuiltList = BuiltList<Order>(ordersResult);
