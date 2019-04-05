@@ -1,8 +1,10 @@
 library order_list_event;
 
-abstract class OrderListEvent{}
+abstract class OrderListEvent {}
 
-abstract class OrderListInitiatedEvent extends OrderListEvent {}
+class OrderListInitiatedEvent extends OrderListEvent {}
 
-abstract class OrderListAddOrderEvent extends OrderListEvent {}
+class FetchNextOrderListPage extends OrderListEvent {}
+
+class OrderListAddOrderEvent extends OrderListEvent {}
 

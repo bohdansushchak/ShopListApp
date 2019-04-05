@@ -13,6 +13,8 @@ abstract class LoginState implements Built<LoginState, LoginStateBuilder> {
 
   factory LoginState([updates(LoginStateBuilder b)]) = _$LoginState;
 
+  bool get isSuccesful => error.isEmpty && !isLoading && isHasToken;
+
   factory LoginState.initial(bool hasSavedToken) {
     return LoginState((b) => b
           ..isLoading = false

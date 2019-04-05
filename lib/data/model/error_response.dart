@@ -10,9 +10,11 @@ part 'error_response.g.dart';
 
 abstract class ErrorResponse
     implements Built<ErrorResponse, ErrorResponseBuilder> {
+  @BuiltValueField(wireName: 'code')
   int get code;
+  @BuiltValueField(wireName: 'message')
   String get message;
-  
+
   ErrorResponse._();
 
   factory ErrorResponse([updates(ErrorResponseBuilder b)]) = _$ErrorResponse;
@@ -22,7 +24,7 @@ abstract class ErrorResponse
         .encode(serializers.serializeWith(ErrorResponse.serializer, this));
   }
 
-  static ErrorResponse fromJson(String jsonString) {
+  factory ErrorResponse.fromJson(String jsonString) {
     return serializers.deserializeWith(
         ErrorResponse.serializer, json.decode(jsonString));
   }

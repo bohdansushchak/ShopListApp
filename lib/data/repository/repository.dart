@@ -4,7 +4,6 @@ import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/data/network/shop_list_data_source.dart';
 import 'package:shop_list_app/internal/token_manager.dart';
 
-
 class Repository {
   ShopListDataSource _dataSource;
   TokenManager _tokenManager;
@@ -17,9 +16,9 @@ class Repository {
     return loginResult;
   }
 
-  Future<BuiltList<Order>> getOrders() async {
+  Future<BuiltList<Order>> getOrders(int offset, int limit) async {
     final token = await _tokenManager.getSavedToken();
-    final ordersResult = await _dataSource.getOrders(token: token);
+    final ordersResult = await _dataSource.getOrders(token: token, offset: offset, limit: limit);
 
     var ordersBuiltList = BuiltList<Order>(ordersResult);
     return ordersBuiltList;

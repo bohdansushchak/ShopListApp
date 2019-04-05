@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shop_list_app/data/model/error_response.dart';
 import 'package:shop_list_app/dependency_container.dart';
 import 'package:shop_list_app/ui/login/login_page.dart';
+import 'package:shop_list_app/ui/shop_list/order_list_page.dart';
 
 void main() {
   initKiwi();
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      home: new LoginPage(),    
+      home: new OrderListPage(),    
     );
   }
 }

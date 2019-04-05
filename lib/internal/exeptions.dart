@@ -5,3 +5,7 @@ class ServerException implements Exception {
   int code;
   ServerException({this.message, this.code});
 }
+
+class NoOrdersException implements Exception{
+  final message = "No orders";
+}

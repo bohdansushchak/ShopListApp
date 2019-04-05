@@ -10,7 +10,7 @@ class TokenManager {
 
   TokenManager(this._preferences);
 
-  String token;
+  String token = "";
 
   Future<bool> saveToken(LoginResult loginResult) async {
     final prefs = await _preferences;

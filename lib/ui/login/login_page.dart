@@ -6,6 +6,7 @@ import 'package:shop_list_app/ui/login/login_state.dart';
 import 'package:shop_list_app/ui/widget/custom_buttons.dart';
 import 'package:shop_list_app/ui/widget/custom_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_list_app/ui/widget/decorated_container.dart';
 import 'package:shop_list_app/ui/widget/password_field.dart';
 
 class LoginPage extends StatefulWidget {
@@ -39,13 +40,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Scaffold _buildScafold() {
     return Scaffold(
-        body: new Container(
-      decoration: new BoxDecoration(
-        image: new DecorationImage(
-          image: new AssetImage("assets/images/background.png"),
-          fit: BoxFit.fitHeight,
-        ),
-      ),
+        body: new DecoratedContainer(
       child: new Stack(children: <Widget>[
         Center(
           child: Column(
@@ -72,8 +67,8 @@ class _LoginPageState extends State<LoginPage> {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else
-                    return new Container();
+                  }
+                  return new Container();
                 }),
             alignment: FractionalOffset.center)
       ]),

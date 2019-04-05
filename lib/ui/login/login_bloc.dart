@@ -23,7 +23,9 @@ class LoginBloc extends Bloc<LoginPageEvent, LoginState> {
   }
 
   void logIn(String email, String password) {
-    dispatch(LoginEvent((b) => {b..email = email, b..password = password}));
+    dispatch(LoginEvent((b) => b
+      ..email = email
+      ..password = password));
   }
 
   Stream<LoginState> _login(LoginEvent event) async* {
