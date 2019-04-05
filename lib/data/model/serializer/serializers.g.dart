@@ -7,6 +7,8 @@ part of serializers;
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(ErrorResponse.serializer)
+      ..add(MyResponse.serializer)
       ..add(Order.serializer)
       ..add(Product.serializer)
       ..addBuilderFactory(const FullType(List, const [const FullType(Product)]),

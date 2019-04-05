@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_list_app/dependency_container.dart';
-import 'package:shop_list_app/ui/login_page.dart';
+import 'package:shop_list_app/ui/login/login_page.dart';
 
 void main() {
   initKiwi();
@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        brightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
       home: LoginPage(),

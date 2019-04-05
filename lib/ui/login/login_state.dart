@@ -7,19 +7,17 @@ part 'login_state.g.dart';
 abstract class LoginState implements Built<LoginState, LoginStateBuilder> {
   bool get isHasToken;
   bool get isLoading;
-  bool get isLoggedIn;
   String get error;
 
   LoginState._();
 
   factory LoginState([updates(LoginStateBuilder b)]) = _$LoginState;
 
-  factory LoginState.initial() {
+  factory LoginState.initial(bool hasSavedToken) {
     return LoginState((b) => b
           ..isLoading = false
           ..error = ''
-          ..isLoggedIn = false
-          ..isHasToken = false //TODO: fix this get from pref
+          ..isHasToken = hasSavedToken
         );
   }
 
@@ -27,8 +25,7 @@ abstract class LoginState implements Built<LoginState, LoginStateBuilder> {
     return LoginState((b) => b
           ..isLoading = true
           ..error = ''
-          ..isLoggedIn = false
-          ..isHasToken = false //TODO: fix this get from pref
+          ..isHasToken = false 
         );
   }
 
@@ -36,7 +33,6 @@ abstract class LoginState implements Built<LoginState, LoginStateBuilder> {
     return LoginState((b) => b
       ..isLoading = false
       ..error = error
-      ..isLoggedIn = true
       ..isHasToken = true
       );
   }
@@ -45,7 +41,6 @@ abstract class LoginState implements Built<LoginState, LoginStateBuilder> {
     return LoginState((b) => b
       ..isLoading = false
       ..error = ''
-      ..isLoggedIn = true
-      ..isHasToken = true);
+      ..isHasToken = token.isNotEmpty);
   }
 }

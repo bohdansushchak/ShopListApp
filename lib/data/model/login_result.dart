@@ -1,28 +1,23 @@
 library login_result;
 
-import 'dart:convert';
+class LoginResult {
+  int id;
+  String email;
+  String updatedAt;
+  String createdAt;
+  String apiToken;
+//TODO : add api_token_expires
 
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:shop_list_app/data/model/serializer/serializers.dart';
+  LoginResult._(
+      {this.id, this.email, this.updatedAt, this.createdAt, this.apiToken});
 
-part 'login_result.g.dart';
-
-abstract class LoginResult implements Built<LoginResult, LoginResultBuilder> {
-
-LoginResult._();
-
-factory LoginResult([updates(LoginResultBuilder b)]) = _$LoginResult;
-
-  String toJson() {
-    return json.encode(
-        serializers.serializeWith(LoginResult.serializer, this));
+  factory LoginResult.fromJson(Map<String, dynamic> mapJson) {
+    return new LoginResult._(
+      id: mapJson["id"],
+      email: mapJson["email"],
+      apiToken: mapJson["api_token"],
+      createdAt: mapJson["created_at"],
+      updatedAt: mapJson["updated_at"],
+    );
   }
-
-  static LoginResult fromJson(String jsonString) {
-    return serializers.deserializeWith(
-        LoginResult.serializer, json.decode(jsonString));
-  }
-
-  static Serializer<LoginResult> get serializer => _$loginResultSerializer;
 }

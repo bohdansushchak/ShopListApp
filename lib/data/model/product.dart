@@ -21,7 +21,7 @@ abstract class Product implements Built<Product, ProductBuilder> {
     return json.encode(serializers.serializeWith(Product.serializer, this));
   }
 
-  static Product fromJson(String, jsonString) {
+  static Product fromJson(String jsonString) {
     return serializers.deserializeWith(
         Product.serializer, json.decode(jsonString));
   }

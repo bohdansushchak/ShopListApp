@@ -16,4 +16,3 @@ abstract class LoginEvent extends LoginPageEvent
   factory LoginEvent([updates(LoginEventBuilder b)]) = _$LoginEvent;
 }
 
-class LogOutEvent extends LoginPageEvent {}

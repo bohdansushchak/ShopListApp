@@ -12,23 +12,17 @@ class _$LoginState extends LoginState {
   @override
   final bool isLoading;
   @override
-  final bool isLoggedIn;
-  @override
   final String error;
 
   factory _$LoginState([void updates(LoginStateBuilder b)]) =>
       (new LoginStateBuilder()..update(updates)).build();
 
-  _$LoginState._({this.isHasToken, this.isLoading, this.isLoggedIn, this.error})
-      : super._() {
+  _$LoginState._({this.isHasToken, this.isLoading, this.error}) : super._() {
     if (isHasToken == null) {
       throw new BuiltValueNullFieldError('LoginState', 'isHasToken');
     }
     if (isLoading == null) {
       throw new BuiltValueNullFieldError('LoginState', 'isLoading');
-    }
-    if (isLoggedIn == null) {
-      throw new BuiltValueNullFieldError('LoginState', 'isLoggedIn');
     }
     if (error == null) {
       throw new BuiltValueNullFieldError('LoginState', 'error');
@@ -48,16 +42,13 @@ class _$LoginState extends LoginState {
     return other is LoginState &&
         isHasToken == other.isHasToken &&
         isLoading == other.isLoading &&
-        isLoggedIn == other.isLoggedIn &&
         error == other.error;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, isHasToken.hashCode), isLoading.hashCode),
-            isLoggedIn.hashCode),
-        error.hashCode));
+        $jc($jc(0, isHasToken.hashCode), isLoading.hashCode), error.hashCode));
   }
 
   @override
@@ -65,7 +56,6 @@ class _$LoginState extends LoginState {
     return (newBuiltValueToStringHelper('LoginState')
           ..add('isHasToken', isHasToken)
           ..add('isLoading', isLoading)
-          ..add('isLoggedIn', isLoggedIn)
           ..add('error', error))
         .toString();
   }
@@ -82,10 +72,6 @@ class LoginStateBuilder implements Builder<LoginState, LoginStateBuilder> {
   bool get isLoading => _$this._isLoading;
   set isLoading(bool isLoading) => _$this._isLoading = isLoading;
 
-  bool _isLoggedIn;
-  bool get isLoggedIn => _$this._isLoggedIn;
-  set isLoggedIn(bool isLoggedIn) => _$this._isLoggedIn = isLoggedIn;
-
   String _error;
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
@@ -96,7 +82,6 @@ class LoginStateBuilder implements Builder<LoginState, LoginStateBuilder> {
     if (_$v != null) {
       _isHasToken = _$v.isHasToken;
       _isLoading = _$v.isLoading;
-      _isLoggedIn = _$v.isLoggedIn;
       _error = _$v.error;
       _$v = null;
     }
@@ -120,10 +105,7 @@ class LoginStateBuilder implements Builder<LoginState, LoginStateBuilder> {
   _$LoginState build() {
     final _$result = _$v ??
         new _$LoginState._(
-            isHasToken: isHasToken,
-            isLoading: isLoading,
-            isLoggedIn: isLoggedIn,
-            error: error);
+            isHasToken: isHasToken, isLoading: isLoading, error: error);
     replace(_$result);
     return _$result;
   }

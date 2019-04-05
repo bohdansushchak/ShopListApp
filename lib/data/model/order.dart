@@ -24,10 +24,10 @@ abstract class Order implements Built<Order, OrderBuilder> {
   factory Order([updates(OrderBuilder b)]) = _$Order;
 
   String toJson() {
-    return json.encode(serializers.serializeWith(Product.serializer, this));
+    return json.encode(serializers.serializeWith(Order.serializer, this));
   }
 
-  static Order fromJson(String, jsonString) {
+  static Order fromJson(String jsonString) {
     return serializers.deserializeWith(
         Order.serializer, json.decode(jsonString));
   }

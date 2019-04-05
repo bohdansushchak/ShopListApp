@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:shop_list_app/data/repository/repository.dart';
 import 'package:shop_list_app/ui/login/login_event.dart';
 import 'package:shop_list_app/ui/login/login_state.dart';
+import 'package:shop_list_app/internal/exeptions.dart';
 
 class LoginBloc extends Bloc<LoginPageEvent, LoginState> {
   final Repository _repository;
@@ -9,25 +10,37 @@ class LoginBloc extends Bloc<LoginPageEvent, LoginState> {
   LoginBloc(this._repository) : super();
 
   @override
-  LoginState get initialState => LoginState.initial();
+  LoginState get initialState {
+    var savedToken = _repository.getSavedToken();
+    return LoginState.initial(savedToken.isNotEmpty);
+  }
 
   @override
-  Stream<LoginState> mapEventToState(
-      LoginState currentState, LoginPageEvent event) async* {
+  Stream<LoginState> mapEventToState(LoginPageEvent event) async* {
     if (event is LoginEvent) {
-      yield* login(event);
+      yield* _login(event);
     }
   }
 
-  Stream<LoginState> login(LoginEvent event) async* {
+  void logIn(String email, String password) {
+    dispatch(LoginEvent((b) => {b..email = email, b..password = password}));
+  }
+
+  Stream<LoginState> _login(LoginEvent event) async* {
     if (event.email.isEmpty || event.password.isEmpty) {
-      yield LoginState.initial();
+      if (event.email.isEmpty)
+        yield LoginState.failure("Email can't be a empty");
+      else
+        yield LoginState.failure("Password can't be empty");
     } else {
       yield LoginState.loading();
-    }
-
-    try {
-      final loginResult = await _repository.
+      try {
+        final loginResult =
+            await _repository.login(event.email, event.password);
+        yield LoginState.success(loginResult.apiToken);
+      } on ServerException catch (e) {
+        yield LoginState.failure(e.message);
+      }
     }
   }
 }
