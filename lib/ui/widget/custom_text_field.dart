@@ -6,7 +6,7 @@ abstract class BaseTextField extends StatelessWidget {
   String hint;
   EdgeInsets padding;
   TextInputType keyboardType;
-  ValueChanged<String> onChanged;
+  TextEditingController controller;
 
   final UnderlineInputBorder border = new UnderlineInputBorder(
       borderSide: new BorderSide(color: COLOR_ACCENT, width: 2));
@@ -15,7 +15,7 @@ abstract class BaseTextField extends StatelessWidget {
       {this.hint,
       this.keyboardType: TextInputType.text,
       this.padding,
-      this.onChanged});
+      this.controller});
 }
 
 class CustomTextField extends BaseTextField {
@@ -23,19 +23,20 @@ class CustomTextField extends BaseTextField {
       {hint,
       keyboardType,
       padding: const EdgeInsets.fromLTRB(25, 10, 25, 20),
+      controller,
       onChanged})
       : super(
             hint: hint,
             keyboardType: keyboardType,
             padding: padding,
-            onChanged: onChanged);
+            controller: controller);
 
   @override
   Widget build(BuildContext context) {
     return new Container(
         padding: padding,
         child: TextField(
-          onChanged: onChanged,
+          controller: controller,
           keyboardType: keyboardType,
           decoration: new InputDecoration(
               hintText: hint, enabledBorder: border, focusedBorder: border),
@@ -43,34 +44,56 @@ class CustomTextField extends BaseTextField {
   }
 }
 
-class PasswordTextField extends BaseTextField {
-  PasswordTextField(
-      {hint,
-      keyboardType,
-      padding: const EdgeInsets.fromLTRB(25, 10, 25, 20),
-      onChanged})
-      : super(
-            hint: hint,
-            keyboardType: keyboardType,
-            padding: padding,
-            onChanged: onChanged);
+class PasswordTextField extends StatefulWidget {
+  String hint;
+  EdgeInsets padding;
+  TextEditingController controller;
 
-  void _showPassword() {}
+  final UnderlineInputBorder border = new UnderlineInputBorder(
+      borderSide: new BorderSide(color: COLOR_ACCENT, width: 2));
+
+  PasswordTextField(
+      {this.hint,
+      this.padding: const EdgeInsets.fromLTRB(25, 10, 25, 20),
+      this.controller});
+
+  @override
+  _PasswordTextFieldState createState() => _PasswordTextFieldState(
+      hint: hint, padding: padding, controller: controller, border: border);
+}
+
+class _PasswordTextFieldState extends State<PasswordTextField> {
+  String hint;
+  EdgeInsets padding;
+  TextEditingController controller;
+  UnderlineInputBorder border;
+
+  bool _obscureText = true;
+
+  void _changePasswordShowing() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  _PasswordTextFieldState({this.hint, this.padding, this.controller, this.border});
+
   @override
   Widget build(BuildContext context) {
     return new Container(
       padding: padding,
       child: new TextField(
-          onChanged: onChanged,
           keyboardType: TextInputType.text,
+          controller: controller,
+          obscureText: _obscureText,
           decoration: InputDecoration(
             hintText: hint,
-            enabledBorder: border,
+            enabledBorder: border, 
             focusedBorder: border,
             suffixIcon: new IconButton(
-                onPressed: _showPassword,
-                icon: new SvgPicture.asset('assets/images/eye.svg'),
-                ),
+              onPressed: _changePasswordShowing,
+              icon: new SvgPicture.asset('assets/images/eye.svg'),
+            ),
           )),
     );
   }

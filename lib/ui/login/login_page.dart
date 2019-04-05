@@ -17,19 +17,19 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _loginBloc = kiwi.Container().resolve<LoginBloc>();
 
+  final emailTextController = TextEditingController();
+  final passwordTextController = TextEditingController();
+
   void _login() {
-    _loginBloc.logIn("skdfgomfdgmail.com", "123Qwer");
+    var email = emailTextController.text;
+    var password = passwordTextController.text;
+
+    _loginBloc.logIn(email, password);
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(bloc: _loginBloc, child: _buildScafold());
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _loginBloc.dispose();
   }
 
   Scaffold _buildScafold() {
@@ -48,12 +48,24 @@ class _LoginPageState extends State<LoginPage> {
             new CustomTextField(
               hint: "E-mail",
               keyboardType: TextInputType.emailAddress,
+              controller: emailTextController,
             ),
-            new PasswordTextField(hint: "Hasło"),
+            new PasswordTextField(
+              hint: "Hasło",
+              controller: passwordTextController,
+            ),
             new MyButton(onPressed: _login, buttonText: "LOG IN")
           ],
         ),
       ),
     ));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _loginBloc.dispose();
+    emailTextController.dispose();
+    passwordTextController.dispose();
   }
 }
