@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shop_list_app/data/model/add_order_model.dart';
 import 'package:shop_list_app/data/model/login_result.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/internal/exeptions.dart';
@@ -13,11 +14,10 @@ class ShopListDataSource {
 
   ShopListDataSource(this._client);
 
-  Future<List<Order>> getOrders({
-    @required String token,
-    @required int offset,
-    @required int limit}
-  ) async {
+  Future<List<Order>> getOrders(
+      {@required String token,
+      @required int offset,
+      @required int limit}) async {
     assert(token.isNotEmpty);
     assert(offset != null);
     assert(limit != null);
@@ -33,14 +33,15 @@ class ShopListDataSource {
 
     final response = await _client.post(urlEncoded, body: body);
 
-    final mapResponse = json.decode(response.body);
     if (response.statusCode == 200) {
+      final mapResponse = json.decode(response.body);
       var orderList = (mapResponse["data"] as List);
+
       if (orderList.length == 0) throw NoOrdersException();
 
       return orderList.map((order) => Order.fromMapJson(order)).toList();
     } else {
-      _throwException(mapResponse);
+      _provideException(response);
     }
   }
 
@@ -50,21 +51,71 @@ class ShopListDataSource {
     final body = {"email": email, "password": password};
 
     final response = await _client.post(urlEncoded, body: body);
-    final mapResponse = json.decode(response.body);
 
-    if (response.statusCode == 200)
+    if (response.statusCode == 200) {
+      final mapResponse = json.decode(response.body);
       return LoginResult.fromJson(mapResponse["data"]);
-    else {
-      _throwException(mapResponse);
+    } else {
+      _provideException(response);
     }
   }
 
-  void _throwException(Map<String, dynamic> map) {
-    if (map.containsKey("error")) {
-      var message = map["error"]["message"];
-      var code = map["error"]["code"];
-      throw ServerException(message: message, code: code);
+  Future<bool> addOrder(AddOrderModel model) async {
+    final urlRaw = "$_baseUrl/addOrder";
+    final urlEncoded = Uri.encodeFull(urlRaw);
+
+    final response = await _client.post(urlEncoded, body: model.toJson());
+
+    if (response.statusCode == 200)
+      return true;
+    else
+      _provideException(response);
+  }
+
+  Future<bool> refreshToken(String token) async {
+    final urlRaw = "$_baseUrl/refresh";
+    final urlEncoded = Uri.encodeFull(urlRaw);
+    final body = {"api_token": token};
+
+    final response = await _client.post(urlEncoded, body: body);
+
+    if (response.statusCode == 200) {
+      final mapResponse = json.decode(response.body);
+      return mapResponse["data"];
     } else
-      throw Exception("Error body is empty");
+      _provideException(response);
+  }
+
+  Future<String> generateLink(String token, int id) async {
+    final urlRaw = "$_baseUrl/gerate";
+    final urlEncoded = Uri.encodeFull(urlRaw);
+    final body = {"api_token": token, "id": id.toString()};
+
+    final response = await _client.post(urlEncoded, body: body);
+
+    if (response.statusCode == 200) {
+      final mapResponse = json.decode(response.body);
+      return mapResponse["data"]["link"];
+    } else
+      _provideException(response);
+  }
+
+  void _provideException(http.Response response) {
+    switch (response.statusCode) {
+      case 401:
+        {
+          throw UnauthorizedException();
+        }
+      default:
+        {
+          final map = json.decode(response.body);
+          if (map.containsKey("error")) {
+            var message = map["error"]["message"];
+            var code = map["error"]["code"];
+            throw ServerException(message: message, code: code);
+          } else
+            throw Exception("Error body is empty");
+        }
+    }
   }
 }

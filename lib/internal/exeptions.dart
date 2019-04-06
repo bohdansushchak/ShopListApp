@@ -6,6 +6,8 @@ class ServerException implements Exception {
   ServerException({this.message, this.code});
 }
 
-class NoOrdersException implements Exception{
+class NoOrdersException implements Exception {
   final message = "No orders";
 }
+
+class UnauthorizedException implements Exception {}
