@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:shop_list_app/data/repository/repository.dart';
-import 'package:shop_list_app/ui/shop_list/order_list_event.dart';
-import 'package:shop_list_app/ui/shop_list/order_list_state.dart';
+
 import 'package:shop_list_app/internal/exeptions.dart';
+import 'package:shop_list_app/ui/order_list/order_list_event.dart';
+import 'package:shop_list_app/ui/order_list/order_list_state.dart';
 
 const MAX_ORDERS_IN_PAGE = 25;
 

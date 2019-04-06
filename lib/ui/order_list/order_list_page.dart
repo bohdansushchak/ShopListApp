@@ -3,9 +3,10 @@ import 'package:kiwi/kiwi.dart' as kiwi;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
-import 'package:shop_list_app/ui/shop_list/order_item.dart';
-import 'package:shop_list_app/ui/shop_list/order_list_bloc.dart';
-import 'package:shop_list_app/ui/shop_list/order_list_state.dart';
+import 'package:shop_list_app/ui/order_list/order_item.dart';
+import 'package:shop_list_app/ui/order_list/order_list_bloc.dart';
+import 'package:shop_list_app/ui/order_list/order_list_state.dart';
+
 import 'package:shop_list_app/ui/widget/decorated_container.dart';
 
 class OrderListPage extends StatefulWidget {

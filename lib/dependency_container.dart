@@ -5,7 +5,7 @@ import 'package:shop_list_app/data/network/shop_list_data_source.dart';
 import 'package:shop_list_app/data/repository/repository.dart';
 import 'package:shop_list_app/internal/token_manager.dart';
 import 'package:shop_list_app/ui/login/login_bloc.dart';
-import 'package:shop_list_app/ui/shop_list/order_list_bloc.dart';
+import 'package:shop_list_app/ui/order_list/order_list_bloc.dart';
 
 void initKiwi() {
   kiwi.Container()
