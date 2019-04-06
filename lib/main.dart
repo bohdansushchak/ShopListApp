@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop_list_app/dependency_container.dart';
+import 'package:shop_list_app/ui/login/login_page.dart';
 import 'package:shop_list_app/ui/order_list/order_list_page.dart';
-
+import 'package:shop_list_app/ui/splash/splash_page.dart';
 
 void main() {
   initKiwi();
@@ -13,13 +14,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: <String, WidgetBuilder>{
+        "/OrderListPage": (BuildContext context) => OrderListPage(),
+        "/LoginPage": (BuildContext context) => LoginPage()
+      },
       title: 'Flutter Demo',
       theme: ThemeData(
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      home: new OrderListPage(),    
+      home: SplashScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
-

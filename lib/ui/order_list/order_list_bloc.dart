@@ -44,6 +44,8 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
       yield OrderListState.failure(e.message);
     } on NoOrdersException catch (e) {
       yield currentState.rebuild((b) => b..hasReachedEndOfResults = true);
+    } on UnauthorizedException catch(e) {
+      
     }
   }
 }

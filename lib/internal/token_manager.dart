@@ -27,4 +27,6 @@ class TokenManager {
     }
     else return token;
   }
+
+  Future<bool> hasSavedToken() async => (await getSavedToken()).isNotEmpty;
 }
