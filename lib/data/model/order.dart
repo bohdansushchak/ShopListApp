@@ -48,7 +48,7 @@ abstract class Order implements Built<Order, OrderBuilder> {
 class Order {
   int id;
   int idOwner;
-  String date;
+  DateTime date;
   String shopName;
   String location;
   double price;
@@ -69,11 +69,12 @@ class Order {
     assert(mapJson != null);
     var price = mapJson["price"];
     var priceDouble = price is double ? price : (price as int).toDouble();
+    var date = DateTime.parse(mapJson["date"]);
 
     return Order._(
         id: mapJson["id"],
         idOwner: mapJson["id_owner"],
-        date: mapJson["date"],
+        date: date,
         shopName: mapJson["shop_name"],
         location: mapJson["location"],
         price: priceDouble,

@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
+import 'package:shop_list_app/internal/helpers.dart';
 
 class OrderItemWidget extends StatelessWidget {
   final Widget child;
@@ -32,7 +33,7 @@ class OrderItemWidget extends StatelessWidget {
                 Container(
                     padding: textPadding,
                     child: Text(
-                      order.date,
+                      formatDateTime(order.date),
                       style: TextStyle(
                         fontSize: 16.0,
                       ),

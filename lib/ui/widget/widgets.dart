@@ -3,6 +3,7 @@ import 'package:shop_list_app/internal/app_colors.dart';
 
 AppBar buildMyAppBar(String appBarTitle) {
   return AppBar(
+    automaticallyImplyLeading: false,
       backgroundColor: COLOR_PRIMARY,
       title: Padding(
           padding: EdgeInsets.only(left: 40),

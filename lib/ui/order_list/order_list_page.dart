@@ -21,7 +21,9 @@ class _OrderListPageState extends State<OrderListPage> {
   final _orderListBloc = kiwi.Container().resolve<OrderListBloc>();
   final _scrollController = ScrollController();
 
-  void _goToAddOrderPage() {}
+  void _goToAddOrderPage() {
+    Navigator.pushNamed(context, "/OrderListPage/ShopDataPage/");
+  }
 
   @override
   Widget build(BuildContext context) {

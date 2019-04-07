@@ -42,6 +42,9 @@ class CustomTextField extends BaseTextField {
           keyboardType: keyboardType,
           decoration: new InputDecoration(
               hintText: hint,
+              hintStyle: TextStyle(
+                color: COLOR_TEXT_HINT
+              ),
               errorText: error,
               enabledBorder: border,
               focusedBorder: border),
