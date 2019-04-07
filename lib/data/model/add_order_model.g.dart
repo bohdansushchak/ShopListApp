@@ -33,7 +33,7 @@ class _$AddOrderModelSerializer implements StructuredSerializer<AddOrderModel> {
       'items',
       serializers.serialize(object.items,
           specifiedType:
-              const FullType(BuiltList, const [const FullType(Product)])),
+              const FullType(BuiltList, const [const FullType(String)])),
       'api_token',
       serializers.serialize(object.apiToken,
           specifiedType: const FullType(String)),
@@ -72,7 +72,7 @@ class _$AddOrderModelSerializer implements StructuredSerializer<AddOrderModel> {
         case 'items':
           result.items.replace(serializers.deserialize(value,
               specifiedType: const FullType(
-                  BuiltList, const [const FullType(Product)])) as BuiltList);
+                  BuiltList, const [const FullType(String)])) as BuiltList);
           break;
         case 'api_token':
           result.apiToken = serializers.deserialize(value,
@@ -95,7 +95,7 @@ class _$AddOrderModel extends AddOrderModel {
   @override
   final double price;
   @override
-  final BuiltList<Product> items;
+  final BuiltList<String> items;
   @override
   final String apiToken;
 
@@ -194,10 +194,10 @@ class AddOrderModelBuilder
   double get price => _$this._price;
   set price(double price) => _$this._price = price;
 
-  ListBuilder<Product> _items;
-  ListBuilder<Product> get items =>
-      _$this._items ??= new ListBuilder<Product>();
-  set items(ListBuilder<Product> items) => _$this._items = items;
+  ListBuilder<String> _items;
+  ListBuilder<String> get items =>
+      _$this._items ??= new ListBuilder<String>();
+  set items(ListBuilder<String> items) => _$this._items = items;
 
   String _apiToken;
   String get apiToken => _$this._apiToken;

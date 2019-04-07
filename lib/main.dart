@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_list_app/dependency_container.dart';
+import 'package:shop_list_app/ui/base_page/base_page.dart';
+import 'package:shop_list_app/ui/create_order_shop_data/shop_data.dart';
 import 'package:shop_list_app/ui/login/login_page.dart';
 import 'package:shop_list_app/ui/order_list/order_list_page.dart';
 import 'package:shop_list_app/ui/splash/splash_page.dart';
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: ShopDataPage(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -5,10 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
 
 class PasswordTextField extends StatefulWidget {
-  String hint;
-  EdgeInsets padding;
-  TextEditingController controller;
-
+  final String hint;
+  final EdgeInsets padding;
+  final TextEditingController controller;
   final UnderlineInputBorder border = new UnderlineInputBorder(
       borderSide: new BorderSide(color: COLOR_ACCENT, width: 2));
 
@@ -23,10 +22,10 @@ class PasswordTextField extends StatefulWidget {
 }
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
-  String hint;
-  EdgeInsets padding;
-  TextEditingController controller;
-  UnderlineInputBorder border;
+  final String hint;
+  final EdgeInsets padding;
+  final TextEditingController controller;
+  final UnderlineInputBorder border;
 
   bool _obscureText = true;
 

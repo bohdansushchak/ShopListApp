@@ -1,10 +1,10 @@
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 
 import 'package:kiwi/kiwi.dart' as kiwi;
 import 'package:shop_list_app/internal/app_colors.dart';
 import 'package:shop_list_app/internal/token_manager.dart';
-
 
 class SplashScreen extends StatefulWidget {
   final Widget child;
@@ -71,10 +71,12 @@ class _SplashScreenState extends State<SplashScreen> {
   void userIsLogedIn() async {
     final hasToken = await _tokenManager.hasSavedToken();
 
-    if (hasToken) {
-      Navigator.of(context).pushReplacementNamed('/OrderListPage');
-    } else {
-      Navigator.of(context).pushReplacementNamed('/LoginPage');
-    }
+    Timer(
+        Duration(seconds: 1),
+        () => {
+              hasToken
+                  ? Navigator.of(context).pushReplacementNamed('/OrderListPage')
+                  : Navigator.of(context).pushReplacementNamed('/LoginPage')
+            });
   }
 }

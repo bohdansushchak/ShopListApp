@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:shop_list_app/data/model/product.dart';
 import 'package:shop_list_app/data/model/serializer/serializers.dart';
 
 part 'add_order_model.g.dart';
@@ -30,7 +29,7 @@ abstract class AddOrderModel
   double get price;
 
   @BuiltValueField(wireName: "items")
-  BuiltList<Product> get items;
+  BuiltList<String> get items;
 
   AddOrderModel._();
 
