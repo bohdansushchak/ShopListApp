@@ -15,7 +15,7 @@ class TokenManager {
   Future<bool> saveToken(LoginResult loginResult) async {
     final prefs = await _preferences;
     token = loginResult.apiToken;
-    
+
     await prefs.setString(API_TOKEN_KEY, loginResult.apiToken);
   }
 
@@ -24,9 +24,13 @@ class TokenManager {
       final prefs = await _preferences;
       var apiToken = prefs.getString(API_TOKEN_KEY);
       return apiToken;
-    }
-    else return token;
+    } else
+      return token;
   }
 
-  Future<bool> hasSavedToken() async => (await getSavedToken()).isNotEmpty;
+  Future<bool> hasSavedToken() async {
+    final token = await getSavedToken();
+
+    return (token != null && token.isNotEmpty);
+  }
 }
