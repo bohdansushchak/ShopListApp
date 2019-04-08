@@ -27,12 +27,14 @@ class _ShopDataPageState extends State<ShopDataPage> {
     final shopName = _shopNameController.text;
     final location = _locationController.text;
     if (shopName.isNotEmpty && location.isNotEmpty && _shopDate != null) {
-    } else {
-      _showError(shopName, location);
+      Navigator.of(context).pushNamed(
+          "/OrderListPage/ShopDataPage/AddProductsPage/",
+          arguments: {
+            'shopNmae': shopName,
+            'location': location,
+            'date': _shopDate.toString()
+          });
     }
-  }
-
-  void _showError(String shopName, String location) {
     setState(() {
       _shopNameError = shopName.isEmpty ? "Shop name can\'t be empty" : null;
       _locationError = location.isEmpty ? "Location can\'t be empty" : null;
@@ -43,9 +45,9 @@ class _ShopDataPageState extends State<ShopDataPage> {
   void setShoppingDate(DateTime shopingDate) {
     if (shopingDate != null) {
       _shopDate = shopingDate;
-       var dateStr = formatDateTime(shopingDate);
+      var dateStr = formatDateTime(shopingDate);
       setState(() {
-       _shopDateString = dateStr;
+        _shopDateString = dateStr;
       });
     }
   }
