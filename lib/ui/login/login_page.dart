@@ -68,12 +68,32 @@ class _LoginPageState extends State<LoginPage> {
                       child: CircularProgressIndicator(),
                     );
                   }
+                  //if (!state.isSuccesful) _showDialog("Error", state.error);
                   return new Container();
                 }),
-            alignment: FractionalOffset.center)
+            alignment: FractionalOffset.center),
+            
       ]),
     ));
   }
+
+  void _showDialog(String title, String content){
+    showDialog(context: context, 
+    builder: (BuildContext context) {
+      return AlertDialog(
+          title: new Text(title),
+          content: new Text(content),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Ok"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+      );
+    } );
+  } 
 
   @override
   void dispose() {

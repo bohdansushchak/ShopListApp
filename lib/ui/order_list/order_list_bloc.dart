@@ -10,9 +10,9 @@ const MAX_ORDERS_IN_PAGE = 25;
 class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
   final Repository _repository;
 
-  OrderListBloc(this._repository) {
-    dispatch(OrderListInitiatedEvent());
-  }
+  OrderListBloc(this._repository);
+
+  void fetchOrderList() => dispatch(OrderListInitiatedEvent());
 
   void fetchNextOrderListPage() {
     dispatch(FetchNextOrderListPage());
@@ -44,8 +44,7 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
       yield OrderListState.failure(e.message);
     } on NoOrdersException catch (e) {
       yield currentState.rebuild((b) => b..hasReachedEndOfResults = true);
-    } on UnauthorizedException catch(e) {
-      
-    }
+    } on UnauthorizedException catch (e) {}
   }
+
 }

@@ -1,4 +1,5 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:shop_list_app/data/model/add_order_model.dart';
 import 'package:shop_list_app/data/model/login_result.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/data/network/shop_list_data_source.dart';
@@ -18,7 +19,6 @@ class Repository {
   }
 
   Future<BuiltList<Order>> getOrders(int offset, int limit) async {
-
     final token = await _tokenManager.getSavedToken();
 
     final ordersResult =
@@ -30,6 +30,28 @@ class Repository {
 
   Future<bool> _refreshToken(String token) async {
     final result = await _dataSource.refreshToken(token);
+    return result;
+  }
+
+  Future<bool> saveOrder(
+      {BuiltList<String> products,
+      String shopName,
+      String location,
+      double price,
+      DateTime date}) async {
+        
+    final token = await _tokenManager.getSavedToken();
+    final model = AddOrderModel(
+      (b) => b
+        ..date = date.toString()
+        ..location = location
+        ..items.replace(products)
+        ..apiToken = token
+        ..shopName = shopName,
+    );
+
+    final result = await _dataSource.addOrder(model);
+
     return result;
   }
 

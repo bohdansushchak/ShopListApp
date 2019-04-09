@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_list_app/data/network/shop_list_data_source.dart';
 import 'package:shop_list_app/data/repository/repository.dart';
 import 'package:shop_list_app/internal/token_manager.dart';
+import 'package:shop_list_app/ui/add_products/add_products_bloc.dart';
 import 'package:shop_list_app/ui/login/login_bloc.dart';
 import 'package:shop_list_app/ui/order_list/order_list_bloc.dart';
 
@@ -15,5 +16,7 @@ void initKiwi() {
   ..registerFactory((c) => ShopListDataSource(c.resolve()))
   ..registerFactory((c) => Repository(c.resolve(), c.resolve()))
   ..registerFactory((c) => LoginBloc(c.resolve()))
-  ..registerFactory((c) => OrderListBloc(c.resolve()));
+  ..registerFactory((c) => OrderListBloc(c.resolve()))
+  ..registerFactory((c) => AddProductsBloc(c.resolve())
+  );
 }

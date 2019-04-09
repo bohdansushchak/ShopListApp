@@ -9,13 +9,11 @@ import 'package:shop_list_app/data/model/serializer/serializers.dart';
 
 part 'add_order_model.g.dart';
 
-abstract class BaseRequestModel {
+abstract class AddOrderModel
+    implements Built<AddOrderModel, AddOrderModelBuilder> {
   @BuiltValueField(wireName: "api_token")
   String get apiToken;
-}
-
-abstract class AddOrderModel
-    implements Built<AddOrderModel, AddOrderModelBuilder>, BaseRequestModel {
+  
   @BuiltValueField(wireName: "date")
   String get date;
 
@@ -47,5 +45,3 @@ abstract class AddOrderModel
 
   static Serializer<AddOrderModel> get serializer => _$addOrderModelSerializer;
 }
-
-

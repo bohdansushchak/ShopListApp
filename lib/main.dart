@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shop_list_app/dependency_container.dart';
+import 'package:shop_list_app/ui/add_products/add_products_page.dart';
 import 'package:shop_list_app/ui/create_order_shop_data/shop_data.dart';
 import 'package:shop_list_app/ui/login/login_page.dart';
 import 'package:shop_list_app/ui/order_list/order_list_page.dart';
@@ -22,14 +23,17 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         "/OrderListPage": (BuildContext context) => OrderListPage(),
         "/LoginPage": (BuildContext context) => LoginPage(),
-        "/OrderListPage/ShopDataPage/": (BuildContext context) => ShopDataPage()
+        "/OrderListPage/ShopDataPage/": (BuildContext context) =>
+            ShopDataPage(),
+        "/OrderListPage/ShopDataPage/AddProductsPage/":
+            (BuildContext context) => AddProductsPage(),
       },
       title: 'Flutter Demo',
       theme: ThemeData(
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: AddProductsPage(),
       debugShowCheckedModeBanner: false,
     );
   }

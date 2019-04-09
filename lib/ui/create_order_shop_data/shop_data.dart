@@ -89,7 +89,7 @@ class _ShopDataPageState extends State<ShopDataPage> {
           MyButton(
             buttonText: "next step",
             padding: BOTTOM_BUTTTON_PADDING,
-            onPressed: _nextPage,
+            onPressed: _nextPage, 
           )
         ],
       ),

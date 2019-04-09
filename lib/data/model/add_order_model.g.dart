@@ -19,6 +19,9 @@ class _$AddOrderModelSerializer implements StructuredSerializer<AddOrderModel> {
   Iterable serialize(Serializers serializers, AddOrderModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
+      'api_token',
+      serializers.serialize(object.apiToken,
+          specifiedType: const FullType(String)),
       'date',
       serializers.serialize(object.date, specifiedType: const FullType(String)),
       'shop_name',
@@ -34,9 +37,6 @@ class _$AddOrderModelSerializer implements StructuredSerializer<AddOrderModel> {
       serializers.serialize(object.items,
           specifiedType:
               const FullType(BuiltList, const [const FullType(String)])),
-      'api_token',
-      serializers.serialize(object.apiToken,
-          specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -53,6 +53,10 @@ class _$AddOrderModelSerializer implements StructuredSerializer<AddOrderModel> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
+        case 'api_token':
+          result.apiToken = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'date':
           result.date = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -71,12 +75,9 @@ class _$AddOrderModelSerializer implements StructuredSerializer<AddOrderModel> {
           break;
         case 'items':
           result.items.replace(serializers.deserialize(value,
-              specifiedType: const FullType(
-                  BuiltList, const [const FullType(String)])) as BuiltList);
-          break;
-        case 'api_token':
-          result.apiToken = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(String)]))
+              as BuiltList);
           break;
       }
     }
@@ -87,6 +88,8 @@ class _$AddOrderModelSerializer implements StructuredSerializer<AddOrderModel> {
 
 class _$AddOrderModel extends AddOrderModel {
   @override
+  final String apiToken;
+  @override
   final String date;
   @override
   final String shopName;
@@ -96,20 +99,21 @@ class _$AddOrderModel extends AddOrderModel {
   final double price;
   @override
   final BuiltList<String> items;
-  @override
-  final String apiToken;
 
   factory _$AddOrderModel([void updates(AddOrderModelBuilder b)]) =>
       (new AddOrderModelBuilder()..update(updates)).build();
 
   _$AddOrderModel._(
-      {this.date,
+      {this.apiToken,
+      this.date,
       this.shopName,
       this.location,
       this.price,
-      this.items,
-      this.apiToken})
+      this.items})
       : super._() {
+    if (apiToken == null) {
+      throw new BuiltValueNullFieldError('AddOrderModel', 'apiToken');
+    }
     if (date == null) {
       throw new BuiltValueNullFieldError('AddOrderModel', 'date');
     }
@@ -125,9 +129,6 @@ class _$AddOrderModel extends AddOrderModel {
     if (items == null) {
       throw new BuiltValueNullFieldError('AddOrderModel', 'items');
     }
-    if (apiToken == null) {
-      throw new BuiltValueNullFieldError('AddOrderModel', 'apiToken');
-    }
   }
 
   @override
@@ -141,12 +142,12 @@ class _$AddOrderModel extends AddOrderModel {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is AddOrderModel &&
+        apiToken == other.apiToken &&
         date == other.date &&
         shopName == other.shopName &&
         location == other.location &&
         price == other.price &&
-        items == other.items &&
-        apiToken == other.apiToken;
+        items == other.items;
   }
 
   @override
@@ -154,22 +155,22 @@ class _$AddOrderModel extends AddOrderModel {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, date.hashCode), shopName.hashCode),
-                    location.hashCode),
-                price.hashCode),
-            items.hashCode),
-        apiToken.hashCode));
+                $jc($jc($jc(0, apiToken.hashCode), date.hashCode),
+                    shopName.hashCode),
+                location.hashCode),
+            price.hashCode),
+        items.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AddOrderModel')
+          ..add('apiToken', apiToken)
           ..add('date', date)
           ..add('shopName', shopName)
           ..add('location', location)
           ..add('price', price)
-          ..add('items', items)
-          ..add('apiToken', apiToken))
+          ..add('items', items))
         .toString();
   }
 }
@@ -177,6 +178,10 @@ class _$AddOrderModel extends AddOrderModel {
 class AddOrderModelBuilder
     implements Builder<AddOrderModel, AddOrderModelBuilder> {
   _$AddOrderModel _$v;
+
+  String _apiToken;
+  String get apiToken => _$this._apiToken;
+  set apiToken(String apiToken) => _$this._apiToken = apiToken;
 
   String _date;
   String get date => _$this._date;
@@ -195,24 +200,19 @@ class AddOrderModelBuilder
   set price(double price) => _$this._price = price;
 
   ListBuilder<String> _items;
-  ListBuilder<String> get items =>
-      _$this._items ??= new ListBuilder<String>();
+  ListBuilder<String> get items => _$this._items ??= new ListBuilder<String>();
   set items(ListBuilder<String> items) => _$this._items = items;
-
-  String _apiToken;
-  String get apiToken => _$this._apiToken;
-  set apiToken(String apiToken) => _$this._apiToken = apiToken;
 
   AddOrderModelBuilder();
 
   AddOrderModelBuilder get _$this {
     if (_$v != null) {
+      _apiToken = _$v.apiToken;
       _date = _$v.date;
       _shopName = _$v.shopName;
       _location = _$v.location;
       _price = _$v.price;
       _items = _$v.items?.toBuilder();
-      _apiToken = _$v.apiToken;
       _$v = null;
     }
     return this;
@@ -237,12 +237,12 @@ class AddOrderModelBuilder
     try {
       _$result = _$v ??
           new _$AddOrderModel._(
+              apiToken: apiToken,
               date: date,
               shopName: shopName,
               location: location,
               price: price,
-              items: items.build(),
-              apiToken: apiToken);
+              items: items.build());
     } catch (_) {
       String _$failedField;
       try {

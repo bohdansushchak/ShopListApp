@@ -26,6 +26,12 @@ class _OrderListPageState extends State<OrderListPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _orderListBloc.fetchOrderList();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return _buildScafold();
   }

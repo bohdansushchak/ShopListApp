@@ -9,7 +9,7 @@ class MyButton extends StatelessWidget {
   MyButton(
       {@required this.onPressed,
       this.buttonText,
-      this.padding: const EdgeInsets.fromLTRB(35, 20, 35, 10)});
+      this.padding});
 
   @override
   Widget build(BuildContext context) {

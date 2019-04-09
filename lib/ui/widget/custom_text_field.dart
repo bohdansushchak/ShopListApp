@@ -21,11 +21,11 @@ abstract class BaseTextField extends StatelessWidget {
 
 class CustomTextField extends BaseTextField {
   CustomTextField(
-      {hint,
-      keyboardType,
-      padding: const EdgeInsets.fromLTRB(25, 10, 25, 20),
-      controller,
-      errorText})
+      {String hint,
+      TextInputType keyboardType,
+      EdgeInsets padding: const EdgeInsets.fromLTRB(25, 10, 25, 20),
+      TextEditingController controller,
+      String errorText})
       : super(
             hint: hint,
             keyboardType: keyboardType,
@@ -42,9 +42,7 @@ class CustomTextField extends BaseTextField {
           keyboardType: keyboardType,
           decoration: new InputDecoration(
               hintText: hint,
-              hintStyle: TextStyle(
-                color: COLOR_TEXT_HINT
-              ),
+              hintStyle: TextStyle(color: COLOR_TEXT_HINT),
               errorText: error,
               enabledBorder: border,
               focusedBorder: border),
