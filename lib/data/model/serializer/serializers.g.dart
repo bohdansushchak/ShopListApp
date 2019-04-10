@@ -10,6 +10,11 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AddOrderModel.serializer)
       ..add(ErrorResponse.serializer)
       ..add(MyResponse.serializer)
+      ..add(Order.serializer)
+      ..add(Product.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Product)]),
+          () => new ListBuilder<Product>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>()))

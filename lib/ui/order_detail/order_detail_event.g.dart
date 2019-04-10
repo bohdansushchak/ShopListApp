@@ -6,32 +6,32 @@ part of order_detail_event;
 // BuiltValueGenerator
 // **************************************************************************
 
-class _$OrderDetainInitiated extends OrderDetainInitiated {
+class _$OrderDetailInitiated extends OrderDetailInitiated {
   @override
   final Order order;
 
-  factory _$OrderDetainInitiated(
-          [void updates(OrderDetainInitiatedBuilder b)]) =>
-      (new OrderDetainInitiatedBuilder()..update(updates)).build();
+  factory _$OrderDetailInitiated(
+          [void updates(OrderDetailInitiatedBuilder b)]) =>
+      (new OrderDetailInitiatedBuilder()..update(updates)).build();
 
-  _$OrderDetainInitiated._({this.order}) : super._() {
+  _$OrderDetailInitiated._({this.order}) : super._() {
     if (order == null) {
-      throw new BuiltValueNullFieldError('OrderDetainInitiated', 'order');
+      throw new BuiltValueNullFieldError('OrderDetailInitiated', 'order');
     }
   }
 
   @override
-  OrderDetainInitiated rebuild(void updates(OrderDetainInitiatedBuilder b)) =>
+  OrderDetailInitiated rebuild(void updates(OrderDetailInitiatedBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  OrderDetainInitiatedBuilder toBuilder() =>
-      new OrderDetainInitiatedBuilder()..replace(this);
+  OrderDetailInitiatedBuilder toBuilder() =>
+      new OrderDetailInitiatedBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is OrderDetainInitiated && order == other.order;
+    return other is OrderDetailInitiated && order == other.order;
   }
 
   @override
@@ -41,46 +41,59 @@ class _$OrderDetainInitiated extends OrderDetainInitiated {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('OrderDetainInitiated')
+    return (newBuiltValueToStringHelper('OrderDetailInitiated')
           ..add('order', order))
         .toString();
   }
 }
 
-class OrderDetainInitiatedBuilder
-    implements Builder<OrderDetainInitiated, OrderDetainInitiatedBuilder> {
-  _$OrderDetainInitiated _$v;
+class OrderDetailInitiatedBuilder
+    implements Builder<OrderDetailInitiated, OrderDetailInitiatedBuilder> {
+  _$OrderDetailInitiated _$v;
 
-  Order _order;
-  Order get order => _$this._order;
-  set order(Order order) => _$this._order = order;
+  OrderBuilder _order;
+  OrderBuilder get order => _$this._order ??= new OrderBuilder();
+  set order(OrderBuilder order) => _$this._order = order;
 
-  OrderDetainInitiatedBuilder();
+  OrderDetailInitiatedBuilder();
 
-  OrderDetainInitiatedBuilder get _$this {
+  OrderDetailInitiatedBuilder get _$this {
     if (_$v != null) {
-      _order = _$v.order;
+      _order = _$v.order?.toBuilder();
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(OrderDetainInitiated other) {
+  void replace(OrderDetailInitiated other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$OrderDetainInitiated;
+    _$v = other as _$OrderDetailInitiated;
   }
 
   @override
-  void update(void updates(OrderDetainInitiatedBuilder b)) {
+  void update(void updates(OrderDetailInitiatedBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$OrderDetainInitiated build() {
-    final _$result = _$v ?? new _$OrderDetainInitiated._(order: order);
+  _$OrderDetailInitiated build() {
+    _$OrderDetailInitiated _$result;
+    try {
+      _$result = _$v ?? new _$OrderDetailInitiated._(order: order.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'order';
+        order.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'OrderDetailInitiated', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

@@ -41,6 +41,7 @@ class _AddProductsPageState extends State<AddProductsPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         new Expanded(
                           child: buildTextFieldWithTitle(

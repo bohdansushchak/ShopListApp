@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
 import 'package:shop_list_app/internal/app_colors.dart';
 import 'package:shop_list_app/internal/token_manager.dart';
+import 'package:shop_list_app/main.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);
@@ -73,8 +74,9 @@ class _SplashScreenState extends State<SplashScreen> {
         Duration(seconds: 1),
         () => {
               hasToken
-                  ? Navigator.of(context).pushReplacementNamed('/OrderListPage')
-                  : Navigator.of(context).pushReplacementNamed('/LoginPage')
+                  ? Navigator.of(context)
+                      .pushReplacementNamed(ORDER_LIST_PAGE_ROUTE)
+                  : Navigator.of(context).pushReplacementNamed(LOGIN_PAGE_ROUTE)
             });
   }
 }

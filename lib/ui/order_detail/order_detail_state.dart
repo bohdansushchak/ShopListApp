@@ -7,6 +7,7 @@ part 'order_detail_state.g.dart';
 abstract class OrderDetailState
     implements Built<OrderDetailState, OrderDetailStateBuilder> {
   String get error;
+
   @nullable
   Order get order;
 
@@ -18,9 +19,15 @@ abstract class OrderDetailState
   factory OrderDetailState([updates(OrderDetailStateBuilder b)]) =
       _$OrderDetailState;
 
-  factory OrderDetailState.initial(Order order) {
+  factory OrderDetailState.initial() {
     return OrderDetailState((b) => b
-      ..order = order
+      ..error = ''
+      ..urlToInvite = null);
+  }
+
+  factory OrderDetailState.initialOrder(Order order) {
+    return OrderDetailState((b) => b
+      ..order.replace(order)
       ..error = ''
       ..urlToInvite = null);
   }
@@ -28,14 +35,14 @@ abstract class OrderDetailState
   factory OrderDetailState.succesful(String url, Order order) {
     return OrderDetailState((b) => b
       ..error = ''
-      ..order = order
+      ..order.replace(order)
       ..urlToInvite = url);
   }
 
   factory OrderDetailState.failure(String error, Order order) {
     return OrderDetailState((b) => b
       ..error = error
-      ..order = order
+      ..order.replace(order)
       ..urlToInvite = null);
   }
 }

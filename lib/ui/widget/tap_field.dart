@@ -54,6 +54,7 @@ class TapField extends StatelessWidget {
     return GestureDetector(
         onTap: onTap,
         child: Container(
+          color: Colors.transparent,
           padding: padding,
           width: double.infinity,
           child: Column(

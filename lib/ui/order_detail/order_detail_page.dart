@@ -13,31 +13,19 @@ import 'package:shop_list_app/ui/widget/widgets.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
 
 class OrderDetailPage extends StatefulWidget {
-  OrderDetailPage({Key key}) : super(key: key);
+  final Order order;
+
+  OrderDetailPage({Key key, @required this.order}) : super(key: key);
 
   _OrderDetailPageState createState() => _OrderDetailPageState();
 }
 
 class _OrderDetailPageState extends State<OrderDetailPage> {
   final OrderDetailBloc _bloc = kiwi.Container().resolve<OrderDetailBloc>();
-  Order order = Order.fromMapJson({
-    "id": 2,
-    "id_owner": 2,
-    "date": "2019-03-17 15:17:35",
-    "shop_name": "Unknown Shop",
-    "location": "Gdies",
-    "price": 21.43,
-    "link": "c81e728d9d4c2f636f067f89cc14862c",
-    "items": [
-      {"id": 3, "order_id": 2, "item": "test"},
-      {"id": 4, "order_id": 2, "item": "test2"},
-      {"id": 5, "order_id": 2, "item": "test3"}
-    ]
-  });
 
   @override
   void initState() {
-    _bloc.putOrder(order);
+    _bloc.initialOrder(widget.order);
     super.initState();
   }
 
@@ -57,7 +45,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   new Padding(
                     padding: EdgeInsets.only(bottom: 10),
                     child: new Text(
-                      'Biedronka', //state.order.shopName,
+                      state.order != null
+                          ? state.order.shopName
+                          : 'Hmm somethink going wrong:((',
                       style: TextStyle(
                         fontSize: 21,
                         fontWeight: FontWeight.bold,
@@ -101,10 +91,10 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   Widget _buildOrderInfo(OrderDetailState state) {
     return new Column(
       children: <Widget>[
-        _buildIconText('assets/images/compass.svg', 'state.order.location'),
+        _buildIconText('assets/images/compass.svg', '${state.order.location}'),
         _buildIconText(
-            'assets/images/clock.svg', 'formatDateTime(state.order.date)'),
-        _buildIconText('assets/images/money.svg', '{state.order.price}zł'),
+            'assets/images/clock.svg', '${formatDateTime(state.order.date)}'),
+        _buildIconText('assets/images/money.svg', '${state.order.price}zł'),
       ],
     );
   }
@@ -134,11 +124,11 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
 
   Widget _buildListItems(OrderDetailState state) {
     return new ListView.builder(
-      itemCount: 5, //state.order.items.length,
+      itemCount: state.order.items.length,
       itemBuilder: (context, index) {
         return new Padding(
             padding: EdgeInsets.only(top: 10, bottom: 10),
-            child: Text('state.order.items[index].item',
+            child: Text(state.order.items[index].item,
                 style: TextStyle(fontSize: 21)));
       },
     );

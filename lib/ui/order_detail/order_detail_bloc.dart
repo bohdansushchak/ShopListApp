@@ -10,8 +10,8 @@ class OrderDetailBloc extends Bloc<OrderDetailEvent, OrderDetailState> {
 
   OrderDetailBloc(this._repository);
 
-  void putOrder(Order order) {
-    dispatch(OrderDetainInitiated((b) => b..order = order));
+  void initialOrder(Order order) {
+    dispatch(OrderDetailInitiated((b) => b..order.replace(order)));
   }
 
   void inviteOrder(int id) {
@@ -20,12 +20,14 @@ class OrderDetailBloc extends Bloc<OrderDetailEvent, OrderDetailState> {
 
   @override
   OrderDetailState get initialState {
-    return OrderDetailState.initial(null);
+    return OrderDetailState.initial();
   }
 
   @override
   Stream<OrderDetailState> mapEventToState(OrderDetailEvent event) async* {
     if (event is InviteOrderDetail) yield* _inviteOrder(event);
+
+    if(event is OrderDetailInitiated) yield OrderDetailState.initialOrder(event.order);
   }
 
   Stream<OrderDetailState> _inviteOrder(InviteOrderDetail event) async* {

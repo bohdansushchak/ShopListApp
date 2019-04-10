@@ -64,9 +64,9 @@ class OrderDetailStateBuilder
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
 
-  Order _order;
-  Order get order => _$this._order;
-  set order(Order order) => _$this._order = order;
+  OrderBuilder _order;
+  OrderBuilder get order => _$this._order ??= new OrderBuilder();
+  set order(OrderBuilder order) => _$this._order = order;
 
   String _urlToInvite;
   String get urlToInvite => _$this._urlToInvite;
@@ -77,7 +77,7 @@ class OrderDetailStateBuilder
   OrderDetailStateBuilder get _$this {
     if (_$v != null) {
       _error = _$v.error;
-      _order = _$v.order;
+      _order = _$v.order?.toBuilder();
       _urlToInvite = _$v.urlToInvite;
       _$v = null;
     }
@@ -99,9 +99,22 @@ class OrderDetailStateBuilder
 
   @override
   _$OrderDetailState build() {
-    final _$result = _$v ??
-        new _$OrderDetailState._(
-            error: error, order: order, urlToInvite: urlToInvite);
+    _$OrderDetailState _$result;
+    try {
+      _$result = _$v ??
+          new _$OrderDetailState._(
+              error: error, order: _order?.build(), urlToInvite: urlToInvite);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'order';
+        _order?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'OrderDetailState', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

@@ -2,7 +2,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
+import 'package:shop_list_app/main.dart';
+import 'package:shop_list_app/ui/order_detail/order_detail_page.dart';
 import 'package:shop_list_app/ui/order_list/order_item.dart';
 import 'package:shop_list_app/ui/order_list/order_list_bloc.dart';
 import 'package:shop_list_app/ui/order_list/order_list_state.dart';
@@ -69,9 +72,21 @@ class _OrderListPageState extends State<OrderListPage> {
         itemBuilder: (context, index) {
           return index >= state.orderList.length
               ? _buildLoaderListItem()
-              : OrderItemWidget(order: state.orderList[index]);
+              : _buildClickableOrderItem(state.orderList[index]);
         },
       ),
+    );
+  }
+
+  void _onItemClick(Order order) {
+    final route = MaterialPageRoute(builder: (BuildContext context) => new OrderDetailPage(order: order));
+    Navigator.of(context).push(route);
+  }
+
+  Widget _buildClickableOrderItem(Order order) {
+    return GestureDetector(
+      onTap: () => _onItemClick(order),
+      child: OrderItemWidget(order: order),
     );
   }
 

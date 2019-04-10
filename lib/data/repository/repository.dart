@@ -57,9 +57,6 @@ class Repository {
   Future<String> generateUrlToOrdfer(int orderId) async {
     final token = await _tokenManager.getSavedToken();
     final result = await _dataSource.generateLink(token, orderId);
-
-    
-
     return result;
   } 
 

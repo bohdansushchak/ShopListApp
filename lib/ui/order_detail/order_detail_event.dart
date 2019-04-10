@@ -7,14 +7,14 @@ part 'order_detail_event.g.dart';
 
 abstract class OrderDetailEvent {}
 
-abstract class OrderDetainInitiated extends OrderDetailEvent
-    implements Built<OrderDetainInitiated, OrderDetainInitiatedBuilder> {
+abstract class OrderDetailInitiated extends OrderDetailEvent
+    implements Built<OrderDetailInitiated, OrderDetailInitiatedBuilder> {
   Order get order;
 
-  OrderDetainInitiated._();
+  OrderDetailInitiated._();
 
-  factory OrderDetainInitiated([updates(OrderDetainInitiatedBuilder b)]) =
-      _$OrderDetainInitiated;
+  factory OrderDetailInitiated([updates(OrderDetailInitiatedBuilder b)]) =
+      _$OrderDetailInitiated;
 }
 
 abstract class InviteOrderDetail extends OrderDetailEvent

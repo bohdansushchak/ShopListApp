@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_list_app/internal/helpers.dart';
+import 'package:shop_list_app/main.dart';
 import 'package:shop_list_app/ui/widget/custom_buttons.dart';
 import 'package:shop_list_app/ui/widget/custom_text_field.dart';
 import 'package:shop_list_app/ui/widget/tap_field.dart';
@@ -27,13 +28,11 @@ class _ShopDataPageState extends State<ShopDataPage> {
     final shopName = _shopNameController.text;
     final location = _locationController.text;
     if (shopName.isNotEmpty && location.isNotEmpty && _shopDate != null) {
-      Navigator.of(context).pushNamed(
-          "/OrderListPage/ShopDataPage/AddProductsPage/",
-          arguments: {
-            'shopNmae': shopName,
-            'location': location,
-            'date': _shopDate.toString()
-          });
+      Navigator.of(context).pushNamed(ADD_PRODUCTS_PAGE_ROUTE, arguments: {
+        'shopNmae': shopName,
+        'location': location,
+        'date': _shopDate.toString()
+      });
     }
     setState(() {
       _shopNameError = shopName.isEmpty ? "Shop name can\'t be empty" : null;
@@ -89,7 +88,7 @@ class _ShopDataPageState extends State<ShopDataPage> {
           MyButton(
             buttonText: "next step",
             padding: BOTTOM_BUTTTON_PADDING,
-            onPressed: _nextPage, 
+            onPressed: _nextPage,
           )
         ],
       ),

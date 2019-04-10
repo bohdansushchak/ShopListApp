@@ -1,6 +1,7 @@
 library login_result;
 
 class LoginResult {
+
   int id;
   String email;
   String updatedAt;
