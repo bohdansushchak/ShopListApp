@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:meta/meta.dart';
 import 'package:shop_list_app/data/repository/repository.dart';
 import 'package:shop_list_app/ui/add_products/add_products_event.dart';
 import 'package:shop_list_app/ui/add_products/add_products_state.dart';
@@ -16,15 +17,27 @@ class AddProductsBloc extends Bloc<ProductsEvent, AddProductsState> {
     dispatch(AddProductEvent((b) => b..product = product));
   }
 
-  void saveOrder(double orderPrice) {
-    dispatch(SaveOrderEvent((b) => b..price = orderPrice));
+  void saveOrder(
+      {@required double orderPrice,
+      @required String shopName,
+      @required String location,
+      @required DateTime date}) {
+    assert(shopName != null);
+    assert(orderPrice != null);
+    assert(location != null);
+    assert(date != null);
+    dispatch(SaveOrderEvent((b) => b
+      ..shopName = shopName
+      ..location = location
+      ..date = date
+      ..price = orderPrice));
   }
 
   @override
   Stream<AddProductsState> mapEventToState(ProductsEvent event) async* {
     if (event is AddProductEvent) yield* _addProduct(event);
 
-    if(event is SaveOrderEvent) yield* _saveOrder(event);
+    if (event is SaveOrderEvent) yield* _saveOrder(event);
   }
 
   Stream<AddProductsState> _addProduct(AddProductEvent event) async* {
@@ -39,11 +52,10 @@ class AddProductsBloc extends Bloc<ProductsEvent, AddProductsState> {
   }
 
   Stream<AddProductsState> _saveOrder(SaveOrderEvent event) async* {
-    try{
-
-        //final result = await _repository.saveOrder(price: event.price,;
+    try {
+      //final result = await _repository.saveOrder(price: event.price,;
     } on ServerException catch (e) {
-        yield AddProductsState.failure(currentState.products, error: e.message);
-      } 
+      yield AddProductsState.failure(currentState.products, error: e.message);
+    }
   }
 }

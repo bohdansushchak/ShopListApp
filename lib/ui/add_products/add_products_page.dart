@@ -10,7 +10,16 @@ import 'package:shop_list_app/ui/widget/custom_text_field.dart';
 import 'package:shop_list_app/ui/widget/widgets.dart';
 
 class AddProductsPage extends StatefulWidget {
-  AddProductsPage({Key key}) : super(key: key);
+  final String shopName;
+  final String location;
+  final DateTime date;
+
+  AddProductsPage(
+      {Key key,
+      @required this.shopName,
+      @required this.location,
+      @required this.date})
+      : super(key: key);
 
   _AddProductsPageState createState() => _AddProductsPageState();
 }
@@ -100,7 +109,11 @@ class _AddProductsPageState extends State<AddProductsPage> {
     final priceStr = _priceTextController.text;
     try {
       final price = double.parse(priceStr);
-      _addProductBloc.saveOrder(price);
+      _addProductBloc.saveOrder(
+          orderPrice: price,
+          shopName: widget.shopName,
+          location: widget.location,
+          date: widget.date);
     } on Exception catch (e) {}
   }
 

@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,16 +16,10 @@ class PasswordTextField extends StatefulWidget {
       this.controller});
 
   @override
-  _PasswordTextFieldState createState() => _PasswordTextFieldState(
-      hint: hint, padding: padding, controller: controller, border: border);
+  _PasswordTextFieldState createState() => _PasswordTextFieldState();
 }
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
-  final String hint;
-  final EdgeInsets padding;
-  final TextEditingController controller;
-  final UnderlineInputBorder border;
-
   bool _obscureText = true;
 
   void _changePasswordShowing() {
@@ -35,20 +28,18 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
     });
   }
 
-  _PasswordTextFieldState({this.hint, this.padding, this.controller, this.border});
-
   @override
   Widget build(BuildContext context) {
     return new Container(
-      padding: padding,
+      padding: widget.padding,
       child: new TextField(
           keyboardType: TextInputType.text,
-          controller: controller,
+          controller: widget.controller,
           obscureText: _obscureText,
           decoration: InputDecoration(
-            hintText: hint,
-            enabledBorder: border, 
-            focusedBorder: border,
+            hintText: widget.hint,
+            enabledBorder: widget.border,
+            focusedBorder: widget.border,
             suffixIcon: new IconButton(
               onPressed: _changePasswordShowing,
               icon: new SvgPicture.asset('assets/images/eye.svg'),

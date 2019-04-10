@@ -180,12 +180,28 @@ class RemoveProducteventBuilder
 
 class _$SaveOrderEvent extends SaveOrderEvent {
   @override
+  final String shopName;
+  @override
+  final String location;
+  @override
+  final DateTime date;
+  @override
   final double price;
 
   factory _$SaveOrderEvent([void updates(SaveOrderEventBuilder b)]) =>
       (new SaveOrderEventBuilder()..update(updates)).build();
 
-  _$SaveOrderEvent._({this.price}) : super._() {
+  _$SaveOrderEvent._({this.shopName, this.location, this.date, this.price})
+      : super._() {
+    if (shopName == null) {
+      throw new BuiltValueNullFieldError('SaveOrderEvent', 'shopName');
+    }
+    if (location == null) {
+      throw new BuiltValueNullFieldError('SaveOrderEvent', 'location');
+    }
+    if (date == null) {
+      throw new BuiltValueNullFieldError('SaveOrderEvent', 'date');
+    }
     if (price == null) {
       throw new BuiltValueNullFieldError('SaveOrderEvent', 'price');
     }
@@ -202,17 +218,27 @@ class _$SaveOrderEvent extends SaveOrderEvent {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is SaveOrderEvent && price == other.price;
+    return other is SaveOrderEvent &&
+        shopName == other.shopName &&
+        location == other.location &&
+        date == other.date &&
+        price == other.price;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, price.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, shopName.hashCode), location.hashCode), date.hashCode),
+        price.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SaveOrderEvent')..add('price', price))
+    return (newBuiltValueToStringHelper('SaveOrderEvent')
+          ..add('shopName', shopName)
+          ..add('location', location)
+          ..add('date', date)
+          ..add('price', price))
         .toString();
   }
 }
@@ -220,6 +246,18 @@ class _$SaveOrderEvent extends SaveOrderEvent {
 class SaveOrderEventBuilder
     implements Builder<SaveOrderEvent, SaveOrderEventBuilder> {
   _$SaveOrderEvent _$v;
+
+  String _shopName;
+  String get shopName => _$this._shopName;
+  set shopName(String shopName) => _$this._shopName = shopName;
+
+  String _location;
+  String get location => _$this._location;
+  set location(String location) => _$this._location = location;
+
+  DateTime _date;
+  DateTime get date => _$this._date;
+  set date(DateTime date) => _$this._date = date;
 
   double _price;
   double get price => _$this._price;
@@ -229,6 +267,9 @@ class SaveOrderEventBuilder
 
   SaveOrderEventBuilder get _$this {
     if (_$v != null) {
+      _shopName = _$v.shopName;
+      _location = _$v.location;
+      _date = _$v.date;
       _price = _$v.price;
       _$v = null;
     }
@@ -250,7 +291,9 @@ class SaveOrderEventBuilder
 
   @override
   _$SaveOrderEvent build() {
-    final _$result = _$v ?? new _$SaveOrderEvent._(price: price);
+    final _$result = _$v ??
+        new _$SaveOrderEvent._(
+            shopName: shopName, location: location, date: date, price: price);
     replace(_$result);
     return _$result;
   }

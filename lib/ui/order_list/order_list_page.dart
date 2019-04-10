@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
-import 'package:shop_list_app/main.dart';
 import 'package:shop_list_app/ui/order_detail/order_detail_page.dart';
 import 'package:shop_list_app/ui/order_list/order_item.dart';
 import 'package:shop_list_app/ui/order_list/order_list_bloc.dart';
@@ -13,9 +12,7 @@ import 'package:shop_list_app/ui/order_list/order_list_state.dart';
 import 'package:shop_list_app/ui/widget/decorated_container.dart';
 
 class OrderListPage extends StatefulWidget {
-  final Widget child;
-
-  OrderListPage({Key key, this.child}) : super(key: key);
+  OrderListPage({Key key}) : super(key: key);
 
   _OrderListPageState createState() => _OrderListPageState();
 }
@@ -79,7 +76,8 @@ class _OrderListPageState extends State<OrderListPage> {
   }
 
   void _onItemClick(Order order) {
-    final route = MaterialPageRoute(builder: (BuildContext context) => new OrderDetailPage(order: order));
+    final route = MaterialPageRoute(
+        builder: (BuildContext context) => new OrderDetailPage(order: order));
     Navigator.of(context).push(route);
   }
 

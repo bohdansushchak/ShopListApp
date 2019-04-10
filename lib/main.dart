@@ -11,7 +11,7 @@ import 'package:shop_list_app/ui/splash/splash_page.dart';
 const ORDER_LIST_PAGE_ROUTE = "/OrderListPage";
 const LOGIN_PAGE_ROUTE = "/LoginPage";
 const SHOP_DATA_PAGE_ROUTE = "/OrderListPage/ShopDataPage/";
-const ADD_PRODUCTS_PAGE_ROUTE = "/OrderListPage/ShopDataPage/AddProductsPage/";
+//const ADD_PRODUCTS_PAGE_ROUTE = "/OrderListPage/ShopDataPage/AddProductsPage/";
 
 void main() {
   initKiwi();
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         ORDER_LIST_PAGE_ROUTE: (BuildContext context) => OrderListPage(),
         LOGIN_PAGE_ROUTE: (BuildContext context) => LoginPage(),
         SHOP_DATA_PAGE_ROUTE: (BuildContext context) => ShopDataPage(),
-        ADD_PRODUCTS_PAGE_ROUTE: (BuildContext context) => AddProductsPage(),
+        //ADD_PRODUCTS_PAGE_ROUTE: (BuildContext context) => AddProductsPage(),
         //ORDER_DETAIL_PAGE_ROUTE: (BuildContext context) => OrderDetailPage(),
       },
       title: 'Flutter Demo',
