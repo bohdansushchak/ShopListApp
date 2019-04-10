@@ -7,9 +7,7 @@ import 'package:shop_list_app/internal/app_colors.dart';
 import 'package:shop_list_app/internal/token_manager.dart';
 
 class SplashScreen extends StatefulWidget {
-  final Widget child;
-
-  SplashScreen({Key key, this.child}) : super(key: key);
+  SplashScreen({Key key}) : super(key: key);
 
   _SplashScreenState createState() => _SplashScreenState();
 }

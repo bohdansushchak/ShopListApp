@@ -40,7 +40,7 @@ class OrderItemWidget extends StatelessWidget {
                     )),
               ],
             ),
-            Container(
+            Padding(
               padding: EdgeInsets.fromLTRB(25, 5, 25, 10),
               child: Container(
                 color: COLOR_ACCENT,

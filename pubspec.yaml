@@ -55,6 +55,10 @@ flutter:
     - assets/images/eye.svg
     - assets/images/background.png
     - assets/images/background.svg
+    - assets/images/clock.svg
+    - assets/images/compass.svg
+    - assets/images/money.svg
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

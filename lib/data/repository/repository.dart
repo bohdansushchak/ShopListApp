@@ -20,7 +20,6 @@ class Repository {
 
   Future<BuiltList<Order>> getOrders(int offset, int limit) async {
     final token = await _tokenManager.getSavedToken();
-
     final ordersResult =
         await _dataSource.getOrders(token: token, offset: offset, limit: limit);
 
@@ -54,6 +53,15 @@ class Repository {
 
     return result;
   }
+
+  Future<String> generateUrlToOrdfer(int orderId) async {
+    final token = await _tokenManager.getSavedToken();
+    final result = await _dataSource.generateLink(token, orderId);
+
+    
+
+    return result;
+  } 
 
   Future<T> _saveExecute<T>(String token, Future fun) async {
     try {

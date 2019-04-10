@@ -86,10 +86,10 @@ class ShopListDataSource {
       _provideException(response);
   }
 
-  Future<String> generateLink(String token, int id) async {
+  Future<String> generateLink(String token, int orderId) async {
     final urlRaw = "$_baseUrl/gerate";
     final urlEncoded = Uri.encodeFull(urlRaw);
-    final body = {"api_token": token, "id": id.toString()};
+    final body = {"api_token": token, "id": orderId.toString()};
 
     final response = await _client.post(urlEncoded, body: body);
 

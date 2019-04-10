@@ -10,9 +10,7 @@ import 'package:shop_list_app/ui/widget/decorated_container.dart';
 import 'package:shop_list_app/ui/widget/password_field.dart';
 
 class LoginPage extends StatefulWidget {
-  final Widget child;
-
-  LoginPage({Key key, this.child}) : super(key: key);
+  LoginPage({Key key}) : super(key: key);
 
   _LoginPageState createState() => _LoginPageState();
 }
@@ -72,28 +70,28 @@ class _LoginPageState extends State<LoginPage> {
                   return new Container();
                 }),
             alignment: FractionalOffset.center),
-            
       ]),
     ));
   }
 
-  void _showDialog(String title, String content){
-    showDialog(context: context, 
-    builder: (BuildContext context) {
-      return AlertDialog(
-          title: new Text(title),
-          content: new Text(content),
-          actions: <Widget>[
-            new FlatButton(
-              child: new Text("Ok"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-      );
-    } );
-  } 
+  void _showDialog(String title, String content) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text(title),
+            content: new Text(content),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
 
   @override
   void dispose() {
