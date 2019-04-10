@@ -15,15 +15,31 @@ class _$AddProductsState extends AddProductsState {
   final String priceError;
   @override
   final String error;
+  @override
+  final bool isLoading;
+  @override
+  final bool isOrdesHasBeenCreated;
 
   factory _$AddProductsState([void updates(AddProductsStateBuilder b)]) =>
       (new AddProductsStateBuilder()..update(updates)).build();
 
   _$AddProductsState._(
-      {this.products, this.productError, this.priceError, this.error})
+      {this.products,
+      this.productError,
+      this.priceError,
+      this.error,
+      this.isLoading,
+      this.isOrdesHasBeenCreated})
       : super._() {
     if (products == null) {
       throw new BuiltValueNullFieldError('AddProductsState', 'products');
+    }
+    if (isLoading == null) {
+      throw new BuiltValueNullFieldError('AddProductsState', 'isLoading');
+    }
+    if (isOrdesHasBeenCreated == null) {
+      throw new BuiltValueNullFieldError(
+          'AddProductsState', 'isOrdesHasBeenCreated');
     }
   }
 
@@ -42,15 +58,21 @@ class _$AddProductsState extends AddProductsState {
         products == other.products &&
         productError == other.productError &&
         priceError == other.priceError &&
-        error == other.error;
+        error == other.error &&
+        isLoading == other.isLoading &&
+        isOrdesHasBeenCreated == other.isOrdesHasBeenCreated;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, products.hashCode), productError.hashCode),
-            priceError.hashCode),
-        error.hashCode));
+        $jc(
+            $jc(
+                $jc($jc($jc(0, products.hashCode), productError.hashCode),
+                    priceError.hashCode),
+                error.hashCode),
+            isLoading.hashCode),
+        isOrdesHasBeenCreated.hashCode));
   }
 
   @override
@@ -59,7 +81,9 @@ class _$AddProductsState extends AddProductsState {
           ..add('products', products)
           ..add('productError', productError)
           ..add('priceError', priceError)
-          ..add('error', error))
+          ..add('error', error)
+          ..add('isLoading', isLoading)
+          ..add('isOrdesHasBeenCreated', isOrdesHasBeenCreated))
         .toString();
   }
 }
@@ -85,6 +109,15 @@ class AddProductsStateBuilder
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
 
+  bool _isLoading;
+  bool get isLoading => _$this._isLoading;
+  set isLoading(bool isLoading) => _$this._isLoading = isLoading;
+
+  bool _isOrdesHasBeenCreated;
+  bool get isOrdesHasBeenCreated => _$this._isOrdesHasBeenCreated;
+  set isOrdesHasBeenCreated(bool isOrdesHasBeenCreated) =>
+      _$this._isOrdesHasBeenCreated = isOrdesHasBeenCreated;
+
   AddProductsStateBuilder();
 
   AddProductsStateBuilder get _$this {
@@ -93,6 +126,8 @@ class AddProductsStateBuilder
       _productError = _$v.productError;
       _priceError = _$v.priceError;
       _error = _$v.error;
+      _isLoading = _$v.isLoading;
+      _isOrdesHasBeenCreated = _$v.isOrdesHasBeenCreated;
       _$v = null;
     }
     return this;
@@ -120,7 +155,9 @@ class AddProductsStateBuilder
               products: products.build(),
               productError: productError,
               priceError: priceError,
-              error: error);
+              error: error,
+              isLoading: isLoading,
+              isOrdesHasBeenCreated: isOrdesHasBeenCreated);
     } catch (_) {
       String _$failedField;
       try {

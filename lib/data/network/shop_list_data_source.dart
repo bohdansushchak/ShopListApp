@@ -64,7 +64,15 @@ class ShopListDataSource {
     final urlRaw = "$_baseUrl/addOrder";
     final urlEncoded = Uri.encodeFull(urlRaw);
 
-    final response = await _client.post(urlEncoded, body: model.toJson());
+    final body = model.toJson();
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    final response =
+        await _client.post(urlEncoded, headers: headers, body: body);
 
     if (response.statusCode == 200)
       return true;
@@ -87,7 +95,7 @@ class ShopListDataSource {
   }
 
   Future<String> generateLink(String token, int orderId) async {
-    final urlRaw = "$_baseUrl/gerate";
+    final urlRaw = "$_baseUrl/generate";
     final urlEncoded = Uri.encodeFull(urlRaw);
     final body = {"api_token": token, "id": orderId.toString()};
 

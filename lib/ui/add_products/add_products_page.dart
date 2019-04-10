@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
+import 'package:shop_list_app/main.dart';
 import 'package:shop_list_app/ui/add_products/add_products_bloc.dart';
 import 'package:shop_list_app/ui/add_products/add_products_state.dart';
 import 'package:shop_list_app/ui/add_products/product_item.dart';
@@ -40,6 +41,7 @@ class _AddProductsPageState extends State<AddProductsPage> {
         body: new BlocBuilder(
           bloc: _addProductBloc,
           builder: (context, AddProductsState state) {
+            if (state.isOrdesHasBeenCreated) _backToOrderList();
             return new Container(
               alignment: Alignment.center,
               padding:
@@ -128,6 +130,10 @@ class _AddProductsPageState extends State<AddProductsPage> {
                 child: ProductItem(product: state.products[index]));
           },
         ));
+  }
+
+  void _backToOrderList() {
+    Navigator.popUntil(context, ModalRoute.withName(ORDER_LIST_PAGE_ROUTE));
   }
 
   Widget buildTextFieldWithTitle(

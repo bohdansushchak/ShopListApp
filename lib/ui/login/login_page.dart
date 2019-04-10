@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                 hint: "Hasło",
                 controller: passwordTextController,
               ),
-              new MyButton(onPressed: _login, buttonText: "LOG IN"),
+              new MyButton(onPressed: _login, buttonText: "LOG IN", padding: EdgeInsets.only(left: 35.0, right: 35, top: 25.0),),
             ],
           ),
         ),

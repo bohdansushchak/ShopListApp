@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:built_collection/built_collection.dart';
 import 'package:meta/meta.dart';
 import 'package:shop_list_app/data/repository/repository.dart';
 import 'package:shop_list_app/ui/add_products/add_products_event.dart';
@@ -53,7 +52,17 @@ class AddProductsBloc extends Bloc<ProductsEvent, AddProductsState> {
 
   Stream<AddProductsState> _saveOrder(SaveOrderEvent event) async* {
     try {
-      //final result = await _repository.saveOrder(price: event.price,;
+      yield AddProductsState.loading(products: currentState.products);
+
+      final isOrderCreated = await _repository.saveOrder(
+          price: event.price,
+          shopName: event.shopName,
+          date: event.date,
+          location: event.location,
+          products: currentState.products);
+
+      if (isOrderCreated)
+        yield AddProductsState.orderCreated(currentState.products);
     } on ServerException catch (e) {
       yield AddProductsState.failure(currentState.products, error: e.message);
     }

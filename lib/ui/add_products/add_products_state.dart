@@ -12,8 +12,12 @@ abstract class AddProductsState
   String get productError;
   @nullable
   String get priceError;
-  @nullable 
+  @nullable
   String get error;
+
+  bool get isLoading;
+
+  bool get isOrdesHasBeenCreated;
 
   AddProductsState._();
 
@@ -24,7 +28,26 @@ abstract class AddProductsState
     return AddProductsState((b) => b
       ..productError = null
       ..priceError = null
+      ..isLoading = false
+      ..isOrdesHasBeenCreated = false
       ..products.replace(BuiltList<String>()));
+  }
+
+  factory AddProductsState.loading({BuiltList<String> products}) {
+    if (products != null)
+      return AddProductsState((b) => b
+        ..productError = null
+        ..priceError = null
+        ..isLoading = true
+        ..isOrdesHasBeenCreated = false
+        ..products.replace(products));
+    else
+      return AddProductsState((b) => b
+        ..productError = null
+        ..priceError = null
+        ..isLoading = true
+        ..isOrdesHasBeenCreated = false
+        ..products.replace(BuiltList<String>()));
   }
 
   factory AddProductsState.failure(BuiltList<String> productList,
@@ -33,6 +56,8 @@ abstract class AddProductsState
       ..productError = productError
       ..priceError = priceError
       ..error = error
+      ..isLoading = false
+      ..isOrdesHasBeenCreated = false
       ..products.replace(productList));
   }
 
@@ -41,6 +66,8 @@ abstract class AddProductsState
       ..productError = null
       ..priceError = null
       ..error = null
+      ..isLoading = false
+      ..isOrdesHasBeenCreated = false
       ..products.replace(productList));
   }
 
@@ -49,6 +76,18 @@ abstract class AddProductsState
       ..productError = null
       ..priceError = null
       ..error = null
+      ..isLoading = false
+      ..isOrdesHasBeenCreated = false
+      ..products.replace(productList));
+  }
+
+  factory AddProductsState.orderCreated(BuiltList<String> productList) {
+    return AddProductsState((b) => b
+      ..productError = null
+      ..priceError = null
+      ..error = null
+      ..isLoading = false
+      ..isOrdesHasBeenCreated = true
       ..products.replace(productList));
   }
 }

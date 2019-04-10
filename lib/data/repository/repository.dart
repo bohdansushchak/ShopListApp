@@ -1,10 +1,12 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:meta/meta.dart';
 import 'package:shop_list_app/data/model/add_order_model.dart';
 import 'package:shop_list_app/data/model/login_result.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/data/network/shop_list_data_source.dart';
 import 'package:shop_list_app/internal/token_manager.dart';
 import 'package:shop_list_app/internal/exeptions.dart';
+import 'package:intl/intl.dart';
 
 class Repository {
   ShopListDataSource _dataSource;
@@ -33,21 +35,22 @@ class Repository {
   }
 
   Future<bool> saveOrder(
-      {BuiltList<String> products,
-      String shopName,
-      String location,
-      double price,
-      DateTime date}) async {
-        
+      {@required BuiltList<String> products,
+      @required String shopName,
+      @required String location,
+      @required double price,
+      @required DateTime date}) async {
     final token = await _tokenManager.getSavedToken();
-    final model = AddOrderModel(
-      (b) => b
-        ..date = date.toString()
-        ..location = location
-        ..items.replace(products)
-        ..apiToken = token
-        ..shopName = shopName,
-    );
+
+    final formattedDate = new DateFormat('yyyy-MM-dd HH:mm:ss').format(date);
+
+    final model = AddOrderModel((b) => b
+      ..date = formattedDate
+      ..location = location
+      ..items.replace(products)
+      ..apiToken = token
+      ..shopName = shopName
+      ..price = price);
 
     final result = await _dataSource.addOrder(model);
 
@@ -58,7 +61,7 @@ class Repository {
     final token = await _tokenManager.getSavedToken();
     final result = await _dataSource.generateLink(token, orderId);
     return result;
-  } 
+  }
 
   Future<T> _saveExecute<T>(String token, Future fun) async {
     try {

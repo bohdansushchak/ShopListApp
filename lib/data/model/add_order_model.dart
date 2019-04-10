@@ -11,6 +11,7 @@ part 'add_order_model.g.dart';
 
 abstract class AddOrderModel
     implements Built<AddOrderModel, AddOrderModelBuilder> {
+
   @BuiltValueField(wireName: "api_token")
   String get apiToken;
   

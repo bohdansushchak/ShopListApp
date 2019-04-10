@@ -1,5 +1,6 @@
 library add_products_event;
 
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
 part 'add_products_event.g.dart';
