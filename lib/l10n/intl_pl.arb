@@ -1,0 +1,134 @@
+{
+    "@@last_modified": "2019-04-11T17:55:18.074104",
+    "appName": "Shop application",
+    "@appName": {
+      "description": "The title of the application",
+      "type": "text",
+      "placeholders": {}
+    },
+    "appBarStoreData": "Dane sklepu",
+    "@appBarStoreData": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "appBarOrderList": "Lista zakupów",
+    "@appBarOrderList": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "appBarOrderData": "Dane zamówienia",
+    "@appBarOrderData": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "txtPrice": "Kwota",
+    "@txtPrice": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "txtProduct": "Produkt",
+    "@txtProduct": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "btnDone": "KONIEC",
+    "@btnDone": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "btnLogin": "ZALOGUJ SIĘ",
+    "@btnLogin": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "btnNextStep": "NASTĘPNY KROK",
+    "@btnNextStep": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "btnShare": "ZAPROŚ",
+    "@btnShare": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "hindDate": "Data zakupów",
+    "@hindDate": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "hindEmail": "E-mail",
+    "@hindEmail": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "hindLocation": "Lokalizacja",
+    "@hindLocation": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "hindPassword": "Hasło",
+    "@hindPassword": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "hindProduct": "Towar",
+    "@hindProduct": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "hindShopName": "Nazwa sklepu",
+    "@hindShopName": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "errCheckInternetConn": "Sprawdż polączenie z internetem",
+    "@errCheckInternetConn": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "errItemsIsEmpty": "Dodaj produkt",
+    "@errItemsIsEmpty": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "errNoExistAppToSend": "Nie masz aplikacjii do wysylania zaproszenia",
+    "@errNoExistAppToSend": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "errPasswordIsEmpty": "Hasło jest puste",
+    "@errPasswordIsEmpty": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "errEmailIsEmpty": "Wpisz e-mail",
+    "@errEmailIsEmpty": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "errPriceIsEmpty": "Wpisz cenę",
+    "@errPriceIsEmpty": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "errProductNameIsEmpty": "Wpisz nazwę produktu",
+    "@errProductNameIsEmpty": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "errDateIsBlank": "Wybierz datę",
+    "@errDateIsBlank": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "errLocationIsBlank": "Wpisz lokalizację",
+    "@errLocationIsBlank": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "errShopNameIsBlank": "Wpisz nazwę sklepu",
+    "@errShopNameIsBlank": {
+      "type": "text",
+      "placeholders": {}
+    }
+  }

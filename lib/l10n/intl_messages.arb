@@ -1,0 +1,134 @@
+{
+  "@@last_modified": "2019-04-11T17:55:18.074104",
+  "appName": "Shop application",
+  "@appName": {
+    "description": "The title of the application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "appBarStoreData": "Store data",
+  "@appBarStoreData": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appBarOrderList": "Shopping list",
+  "@appBarOrderList": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appBarOrderData": "Order data",
+  "@appBarOrderData": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "txtPrice": "Amount",
+  "@txtPrice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "txtProduct": "Product",
+  "@txtProduct": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnDone": "DONE",
+  "@btnDone": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnLogin": "LOG IN",
+  "@btnLogin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnNextStep": "NEXT STEP",
+  "@btnNextStep": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnShare": "SEND INVITE",
+  "@btnShare": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hindDate": "Date of purchase",
+  "@hindDate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hindEmail": "E-mail",
+  "@hindEmail": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hindLocation": "Location",
+  "@hindLocation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hindPassword": "Password",
+  "@hindPassword": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hindProduct": "Article",
+  "@hindProduct": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hindShopName": "Shop name",
+  "@hindShopName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errCheckInternetConn": "Check your internet connection",
+  "@errCheckInternetConn": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errItemsIsEmpty": "Add a product",
+  "@errItemsIsEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errNoExistAppToSend": "Not exist app to send an invitation",
+  "@errNoExistAppToSend": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errPasswordIsEmpty": "Password is empty",
+  "@errPasswordIsEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errEmailIsEmpty": "Email is empty",
+  "@errEmailIsEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errPriceIsEmpty": "Enter price",
+  "@errPriceIsEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errProductNameIsEmpty": "Enter a product name",
+  "@errProductNameIsEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errDateIsBlank": "Choose a date",
+  "@errDateIsBlank": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errLocationIsBlank": "Enter a location",
+  "@errLocationIsBlank": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errShopNameIsBlank": "Enter a store name",
+  "@errShopNameIsBlank": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

@@ -34,15 +34,13 @@ class MyApp extends StatelessWidget {
       },
       title: 'Flutter Demo',
       theme: ThemeData(
-        cardColor: COLOR_ITEM_BACKGROUND,
-        primaryColor: COLOR_PRIMARY,
-        accentColor: COLOR_ACCENT,
-        primaryColorDark: COLOR_PRIMARY_DARK,
-        primarySwatch: Colors.blue,
-        hintColor: COLOR_TEXT_HINT
-      ),
+          cardColor: COLOR_ITEM_BACKGROUND,
+          primaryColor: COLOR_PRIMARY,
+          accentColor: COLOR_ACCENT,
+          primaryColorDark: COLOR_PRIMARY_DARK,
+          primarySwatch: Colors.blue,
+          hintColor: COLOR_TEXT_HINT),
       home: SplashScreen(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
