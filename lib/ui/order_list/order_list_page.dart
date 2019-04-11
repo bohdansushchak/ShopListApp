@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
+import 'package:shop_list_app/main.dart';
 import 'package:shop_list_app/ui/order_detail/order_detail_page.dart';
 import 'package:shop_list_app/ui/order_list/order_item.dart';
 import 'package:shop_list_app/ui/order_list/order_list_bloc.dart';
@@ -22,7 +23,7 @@ class _OrderListPageState extends State<OrderListPage> {
   final _scrollController = ScrollController();
 
   void _goToAddOrderPage() {
-    Navigator.pushNamed(context, "/OrderListPage/ShopDataPage/");
+    Navigator.pushNamed(context, SHOP_DATA_PAGE_ROUTE);
   }
 
   @override

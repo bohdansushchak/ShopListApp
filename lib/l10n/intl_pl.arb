@@ -51,33 +51,33 @@
       "type": "text",
       "placeholders": {}
     },
-    "hindDate": "Data zakupów",
-    "@hindDate": {
+    "hintDate": "Data zakupów",
+    "@hintDate": {
       "type": "text",
       "placeholders": {}
     },
-    "hindEmail": "E-mail",
-    "@hindEmail": {
+    "hintEmail": "E-mail",
+    "@hintEmail": {
       "type": "text",
       "placeholders": {}
     },
-    "hindLocation": "Lokalizacja",
-    "@hindLocation": {
+    "hintLocation": "Lokalizacja",
+    "@hintLocation": {
       "type": "text",
       "placeholders": {}
     },
-    "hindPassword": "Hasło",
-    "@hindPassword": {
+    "hintPassword": "Hasło",
+    "@hintPassword": {
       "type": "text",
       "placeholders": {}
     },
-    "hindProduct": "Towar",
-    "@hindProduct": {
+    "hintProduct": "Towar",
+    "@hintProduct": {
       "type": "text",
       "placeholders": {}
     },
-    "hindShopName": "Nazwa sklepu",
-    "@hindShopName": {
+    "hintShopName": "Nazwa sklepu",
+    "@hintShopName": {
       "type": "text",
       "placeholders": {}
     },

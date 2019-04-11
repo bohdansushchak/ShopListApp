@@ -126,7 +126,7 @@
       "type": "text",
       "placeholders": {}
     },
-    "errShopNameIsBlank": "Enter a store name",
+    "errShopNameIsBlank": "Enter a shop name",
     "@errShopNameIsBlank": {
       "type": "text",
       "placeholders": {}

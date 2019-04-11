@@ -28,20 +28,12 @@ class LoginBloc extends Bloc<LoginPageEvent, LoginState> {
   }
 
   Stream<LoginState> _login(LoginEvent event) async* {
-    if (event.email.isEmpty || event.password.isEmpty) {
-      if (event.email.isEmpty)
-        yield LoginState.failure("Email can't be a empty");
-      else
-        yield LoginState.failure("Password can't be empty");
-    } else {
-      yield LoginState.loading();
-      try {
-        final loginResult =
-            await _repository.login(event.email, event.password);
-        yield LoginState.success(loginResult.apiToken);
-      } on ServerException catch (e) {
-        yield LoginState.failure(e.message);
-      }
+    yield LoginState.loading();
+    try {
+      final loginResult = await _repository.login(event.email, event.password);
+      yield LoginState.success(loginResult.apiToken);
+    } on ServerException catch (e) {
+      yield LoginState.failure(e.message);
     }
   }
 }

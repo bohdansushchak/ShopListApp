@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
+import 'package:shop_list_app/locale/locales.dart';
 import 'package:shop_list_app/main.dart';
 import 'package:shop_list_app/ui/add_products/add_products_bloc.dart';
 import 'package:shop_list_app/ui/add_products/add_products_state.dart';
@@ -30,6 +31,9 @@ class _AddProductsPageState extends State<AddProductsPage> {
   final _priceTextController = TextEditingController();
   final _addProductBloc = kiwi.Container().resolve<AddProductsBloc>();
 
+  String _productError;
+  String _priceError;
+
   @override
   Widget build(BuildContext context) {
     return _buildScaffold();
@@ -37,87 +41,122 @@ class _AddProductsPageState extends State<AddProductsPage> {
 
   Scaffold _buildScaffold() {
     return new Scaffold(
-        appBar: buildMyAppBar("Lista zakupów"),
-        body: new BlocBuilder(
-          bloc: _addProductBloc,
-          builder: (context, AddProductsState state) {
-            if (state.isOrdesHasBeenCreated) _backToOrderList();
-            return new Container(
-              alignment: Alignment.center,
-              padding:
-                  EdgeInsets.only(top: 45, left: 45, right: 45, bottom: 25),
-              child: new Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+        appBar: buildMyAppBar(AppLocalizations.of(context).appBarOrderList),
+        body: BlocListener(
+            bloc: _addProductBloc,
+            listener: (BuildContext context, AddProductsState state) =>
+                _blocListener(context, state),
+            child: new BlocBuilder(
+              bloc: _addProductBloc,
+              builder: (context, AddProductsState state) {
+                if (state.isOrdesHasBeenCreated) _backToOrderList();
+                return new Stack(
                   children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        new Expanded(
-                          child: buildWidgetWithTitle(
-                              title: "Product",
-                              child: CustomTextField(
-                                hint: "Towar",
-                                controller: _productTextController,
-                                errorText: state.productError,
-                              )),
-                        ),
-                        new Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    new Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(
+                          top: 45, left: 45, right: 45, bottom: 25),
+                      child: new Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            new SizedBox(
-                                width: 30.0,
-                                height: 30.0,
-                                child: new FloatingActionButton(
-                                  elevation: 12,
-                                  backgroundColor: COLOR_ACCENT,
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 15,
-                                  ),
-                                  onPressed: _addProduct,
-                                  tooltip: 'Add product',
-                                )),
-                          ],
-                        ),
-                      ],
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                new Expanded(
+                                  child: buildWidgetWithTitle(
+                                      title: AppLocalizations.of(context)
+                                          .txtProduct,
+                                      child: CustomTextField(
+                                        hint: AppLocalizations.of(context)
+                                            .hintProduct,
+                                        controller: _productTextController,
+                                        errorText: _productError,
+                                      )),
+                                ),
+                                new Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                        width: 30.0,
+                                        height: 30.0,
+                                        child: new FloatingActionButton(
+                                          elevation: 12,
+                                          backgroundColor: COLOR_ACCENT,
+                                          child: Icon(
+                                            Icons.add,
+                                            size: 15,
+                                          ),
+                                          onPressed: _addProduct,
+                                        )),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            new Expanded(child: _buildProductList(state)),
+                            new Padding(
+                              padding: EdgeInsets.only(bottom: 30),
+                              child: buildWidgetWithTitle(
+                                  title: AppLocalizations.of(context).txtPrice,
+                                  child: PriceTextField(
+                                    hint:
+                                        AppLocalizations.of(context).hintPrice,
+                                    controller: _priceTextController,
+                                    errorText: _priceError,
+                                  )),
+                            ),
+                            MyButton(
+                              buttonText: AppLocalizations.of(context).btnDone,
+                              onPressed: () => _saveOrder(state),
+                            )
+                          ]),
                     ),
-                    new Expanded(child: _buildProductList(state)),
-                    new Padding(
-                      padding: EdgeInsets.only(bottom: 30),
-                      child: buildWidgetWithTitle(
-                          title: "Kwota",
-                          child: PriceTextField(
-                            hint: '15zl',
-                            controller: _priceTextController,
-                            errorText: state.priceError,
-                          )),
-                    ),
-                    MyButton(
-                      buttonText: 'DONE',
-                      onPressed: _saveOrder,
-                    )
-                  ]),
-            );
-          },
-        ));
+                    new Align(
+                      alignment: Alignment.center,
+                      child: state.isLoading
+                      ? CircularProgressIndicator()
+                      : Container(),
+                    )                  ],
+                );
+              },
+            )));
   }
 
   void _addProduct() {
     final product = _productTextController.text;
-    _addProductBloc.addProduct(product);
+    if (product.isNotEmpty) {
+      _addProductBloc.addProduct(product);
+    } else {
+      setState(() {
+        _productError = product.isEmpty
+            ? AppLocalizations.of(context).errProductNameIsEmpty
+            : null;
+      });
+    }
   }
 
-  void _saveOrder() {
+  void _saveOrder(AddProductsState state) {
     final priceStr = _priceTextController.text;
-    _addProductBloc.saveOrder(
-        orderPrice: priceStr,
-        shopName: widget.shopName,
-        location: widget.location,
-        date: widget.date);
+    if (priceStr.isNotEmpty && state.products.length > 0) {
+      _addProductBloc.saveOrder(
+          orderPrice: priceStr,
+          shopName: widget.shopName,
+          location: widget.location,
+          date: widget.date,
+          locale: Localizations.localeOf(context).languageCode);
+    } else {
+      setState(() {
+        _priceError = priceStr.isEmpty
+            ? AppLocalizations.of(context).errPriceIsEmpty
+            : null;
+        _productError = state.products.length == 0
+            ? AppLocalizations.of(context).errItemsIsEmpty
+            : null;
+      });
+    }
   }
 
   Widget _buildProductList(AddProductsState state) {
@@ -159,5 +198,13 @@ class _AddProductsPageState extends State<AddProductsPage> {
     _addProductBloc.dispose();
     _productTextController.dispose();
     _priceTextController.dispose();
+  }
+
+  _blocListener(BuildContext context, AddProductsState state) {
+    if (state.isHasError) {
+      showMyAlertDialog(
+          title: AppLocalizations.of(context).errTitleDialog,
+          content: state.error);
+    }
   }
 }

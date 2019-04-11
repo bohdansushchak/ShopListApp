@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shop_list_app/dependency_container.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
+import 'package:shop_list_app/locale/locales.dart';
 import 'package:shop_list_app/ui/create_order_shop_data/shop_data.dart';
 import 'package:shop_list_app/ui/login/login_page.dart';
 import 'package:shop_list_app/ui/order_list/order_list_page.dart';
@@ -25,6 +26,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        AppLocalizationDelegates(),
+      ],
+      supportedLocales: [
+        Locale('en', ''),
+        Locale('pl', ''),
+      ],
+      onGenerateTitle: (BuildContext context) =>
+          AppLocalizations.of(context).appName,
       routes: <String, WidgetBuilder>{
         ORDER_LIST_PAGE_ROUTE: (BuildContext context) => OrderListPage(),
         LOGIN_PAGE_ROUTE: (BuildContext context) => LoginPage(),

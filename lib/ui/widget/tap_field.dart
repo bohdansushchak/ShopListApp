@@ -6,21 +6,19 @@ class TapField extends StatelessWidget {
   final String errorText;
   final VoidCallback onTap;
   final String text;
-  final EdgeInsets padding;
 
   Color _actualLineColor = COLOR_ACCENT;
   Widget _errorWidget = Container();
   String _actualText;
   Color _actualTextColor = COLOR_TEXT_HINT;
 
-  TapField(
-      {Key key,
-      this.errorText,
-      this.onTap,
-      this.hint,
-      this.text,
-      this.padding: const EdgeInsets.fromLTRB(25, 20, 25, 0)})
-      : super(key: key) {
+  TapField({
+    Key key,
+    this.errorText,
+    this.onTap,
+    this.hint,
+    this.text,
+  }) : super(key: key) {
     _initWidgets();
   }
 
@@ -55,7 +53,6 @@ class TapField extends StatelessWidget {
         onTap: onTap,
         child: Container(
           color: Colors.transparent,
-          padding: padding,
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

@@ -10,10 +10,6 @@ class _$AddProductsState extends AddProductsState {
   @override
   final BuiltList<String> products;
   @override
-  final String productError;
-  @override
-  final String priceError;
-  @override
   final String error;
   @override
   final bool isLoading;
@@ -24,12 +20,7 @@ class _$AddProductsState extends AddProductsState {
       (new AddProductsStateBuilder()..update(updates)).build();
 
   _$AddProductsState._(
-      {this.products,
-      this.productError,
-      this.priceError,
-      this.error,
-      this.isLoading,
-      this.isOrdesHasBeenCreated})
+      {this.products, this.error, this.isLoading, this.isOrdesHasBeenCreated})
       : super._() {
     if (products == null) {
       throw new BuiltValueNullFieldError('AddProductsState', 'products');
@@ -59,8 +50,6 @@ class _$AddProductsState extends AddProductsState {
     if (identical(other, this)) return true;
     return other is AddProductsState &&
         products == other.products &&
-        productError == other.productError &&
-        priceError == other.priceError &&
         error == other.error &&
         isLoading == other.isLoading &&
         isOrdesHasBeenCreated == other.isOrdesHasBeenCreated;
@@ -69,12 +58,7 @@ class _$AddProductsState extends AddProductsState {
   @override
   int get hashCode {
     return $jf($jc(
-        $jc(
-            $jc(
-                $jc($jc($jc(0, products.hashCode), productError.hashCode),
-                    priceError.hashCode),
-                error.hashCode),
-            isLoading.hashCode),
+        $jc($jc($jc(0, products.hashCode), error.hashCode), isLoading.hashCode),
         isOrdesHasBeenCreated.hashCode));
   }
 
@@ -82,8 +66,6 @@ class _$AddProductsState extends AddProductsState {
   String toString() {
     return (newBuiltValueToStringHelper('AddProductsState')
           ..add('products', products)
-          ..add('productError', productError)
-          ..add('priceError', priceError)
           ..add('error', error)
           ..add('isLoading', isLoading)
           ..add('isOrdesHasBeenCreated', isOrdesHasBeenCreated))
@@ -99,14 +81,6 @@ class AddProductsStateBuilder
   ListBuilder<String> get products =>
       _$this._products ??= new ListBuilder<String>();
   set products(ListBuilder<String> products) => _$this._products = products;
-
-  String _productError;
-  String get productError => _$this._productError;
-  set productError(String productError) => _$this._productError = productError;
-
-  String _priceError;
-  String get priceError => _$this._priceError;
-  set priceError(String priceError) => _$this._priceError = priceError;
 
   String _error;
   String get error => _$this._error;
@@ -126,8 +100,6 @@ class AddProductsStateBuilder
   AddProductsStateBuilder get _$this {
     if (_$v != null) {
       _products = _$v.products?.toBuilder();
-      _productError = _$v.productError;
-      _priceError = _$v.priceError;
       _error = _$v.error;
       _isLoading = _$v.isLoading;
       _isOrdesHasBeenCreated = _$v.isOrdesHasBeenCreated;
@@ -156,8 +128,6 @@ class AddProductsStateBuilder
       _$result = _$v ??
           new _$AddProductsState._(
               products: products.build(),
-              productError: productError,
-              priceError: priceError,
               error: error,
               isLoading: isLoading,
               isOrdesHasBeenCreated: isOrdesHasBeenCreated);

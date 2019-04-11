@@ -32,6 +32,7 @@ abstract class SaveOrderEvent extends ProductsEvent
   String get location;
   DateTime get date;
   String get price;
+  String get locale;
 
   SaveOrderEvent._();
 

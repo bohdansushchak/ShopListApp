@@ -24,15 +24,18 @@ class AddProductsBloc extends Bloc<ProductsEvent, AddProductsState> {
       {@required String orderPrice,
       @required String shopName,
       @required String location,
-      @required DateTime date}) {
+      @required DateTime date,
+      String locale}) {
     assert(shopName != null);
     assert(location != null);
     assert(date != null);
+    assert(locale != null);
     dispatch(SaveOrderEvent((b) => b
       ..shopName = shopName
       ..location = location
       ..date = date
-      ..price = orderPrice));
+      ..price = orderPrice
+      ..locale = locale));
   }
 
   @override
@@ -45,47 +48,35 @@ class AddProductsBloc extends Bloc<ProductsEvent, AddProductsState> {
   }
 
   Stream<AddProductsState> _addProduct(AddProductEvent event) async* {
-    if (event.product.isNotEmpty) {
-      var builderList = currentState.products.toBuilder();
-      builderList.add(event.product);
+    var builderList = currentState.products.toBuilder();
+    builderList.add(event.product);
 
-      yield AddProductsState.productsUpdate(builderList.build());
-    } else
-      yield AddProductsState.failure(currentState.products,
-          error: '', productError: 'Product can\'t be empty');
+    yield AddProductsState.productsUpdate(builderList.build());
   }
 
   Stream<AddProductsState> _saveOrder(SaveOrderEvent event) async* {
     try {
       yield AddProductsState.loading(products: currentState.products);
 
-      if (event.price.isNotEmpty && currentState.products.length > 0) {
-        final priceParsed = double.tryParse(event.price) != null
-            ? double.parse(event.price)
-            : 0.0;
+      final priceParsed = double.tryParse(event.price) != null
+          ? double.parse(event.price)
+          : 0.0;
 
-        final isOrderCreated = await _repository.saveOrder(
-            price: priceParsed,
-            shopName: event.shopName,
-            date: event.date,
-            location: event.location,
-            products: currentState.products);
-            
-        if (isOrderCreated)
-          yield AddProductsState.orderCreated(currentState.products);
-        else
-          yield AddProductsState.failure(currentState.products,
-              error: "Order has not created");
-      } else {
-        final priceError = event.price.isEmpty ? "Enter a price" : null;
+      final isOrderCreated = await _repository.saveOrder(
+          price: priceParsed,
+          shopName: event.shopName,
+          date: event.date,
+          location: event.location,
+          products: currentState.products,
+          locale: event.locale);
 
-        final productError =
-            currentState.products.length == 0 ? "Please add a product" : '';
-        yield AddProductsState.failure(currentState.products,
-            productError: productError, priceError: priceError);
-      }
+      if (isOrderCreated)
+        yield AddProductsState.orderCreated(currentState.products);
+      else
+        yield AddProductsState.failure(
+            currentState.products, "Order has not created");
     } on ServerException catch (e) {
-      yield AddProductsState.failure(currentState.products, error: e.message);
+      yield AddProductsState.failure(currentState.products, e.message);
     }
   }
 

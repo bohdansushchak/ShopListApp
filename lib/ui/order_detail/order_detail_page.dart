@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
 import 'package:shop_list_app/internal/helpers.dart';
+import 'package:shop_list_app/locale/locales.dart';
 import 'package:shop_list_app/ui/order_detail/order_detail_bloc.dart';
 import 'package:shop_list_app/ui/order_detail/order_detail_state.dart';
 import 'package:shop_list_app/ui/widget/custom_buttons.dart';
@@ -39,7 +40,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
 
   Scaffold _buildScaffold() {
     return new Scaffold(
-        appBar: buildMyAppBar("Dane zamówienie"),
+        appBar: buildMyAppBar(AppLocalizations.of(context).appBarOrderData),
         body: new BlocListener(
           bloc: _bloc,
           listener: (context, state) => _blocListener(context, state),
@@ -82,7 +83,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         ),
                         new MyButton(
                           onPressed: _invite,
-                          buttonText: 'Zaproś',
+                          buttonText: AppLocalizations.of(context).btnShare,
                           padding: EdgeInsets.only(left: 10, right: 10),
                         ),
                       ],
@@ -109,7 +110,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   void _blocListener(BuildContext context, OrderDetailState state) {
     if (!state.isSuccesfull) {
       showMyAlertDialog(
-          context: context, title: "Error message", content: state.error);
+          context: context, title: AppLocalizations.of(context).errTitleDialog, content: state.error);
     }
   }
 

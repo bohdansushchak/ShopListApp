@@ -1,11 +1,11 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:meta/meta.dart';
 import 'package:shop_list_app/data/model/add_order_model.dart';
 import 'package:shop_list_app/data/model/login_result.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/data/network/shop_list_data_source.dart';
 import 'package:shop_list_app/internal/token_manager.dart';
-import 'package:shop_list_app/internal/exeptions.dart';
 import 'package:intl/intl.dart';
 
 class Repository {
@@ -16,7 +16,7 @@ class Repository {
 
   Future<LoginResult> login(String email, String password) async {
     final loginResult = await _dataSource.login(email, password);
-    await _tokenManager.saveToken(loginResult); 
+    await _tokenManager.saveToken(loginResult);
     return loginResult;
   }
 
@@ -39,10 +39,13 @@ class Repository {
       @required String shopName,
       @required String location,
       @required double price,
-      @required DateTime date}) async {
+      @required DateTime date,
+      String locale}) async {
     final token = await _tokenManager.getSavedToken();
 
-    final formattedDate = new DateFormat('yyyy-MM-dd HH:mm:ss').format(date);
+    initializeDateFormatting(locale);
+    final formattedDate =
+        new DateFormat('yyyy-MM-dd HH:mm:ss', locale).format(date);
 
     final model = AddOrderModel((b) => b
       ..date = formattedDate
@@ -61,14 +64,5 @@ class Repository {
     final token = await _tokenManager.getSavedToken();
     final result = await _dataSource.generateLink(token, orderId);
     return result;
-  }
-
-  Future<T> _saveExecute<T>(String token, Future fun) async {
-    try {
-      return await fun;
-    } on UnauthorizedException {
-      await _refreshToken(token);
-      return await fun;
-    }
   }
 }

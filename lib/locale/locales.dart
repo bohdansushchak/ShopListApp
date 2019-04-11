@@ -4,8 +4,10 @@ import 'package:intl/intl.dart';
 
 import 'dart:async';
 
-class AppLocalications {
-  static Future<AppLocalications> load(Locale locale) {
+import 'package:shop_list_app/l10n/messages_all.dart';
+
+class AppLocalizations {
+  static Future<AppLocalizations> load(Locale locale) {
     final String name =
         locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
 
@@ -13,12 +15,12 @@ class AppLocalications {
 
     return initializeMessages(localName).then((bool _) {
       Intl.defaultLocale = localName;
-      return AppLocalications();
+      return AppLocalizations();
     });
   }
 
-  static AppLocalications of(BuildContext context) {
-    return Localizations.of<AppLocalications>(context, AppLocalications);
+  static AppLocalizations of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
   String get appName {
@@ -62,28 +64,28 @@ class AppLocalications {
     return Intl.message('SEND INVITE', name: 'btnShare');
   }
 
-  String get hindDate {
-    return Intl.message('Date of purchase', name: 'hindDate');
+  String get hintDate {
+    return Intl.message('Date of purchase', name: 'hintDate');
   }
 
-  String get hindEmail {
-    return Intl.message('E-mail', name: 'hindEmail');
+  String get hintEmail {
+    return Intl.message('E-mail', name: 'hintEmail');
   }
 
-  String get hindLocation {
-    return Intl.message('Location', name: 'hindLocation');
+  String get hintLocation {
+    return Intl.message('Location', name: 'hintLocation');
   }
 
-  String get hindPassword {
-    return Intl.message('Password', name: 'hindPassword');
+  String get hintPassword {
+    return Intl.message('Password', name: 'hintPassword');
   }
 
-  String get hindProduct {
-    return Intl.message('Article', name: 'hindProduct');
+  String get hintProduct {
+    return Intl.message('Article', name: 'hintProduct');
   }
 
-  String get hindShopName {
-    return Intl.message('Shop name', name: 'hindShopName');
+  String get hintShopName {
+    return Intl.message('Shop name', name: 'hintShopName');
   }
 
   String get errCheckInternetConn {
@@ -127,9 +129,17 @@ class AppLocalications {
   String get errShopNameIsBlank {
     return Intl.message('Enter a store name', name: 'errShopNameIsBlank');
   }
+
+  String get hintPrice {
+    return Intl.message('Price', name: 'hintPrice');
+  }
+
+  String get errTitleDialog {
+    return Intl.message('Error message', name: 'errTitleDialog');
+  }
 }
 
-class AppLocalizationDelegates extends LocalizationsDelegate<AppLocalications> {
+class AppLocalizationDelegates extends LocalizationsDelegate<AppLocalizations> {
   const AppLocalizationDelegates();
 
   @override
@@ -138,12 +148,12 @@ class AppLocalizationDelegates extends LocalizationsDelegate<AppLocalications> {
   }
 
   @override
-  Future<AppLocalications> load(Locale locale) {
-    return AppLocalications.load(locale);
+  Future<AppLocalizations> load(Locale locale) {
+    return AppLocalizations.load(locale);
   }
 
   @override
-  bool shouldReload(LocalizationsDelegate<AppLocalications> old) {
+  bool shouldReload(LocalizationsDelegate<AppLocalizations> old) {
     return false;
   }
 }

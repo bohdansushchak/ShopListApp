@@ -173,11 +173,14 @@ class _$SaveOrderEvent extends SaveOrderEvent {
   final DateTime date;
   @override
   final String price;
+  @override
+  final String locale;
 
   factory _$SaveOrderEvent([void updates(SaveOrderEventBuilder b)]) =>
       (new SaveOrderEventBuilder()..update(updates)).build();
 
-  _$SaveOrderEvent._({this.shopName, this.location, this.date, this.price})
+  _$SaveOrderEvent._(
+      {this.shopName, this.location, this.date, this.price, this.locale})
       : super._() {
     if (shopName == null) {
       throw new BuiltValueNullFieldError('SaveOrderEvent', 'shopName');
@@ -190,6 +193,9 @@ class _$SaveOrderEvent extends SaveOrderEvent {
     }
     if (price == null) {
       throw new BuiltValueNullFieldError('SaveOrderEvent', 'price');
+    }
+    if (locale == null) {
+      throw new BuiltValueNullFieldError('SaveOrderEvent', 'locale');
     }
   }
 
@@ -208,14 +214,18 @@ class _$SaveOrderEvent extends SaveOrderEvent {
         shopName == other.shopName &&
         location == other.location &&
         date == other.date &&
-        price == other.price;
+        price == other.price &&
+        locale == other.locale;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, shopName.hashCode), location.hashCode), date.hashCode),
-        price.hashCode));
+        $jc(
+            $jc($jc($jc(0, shopName.hashCode), location.hashCode),
+                date.hashCode),
+            price.hashCode),
+        locale.hashCode));
   }
 
   @override
@@ -224,7 +234,8 @@ class _$SaveOrderEvent extends SaveOrderEvent {
           ..add('shopName', shopName)
           ..add('location', location)
           ..add('date', date)
-          ..add('price', price))
+          ..add('price', price)
+          ..add('locale', locale))
         .toString();
   }
 }
@@ -249,6 +260,10 @@ class SaveOrderEventBuilder
   String get price => _$this._price;
   set price(String price) => _$this._price = price;
 
+  String _locale;
+  String get locale => _$this._locale;
+  set locale(String locale) => _$this._locale = locale;
+
   SaveOrderEventBuilder();
 
   SaveOrderEventBuilder get _$this {
@@ -257,6 +272,7 @@ class SaveOrderEventBuilder
       _location = _$v.location;
       _date = _$v.date;
       _price = _$v.price;
+      _locale = _$v.locale;
       _$v = null;
     }
     return this;
@@ -279,7 +295,11 @@ class SaveOrderEventBuilder
   _$SaveOrderEvent build() {
     final _$result = _$v ??
         new _$SaveOrderEvent._(
-            shopName: shopName, location: location, date: date, price: price);
+            shopName: shopName,
+            location: location,
+            date: date,
+            price: price,
+            locale: locale);
     replace(_$result);
     return _$result;
   }
