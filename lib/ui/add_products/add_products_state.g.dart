@@ -34,6 +34,9 @@ class _$AddProductsState extends AddProductsState {
     if (products == null) {
       throw new BuiltValueNullFieldError('AddProductsState', 'products');
     }
+    if (error == null) {
+      throw new BuiltValueNullFieldError('AddProductsState', 'error');
+    }
     if (isLoading == null) {
       throw new BuiltValueNullFieldError('AddProductsState', 'isLoading');
     }

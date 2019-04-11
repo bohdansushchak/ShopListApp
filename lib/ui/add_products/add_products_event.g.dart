@@ -88,18 +88,13 @@ class AddProductEventBuilder
 class _$RemoveProductevent extends RemoveProductevent {
   @override
   final String product;
-  @override
-  final int index;
 
   factory _$RemoveProductevent([void updates(RemoveProducteventBuilder b)]) =>
       (new RemoveProducteventBuilder()..update(updates)).build();
 
-  _$RemoveProductevent._({this.product, this.index}) : super._() {
+  _$RemoveProductevent._({this.product}) : super._() {
     if (product == null) {
       throw new BuiltValueNullFieldError('RemoveProductevent', 'product');
-    }
-    if (index == null) {
-      throw new BuiltValueNullFieldError('RemoveProductevent', 'index');
     }
   }
 
@@ -114,21 +109,18 @@ class _$RemoveProductevent extends RemoveProductevent {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is RemoveProductevent &&
-        product == other.product &&
-        index == other.index;
+    return other is RemoveProductevent && product == other.product;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, product.hashCode), index.hashCode));
+    return $jf($jc(0, product.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('RemoveProductevent')
-          ..add('product', product)
-          ..add('index', index))
+          ..add('product', product))
         .toString();
   }
 }
@@ -141,16 +133,11 @@ class RemoveProducteventBuilder
   String get product => _$this._product;
   set product(String product) => _$this._product = product;
 
-  int _index;
-  int get index => _$this._index;
-  set index(int index) => _$this._index = index;
-
   RemoveProducteventBuilder();
 
   RemoveProducteventBuilder get _$this {
     if (_$v != null) {
       _product = _$v.product;
-      _index = _$v.index;
       _$v = null;
     }
     return this;
@@ -171,8 +158,7 @@ class RemoveProducteventBuilder
 
   @override
   _$RemoveProductevent build() {
-    final _$result =
-        _$v ?? new _$RemoveProductevent._(product: product, index: index);
+    final _$result = _$v ?? new _$RemoveProductevent._(product: product);
     replace(_$result);
     return _$result;
   }
@@ -186,7 +172,7 @@ class _$SaveOrderEvent extends SaveOrderEvent {
   @override
   final DateTime date;
   @override
-  final double price;
+  final String price;
 
   factory _$SaveOrderEvent([void updates(SaveOrderEventBuilder b)]) =>
       (new SaveOrderEventBuilder()..update(updates)).build();
@@ -259,9 +245,9 @@ class SaveOrderEventBuilder
   DateTime get date => _$this._date;
   set date(DateTime date) => _$this._date = date;
 
-  double _price;
-  double get price => _$this._price;
-  set price(double price) => _$this._price = price;
+  String _price;
+  String get price => _$this._price;
+  set price(String price) => _$this._price = price;
 
   SaveOrderEventBuilder();
 

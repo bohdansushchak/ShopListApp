@@ -7,9 +7,7 @@ import 'package:shop_list_app/ui/widget/tap_field.dart';
 import 'package:shop_list_app/ui/widget/widgets.dart';
 
 class ShopDataPage extends StatefulWidget {
-  final Widget child;
-
-  ShopDataPage({Key key, this.child}) : super(key: key);
+  ShopDataPage({Key key}) : super(key: key);
 
   _ShopDataPageState createState() => _ShopDataPageState();
 }

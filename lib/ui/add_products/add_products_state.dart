@@ -2,6 +2,7 @@ library add_products_state;
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:meta/meta.dart';
 
 part 'add_products_state.g.dart';
 
@@ -12,12 +13,14 @@ abstract class AddProductsState
   String get productError;
   @nullable
   String get priceError;
-  @nullable
+
   String get error;
 
   bool get isLoading;
 
   bool get isOrdesHasBeenCreated;
+
+  bool get isHasError => error.isNotEmpty;
 
   AddProductsState._();
 
@@ -30,12 +33,14 @@ abstract class AddProductsState
       ..priceError = null
       ..isLoading = false
       ..isOrdesHasBeenCreated = false
+      ..error = ''
       ..products.replace(BuiltList<String>()));
   }
 
   factory AddProductsState.loading({BuiltList<String> products}) {
     if (products != null)
       return AddProductsState((b) => b
+        ..error = ''
         ..productError = null
         ..priceError = null
         ..isLoading = true
@@ -43,6 +48,7 @@ abstract class AddProductsState
         ..products.replace(products));
     else
       return AddProductsState((b) => b
+        ..error = ''
         ..productError = null
         ..priceError = null
         ..isLoading = true
@@ -55,27 +61,17 @@ abstract class AddProductsState
     return AddProductsState((b) => b
       ..productError = productError
       ..priceError = priceError
-      ..error = error
+      ..error = error != null ? error : ''
       ..isLoading = false
       ..isOrdesHasBeenCreated = false
       ..products.replace(productList));
   }
 
-  factory AddProductsState.productAdded(BuiltList<String> productList) {
+  factory AddProductsState.productsUpdate(BuiltList<String> productList) {
     return AddProductsState((b) => b
       ..productError = null
       ..priceError = null
-      ..error = null
-      ..isLoading = false
-      ..isOrdesHasBeenCreated = false
-      ..products.replace(productList));
-  }
-
-  factory AddProductsState.removeProduct(BuiltList<String> productList) {
-    return AddProductsState((b) => b
-      ..productError = null
-      ..priceError = null
-      ..error = null
+      ..error = ''
       ..isLoading = false
       ..isOrdesHasBeenCreated = false
       ..products.replace(productList));
@@ -85,7 +81,7 @@ abstract class AddProductsState
     return AddProductsState((b) => b
       ..productError = null
       ..priceError = null
-      ..error = null
+      ..error = ''
       ..isLoading = false
       ..isOrdesHasBeenCreated = true
       ..products.replace(productList));

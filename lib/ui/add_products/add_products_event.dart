@@ -1,6 +1,5 @@
 library add_products_event;
 
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
 part 'add_products_event.g.dart';
@@ -17,10 +16,9 @@ abstract class AddProductEvent extends ProductsEvent
       _$AddProductEvent;
 }
 
-abstract class RemoveProductevent
+abstract class RemoveProductevent extends ProductsEvent
     implements Built<RemoveProductevent, RemoveProducteventBuilder> {
   String get product;
-  int get index;
 
   RemoveProductevent._();
 
@@ -33,7 +31,7 @@ abstract class SaveOrderEvent extends ProductsEvent
   String get shopName;
   String get location;
   DateTime get date;
-  double get price;
+  String get price;
 
   SaveOrderEvent._();
 

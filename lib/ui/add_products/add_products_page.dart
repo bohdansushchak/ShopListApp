@@ -55,11 +55,13 @@ class _AddProductsPageState extends State<AddProductsPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         new Expanded(
-                          child: buildTextFieldWithTitle(
+                          child: buildWidgetWithTitle(
                               title: "Product",
-                              fieldHint: "Towar",
-                              textError: state.productError,
-                              controller: _productTextController),
+                              child: CustomTextField(
+                                hint: "Towar",
+                                controller: _productTextController,
+                                errorText: state.productError,
+                              )),
                         ),
                         new Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,13 +87,15 @@ class _AddProductsPageState extends State<AddProductsPage> {
                     ),
                     new Expanded(child: _buildProductList(state)),
                     new Padding(
-                        padding: EdgeInsets.only(bottom: 30),
-                        child: buildTextFieldWithTitle(
-                            title: "Kwota",
-                            fieldHint: "15 zl",
-                            keyboardType: TextInputType.number,
-                            textError: state.priceError,
-                            controller: _priceTextController)),
+                      padding: EdgeInsets.only(bottom: 30),
+                      child: buildWidgetWithTitle(
+                          title: "Kwota",
+                          child: PriceTextField(
+                            hint: '15zl',
+                            controller: _priceTextController,
+                            errorText: state.priceError,
+                          )),
+                    ),
                     MyButton(
                       buttonText: 'DONE',
                       onPressed: _saveOrder,
@@ -109,14 +113,11 @@ class _AddProductsPageState extends State<AddProductsPage> {
 
   void _saveOrder() {
     final priceStr = _priceTextController.text;
-    try {
-      final price = double.parse(priceStr);
-      _addProductBloc.saveOrder(
-          orderPrice: price,
-          shopName: widget.shopName,
-          location: widget.location,
-          date: widget.date);
-    } on Exception catch (e) {}
+    _addProductBloc.saveOrder(
+        orderPrice: priceStr,
+        shopName: widget.shopName,
+        location: widget.location,
+        date: widget.date);
   }
 
   Widget _buildProductList(AddProductsState state) {
@@ -136,15 +137,8 @@ class _AddProductsPageState extends State<AddProductsPage> {
     Navigator.popUntil(context, ModalRoute.withName(ORDER_LIST_PAGE_ROUTE));
   }
 
-  Widget buildTextFieldWithTitle(
-      {@required String title,
-      @required String fieldHint,
-      @required TextEditingController controller,
-      String textError,
-      TextInputType keyboardType: TextInputType.text}) {
+  Widget buildWidgetWithTitle({@required String title, Widget child}) {
     assert(title != null);
-    assert(fieldHint != null);
-    assert(controller != null);
     return new Column(children: <Widget>[
       new Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -155,13 +149,7 @@ class _AddProductsPageState extends State<AddProductsPage> {
           )
         ],
       ),
-      new CustomTextField(
-        controller: controller,
-        hint: fieldHint,
-        keyboardType: keyboardType,
-        errorText: textError,
-        padding: new EdgeInsets.all(0),
-      ),
+      child,
     ]);
   }
 

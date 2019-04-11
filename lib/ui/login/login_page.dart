@@ -55,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: emailTextController,
                         ),
                         new PasswordTextField(
+                          
                           hint: "Hasło",
                           controller: passwordTextController,
                         ),

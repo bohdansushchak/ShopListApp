@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shop_list_app/dependency_container.dart';
+import 'package:shop_list_app/internal/app_colors.dart';
 import 'package:shop_list_app/ui/create_order_shop_data/shop_data.dart';
 import 'package:shop_list_app/ui/login/login_page.dart';
 import 'package:shop_list_app/ui/order_list/order_list_page.dart';
@@ -33,8 +34,12 @@ class MyApp extends StatelessWidget {
       },
       title: 'Flutter Demo',
       theme: ThemeData(
-        brightness: Brightness.light,
+        cardColor: COLOR_ITEM_BACKGROUND,
+        primaryColor: COLOR_PRIMARY,
+        accentColor: COLOR_ACCENT,
+        primaryColorDark: COLOR_PRIMARY_DARK,
         primarySwatch: Colors.blue,
+        hintColor: COLOR_TEXT_HINT
       ),
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,
