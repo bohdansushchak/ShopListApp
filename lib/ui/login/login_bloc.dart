@@ -11,8 +11,7 @@ class LoginBloc extends Bloc<LoginPageEvent, LoginState> {
 
   @override
   LoginState get initialState {
-    //var token = _repository.token;
-    return LoginState.initial(false);
+    return LoginState.initial();
   }
 
   @override

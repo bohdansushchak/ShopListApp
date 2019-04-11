@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:kiwi/kiwi.dart' as kiwi;
+import 'package:shop_list_app/main.dart';
 import 'package:shop_list_app/ui/login/login_bloc.dart';
 import 'package:shop_list_app/ui/login/login_state.dart';
 import 'package:shop_list_app/ui/widget/custom_buttons.dart';
@@ -39,39 +40,52 @@ class _LoginPageState extends State<LoginPage> {
   Scaffold _buildScafold() {
     return Scaffold(
         body: new DecoratedContainer(
-      child: new Stack(children: <Widget>[
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new CustomTextField(
-                hint: "E-mail",
-                keyboardType: TextInputType.emailAddress,
-                controller: emailTextController,
-              ),
-              new PasswordTextField(
-                hint: "Hasło",
-                controller: passwordTextController,
-              ),
-              new MyButton(onPressed: _login, buttonText: "LOG IN", padding: EdgeInsets.only(left: 35.0, right: 35, top: 25.0),),
-            ],
-          ),
-        ),
-        new Align(
-            child: new BlocBuilder(
+            child: new BlocListener(
                 bloc: _loginBloc,
-                builder: (context, LoginState state) {
-                  if (state.isLoading) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  //if (!state.isSuccesful) _showDialog("Error", state.error);
-                  return new Container();
-                }),
-            alignment: FractionalOffset.center),
-      ]),
-    ));
+                listener: (context, state) => _blocListener(context, state),
+                child: new Stack(children: <Widget>[
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        new CustomTextField(
+                          hint: "E-mail",
+                          keyboardType: TextInputType.emailAddress,
+                          controller: emailTextController,
+                        ),
+                        new PasswordTextField(
+                          hint: "Hasło",
+                          controller: passwordTextController,
+                        ),
+                        new MyButton(
+                          onPressed: _login,
+                          buttonText: "LOG IN",
+                          padding:
+                              EdgeInsets.only(left: 35.0, right: 35, top: 25.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                  new Align(
+                      child: new BlocBuilder(
+                          bloc: _loginBloc,
+                          builder: (context, LoginState state) {
+                            if (state.isLoading) {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                            return new Container();
+                          }),
+                      alignment: FractionalOffset.center)
+                ]))));
+  }
+
+  void _blocListener(BuildContext context, LoginState state) {
+    if (state.isHasError) {
+      _showDialog("Error message", state.error);
+    }
+    if (state.isSuccesful) {
+      Navigator.of(context).pushReplacementNamed(ORDER_LIST_PAGE_ROUTE);
+    }
   }
 
   void _showDialog(String title, String content) {

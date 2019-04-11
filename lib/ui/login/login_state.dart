@@ -15,11 +15,13 @@ abstract class LoginState implements Built<LoginState, LoginStateBuilder> {
 
   bool get isSuccesful => error.isEmpty && !isLoading && isHasToken;
 
-  factory LoginState.initial(bool hasSavedToken) {
+  bool get isHasError => error.isNotEmpty && !isLoading && !isHasToken;
+
+  factory LoginState.initial() {
     return LoginState((b) => b
           ..isLoading = false
           ..error = ''
-          ..isHasToken = hasSavedToken
+          ..isHasToken = false
         );
   }
 
@@ -35,7 +37,7 @@ abstract class LoginState implements Built<LoginState, LoginStateBuilder> {
     return LoginState((b) => b
       ..isLoading = false
       ..error = error
-      ..isHasToken = true
+      ..isHasToken = false
       );
   }
 
