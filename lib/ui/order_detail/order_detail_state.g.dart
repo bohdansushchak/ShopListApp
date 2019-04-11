@@ -13,13 +13,20 @@ class _$OrderDetailState extends OrderDetailState {
   final Order order;
   @override
   final String urlToInvite;
+  @override
+  final bool isLoading;
 
   factory _$OrderDetailState([void updates(OrderDetailStateBuilder b)]) =>
       (new OrderDetailStateBuilder()..update(updates)).build();
 
-  _$OrderDetailState._({this.error, this.order, this.urlToInvite}) : super._() {
+  _$OrderDetailState._(
+      {this.error, this.order, this.urlToInvite, this.isLoading})
+      : super._() {
     if (error == null) {
       throw new BuiltValueNullFieldError('OrderDetailState', 'error');
+    }
+    if (isLoading == null) {
+      throw new BuiltValueNullFieldError('OrderDetailState', 'isLoading');
     }
   }
 
@@ -37,13 +44,15 @@ class _$OrderDetailState extends OrderDetailState {
     return other is OrderDetailState &&
         error == other.error &&
         order == other.order &&
-        urlToInvite == other.urlToInvite;
+        urlToInvite == other.urlToInvite &&
+        isLoading == other.isLoading;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, error.hashCode), order.hashCode), urlToInvite.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, error.hashCode), order.hashCode), urlToInvite.hashCode),
+        isLoading.hashCode));
   }
 
   @override
@@ -51,7 +60,8 @@ class _$OrderDetailState extends OrderDetailState {
     return (newBuiltValueToStringHelper('OrderDetailState')
           ..add('error', error)
           ..add('order', order)
-          ..add('urlToInvite', urlToInvite))
+          ..add('urlToInvite', urlToInvite)
+          ..add('isLoading', isLoading))
         .toString();
   }
 }
@@ -72,6 +82,10 @@ class OrderDetailStateBuilder
   String get urlToInvite => _$this._urlToInvite;
   set urlToInvite(String urlToInvite) => _$this._urlToInvite = urlToInvite;
 
+  bool _isLoading;
+  bool get isLoading => _$this._isLoading;
+  set isLoading(bool isLoading) => _$this._isLoading = isLoading;
+
   OrderDetailStateBuilder();
 
   OrderDetailStateBuilder get _$this {
@@ -79,6 +93,7 @@ class OrderDetailStateBuilder
       _error = _$v.error;
       _order = _$v.order?.toBuilder();
       _urlToInvite = _$v.urlToInvite;
+      _isLoading = _$v.isLoading;
       _$v = null;
     }
     return this;
@@ -103,7 +118,10 @@ class OrderDetailStateBuilder
     try {
       _$result = _$v ??
           new _$OrderDetailState._(
-              error: error, order: _order?.build(), urlToInvite: urlToInvite);
+              error: error,
+              order: _order?.build(),
+              urlToInvite: urlToInvite,
+              isLoading: isLoading);
     } catch (_) {
       String _$failedField;
       try {

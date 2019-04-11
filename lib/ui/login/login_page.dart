@@ -9,6 +9,7 @@ import 'package:shop_list_app/ui/widget/custom_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_list_app/ui/widget/decorated_container.dart';
 import 'package:shop_list_app/ui/widget/password_field.dart';
+import 'package:shop_list_app/ui/widget/widgets.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -81,30 +82,12 @@ class _LoginPageState extends State<LoginPage> {
 
   void _blocListener(BuildContext context, LoginState state) {
     if (state.isHasError) {
-      _showDialog("Error message", state.error);
+      showMyAlertDialog(
+          context: context, title: 'Error message', content: state.error);
     }
     if (state.isSuccesful) {
       Navigator.of(context).pushReplacementNamed(ORDER_LIST_PAGE_ROUTE);
     }
-  }
-
-  void _showDialog(String title, String content) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: new Text(title),
-            content: new Text(content),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text("Ok"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        });
   }
 
   @override

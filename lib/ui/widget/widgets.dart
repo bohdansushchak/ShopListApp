@@ -5,7 +5,7 @@ const EdgeInsets BOTTOM_BUTTTON_PADDING = EdgeInsets.fromLTRB(45, 10, 45, 35);
 
 AppBar buildMyAppBar(String appBarTitle) {
   return AppBar(
-    automaticallyImplyLeading: false,
+      automaticallyImplyLeading: false,
       backgroundColor: COLOR_PRIMARY,
       title: Padding(
           padding: EdgeInsets.only(left: 40),
@@ -15,4 +15,21 @@ AppBar buildMyAppBar(String appBarTitle) {
           )));
 }
 
-
+void showMyAlertDialog({BuildContext context, String title, String content}) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text(title),
+          content: new Text(content),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Ok"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      });
+}

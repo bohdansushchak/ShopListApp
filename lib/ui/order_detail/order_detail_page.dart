@@ -31,56 +31,87 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: buildMyAppBar("Dane zamówienie"),
-      body: new BlocBuilder(
-        bloc: _bloc,
-        builder: (context, OrderDetailState state) {
-          return new DecoratedContainer(
-            padding: EdgeInsets.only(top: 25, right: 35, left: 25, bottom: 25),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                new Row(children: <Widget>[
-                  new Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: new Text(
-                      state.order != null
-                          ? state.order.shopName
-                          : 'Hmm somethink going wrong:((',
-                      style: TextStyle(
-                        fontSize: 21,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                ]),
-                _buildOrderInfo(state),
-                new Padding(
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
-                  child: Container(
-                    color: COLOR_ACCENT,
-                    height: 2,
-                    width: double.infinity,
-                  ),
-                ),
-                new Expanded(
-                  child: _buildListItems(state),
-                ),
-                new MyButton(
-                  onPressed: _invite,
-                  buttonText: 'Zapros',
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+    return new BlocProvider(
+      bloc: _bloc,
+      child: _buildScaffold(),
     );
   }
 
-  void _invite() {}
+  Scaffold _buildScaffold() {
+    return new Scaffold(
+        appBar: buildMyAppBar("Dane zamówienie"),
+        body: new BlocListener(
+          bloc: _bloc,
+          listener: (context, state) => _blocListener(context, state),
+          child: new BlocBuilder(
+            bloc: _bloc,
+            builder: (context, OrderDetailState state) {
+              return new Stack(
+                children: <Widget>[
+                  new DecoratedContainer(
+                    padding: EdgeInsets.only(
+                        top: 25, right: 35, left: 25, bottom: 25),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        new Row(children: <Widget>[
+                          new Padding(
+                            padding: EdgeInsets.only(bottom: 10),
+                            child: new Text(
+                              state.order != null
+                                  ? state.order.shopName
+                                  : 'Hmm, somethink going wrong:((',
+                              style: TextStyle(
+                                fontSize: 21,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          )
+                        ]),
+                        _buildOrderInfo(state),
+                        new Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            color: COLOR_ACCENT,
+                            height: 2,
+                            width: double.infinity,
+                          ),
+                        ),
+                        new Expanded(
+                          child: _buildListItems(state),
+                        ),
+                        new MyButton(
+                          onPressed: _invite,
+                          buttonText: 'Zaproś',
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                  new Align(
+                    child: Center(
+                      child: state.isLoading
+                          ? CircularProgressIndicator()
+                          : Container(),
+                    ),
+                  )
+                ],
+              );
+            },
+          ),
+        ));
+  }
+
+  void _invite() {
+    _bloc.inviteOrder();
+  }
+
+  void _blocListener(BuildContext context, OrderDetailState state) {
+    if (!state.isSuccesfull) {
+      showMyAlertDialog(
+          context: context, title: "Error message", content: state.error);
+    }
+  }
 
   @override
   void dispose() {

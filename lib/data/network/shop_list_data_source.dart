@@ -103,7 +103,9 @@ class ShopListDataSource {
 
     if (response.statusCode == 200) {
       final mapResponse = json.decode(response.body);
-      return mapResponse["data"]["link"];
+      final subUrl = mapResponse["data"]["link"];
+      final url = "$_baseUrl/order/$subUrl";
+      return url;
     } else
       _provideException(response);
   }
