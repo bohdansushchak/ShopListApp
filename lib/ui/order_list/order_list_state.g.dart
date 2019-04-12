@@ -8,32 +8,42 @@ part of order_list_state;
 
 class _$OrderListState extends OrderListState {
   @override
-  final bool isLoading;
-  @override
-  final String error;
-  @override
   final BuiltList<Order> orderList;
   @override
   final bool hasReachedEndOfResults;
+  @override
+  final bool isHasInternetConnection;
+  @override
+  final bool isLoading;
+  @override
+  final String error;
 
   factory _$OrderListState([void updates(OrderListStateBuilder b)]) =>
       (new OrderListStateBuilder()..update(updates)).build();
 
   _$OrderListState._(
-      {this.isLoading, this.error, this.orderList, this.hasReachedEndOfResults})
+      {this.orderList,
+      this.hasReachedEndOfResults,
+      this.isHasInternetConnection,
+      this.isLoading,
+      this.error})
       : super._() {
-    if (isLoading == null) {
-      throw new BuiltValueNullFieldError('OrderListState', 'isLoading');
-    }
-    if (error == null) {
-      throw new BuiltValueNullFieldError('OrderListState', 'error');
-    }
     if (orderList == null) {
       throw new BuiltValueNullFieldError('OrderListState', 'orderList');
     }
     if (hasReachedEndOfResults == null) {
       throw new BuiltValueNullFieldError(
           'OrderListState', 'hasReachedEndOfResults');
+    }
+    if (isHasInternetConnection == null) {
+      throw new BuiltValueNullFieldError(
+          'OrderListState', 'isHasInternetConnection');
+    }
+    if (isLoading == null) {
+      throw new BuiltValueNullFieldError('OrderListState', 'isLoading');
+    }
+    if (error == null) {
+      throw new BuiltValueNullFieldError('OrderListState', 'error');
     }
   }
 
@@ -49,27 +59,33 @@ class _$OrderListState extends OrderListState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is OrderListState &&
-        isLoading == other.isLoading &&
-        error == other.error &&
         orderList == other.orderList &&
-        hasReachedEndOfResults == other.hasReachedEndOfResults;
+        hasReachedEndOfResults == other.hasReachedEndOfResults &&
+        isHasInternetConnection == other.isHasInternetConnection &&
+        isLoading == other.isLoading &&
+        error == other.error;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, isLoading.hashCode), error.hashCode),
-            orderList.hashCode),
-        hasReachedEndOfResults.hashCode));
+        $jc(
+            $jc(
+                $jc($jc(0, orderList.hashCode),
+                    hasReachedEndOfResults.hashCode),
+                isHasInternetConnection.hashCode),
+            isLoading.hashCode),
+        error.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('OrderListState')
-          ..add('isLoading', isLoading)
-          ..add('error', error)
           ..add('orderList', orderList)
-          ..add('hasReachedEndOfResults', hasReachedEndOfResults))
+          ..add('hasReachedEndOfResults', hasReachedEndOfResults)
+          ..add('isHasInternetConnection', isHasInternetConnection)
+          ..add('isLoading', isLoading)
+          ..add('error', error))
         .toString();
   }
 }
@@ -77,14 +93,6 @@ class _$OrderListState extends OrderListState {
 class OrderListStateBuilder
     implements Builder<OrderListState, OrderListStateBuilder> {
   _$OrderListState _$v;
-
-  bool _isLoading;
-  bool get isLoading => _$this._isLoading;
-  set isLoading(bool isLoading) => _$this._isLoading = isLoading;
-
-  String _error;
-  String get error => _$this._error;
-  set error(String error) => _$this._error = error;
 
   ListBuilder<Order> _orderList;
   ListBuilder<Order> get orderList =>
@@ -96,14 +104,28 @@ class OrderListStateBuilder
   set hasReachedEndOfResults(bool hasReachedEndOfResults) =>
       _$this._hasReachedEndOfResults = hasReachedEndOfResults;
 
+  bool _isHasInternetConnection;
+  bool get isHasInternetConnection => _$this._isHasInternetConnection;
+  set isHasInternetConnection(bool isHasInternetConnection) =>
+      _$this._isHasInternetConnection = isHasInternetConnection;
+
+  bool _isLoading;
+  bool get isLoading => _$this._isLoading;
+  set isLoading(bool isLoading) => _$this._isLoading = isLoading;
+
+  String _error;
+  String get error => _$this._error;
+  set error(String error) => _$this._error = error;
+
   OrderListStateBuilder();
 
   OrderListStateBuilder get _$this {
     if (_$v != null) {
-      _isLoading = _$v.isLoading;
-      _error = _$v.error;
       _orderList = _$v.orderList?.toBuilder();
       _hasReachedEndOfResults = _$v.hasReachedEndOfResults;
+      _isHasInternetConnection = _$v.isHasInternetConnection;
+      _isLoading = _$v.isLoading;
+      _error = _$v.error;
       _$v = null;
     }
     return this;
@@ -128,10 +150,11 @@ class OrderListStateBuilder
     try {
       _$result = _$v ??
           new _$OrderListState._(
-              isLoading: isLoading,
-              error: error,
               orderList: orderList.build(),
-              hasReachedEndOfResults: hasReachedEndOfResults);
+              hasReachedEndOfResults: hasReachedEndOfResults,
+              isHasInternetConnection: isHasInternetConnection,
+              isLoading: isLoading,
+              error: error);
     } catch (_) {
       String _$failedField;
       try {

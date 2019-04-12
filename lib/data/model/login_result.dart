@@ -7,7 +7,6 @@ class LoginResult {
   String updatedAt;
   String createdAt;
   String apiToken;
-//TODO : add api_token_expires
 
   LoginResult._(
       {this.id, this.email, this.updatedAt, this.createdAt, this.apiToken});

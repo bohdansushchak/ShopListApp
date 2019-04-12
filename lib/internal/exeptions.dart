@@ -11,3 +11,7 @@ class NoOrdersException implements Exception {
 }
 
 class UnauthorizedException implements Exception {}
+
+class NoConnectivityException implements Exception {
+  final message = "No internet connection";
+}

@@ -34,6 +34,8 @@ class LoginBloc extends Bloc<LoginPageEvent, LoginState> {
       yield LoginState.success(loginResult.apiToken);
     } on ServerException catch (e) {
       yield LoginState.failure(e.message);
+    } on NoConnectivityException catch (e) {
+      yield LoginState.failure(e.message, false);
     }
   }
 }

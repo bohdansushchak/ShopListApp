@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
+import 'package:shop_list_app/locale/locales.dart';
 import 'package:shop_list_app/main.dart';
 import 'package:shop_list_app/ui/order_detail/order_detail_page.dart';
 import 'package:shop_list_app/ui/order_list/order_item.dart';
@@ -11,6 +12,7 @@ import 'package:shop_list_app/ui/order_list/order_list_bloc.dart';
 import 'package:shop_list_app/ui/order_list/order_list_state.dart';
 
 import 'package:shop_list_app/ui/widget/decorated_container.dart';
+import 'package:shop_list_app/ui/widget/no_connectivity_widget.dart';
 
 class OrderListPage extends StatefulWidget {
   OrderListPage({Key key}) : super(key: key);
@@ -45,6 +47,13 @@ class _OrderListPageState extends State<OrderListPage> {
                   bloc: _orderListBloc,
                   builder: (context, OrderListState state) {
                     if (state.isLoading) return CircularProgressIndicator();
+                    if (!state.isHasInternetConnection)
+                      return Center(
+                          child: new NoConnectivityWidget(
+                        message:
+                            AppLocalizations.of(context).errCheckInternetConn,
+                        onTap: () => {_orderListBloc.fetchOrderList()},
+                      ));
                     if (state.isSuccessful) {
                       return _buildOrderList(state);
                     } else

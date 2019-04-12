@@ -27,6 +27,7 @@ dependencies:
   flutter_svg: ^0.12.1
   shared_preferences: ^0.5.1+2
   intl: ^0.15.8
+  connectivity: ^0.4.2
 
 
 

@@ -77,6 +77,8 @@ class AddProductsBloc extends Bloc<ProductsEvent, AddProductsState> {
             currentState.products, "Order has not created");
     } on ServerException catch (e) {
       yield AddProductsState.failure(currentState.products, e.message);
+    } on NoConnectivityException catch (e) {
+      yield AddProductsState.failure(currentState.products, e.message, false);
     }
   }
 

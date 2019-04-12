@@ -46,6 +46,8 @@ class OrderDetailBloc extends Bloc<OrderDetailEvent, OrderDetailState> {
       yield OrderDetailState.failure(e.message, currentState.order);
     } on PlatformException catch (e) {
       yield OrderDetailState.failure(e.message, currentState.order);
+    } on NoConnectivityException catch(e) {
+      yield OrderDetailState.failure(e.message, currentState.order, false);
     }
   }
 }

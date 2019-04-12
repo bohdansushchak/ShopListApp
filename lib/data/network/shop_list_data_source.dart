@@ -6,13 +6,15 @@ import 'package:shop_list_app/data/model/add_order_model.dart';
 import 'package:shop_list_app/data/model/login_result.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/internal/exeptions.dart';
+import 'package:connectivity/connectivity.dart';
 
 class ShopListDataSource {
   final http.Client _client;
+  final Connectivity _connectivity;
 
   final String _baseUrl = "https://test.elementzone.uk";
 
-  ShopListDataSource(this._client);
+  ShopListDataSource(this._client, this._connectivity);
 
   Future<List<Order>> getOrders(
       {@required String token,
@@ -21,16 +23,13 @@ class ShopListDataSource {
     assert(token.isNotEmpty);
     assert(offset != null);
     assert(limit != null);
-    final urlRaw = "$_baseUrl/orders";
-    final urlEncoded = Uri.encodeFull(urlRaw);
+    final urlEncoded = _encodeUrl('orders');
     final body = {
       "api_token": token,
       "offset": offset.toString(),
       "limit": limit.toString(),
     };
-
-    print(body.toString());
-
+    await _checkInternetConnection();
     final response = await _client.post(urlEncoded, body: body);
 
     if (response.statusCode == 200) {
@@ -46,10 +45,9 @@ class ShopListDataSource {
   }
 
   Future<LoginResult> login(String email, String password) async {
-    final urlRaw = "$_baseUrl/login";
-    final urlEncoded = Uri.encodeFull(urlRaw);
+    final urlEncoded = _encodeUrl('login');
     final body = {"email": email, "password": password};
-
+    await _checkInternetConnection();
     final response = await _client.post(urlEncoded, body: body);
 
     if (response.statusCode == 200) {
@@ -61,8 +59,7 @@ class ShopListDataSource {
   }
 
   Future<bool> addOrder(AddOrderModel model) async {
-    final urlRaw = "$_baseUrl/addOrder";
-    final urlEncoded = Uri.encodeFull(urlRaw);
+    final urlEncoded = _encodeUrl('addOrder');
 
     final body = model.toJson();
 
@@ -70,7 +67,7 @@ class ShopListDataSource {
       'Content-type': 'application/json',
       'Accept': 'application/json',
     };
-
+    await _checkInternetConnection();
     final response =
         await _client.post(urlEncoded, headers: headers, body: body);
 
@@ -81,10 +78,10 @@ class ShopListDataSource {
   }
 
   Future<bool> refreshToken(String token) async {
-    final urlRaw = "$_baseUrl/refresh";
-    final urlEncoded = Uri.encodeFull(urlRaw);
+    final urlEncoded = _encodeUrl('refresh');
     final body = {"api_token": token};
 
+    await _checkInternetConnection();
     final response = await _client.post(urlEncoded, body: body);
 
     if (response.statusCode == 200) {
@@ -95,10 +92,10 @@ class ShopListDataSource {
   }
 
   Future<String> generateLink(String token, int orderId) async {
-    final urlRaw = "$_baseUrl/generate";
-    final urlEncoded = Uri.encodeFull(urlRaw);
+    final urlEncoded = _encodeUrl('generate');
     final body = {"api_token": token, "id": orderId.toString()};
 
+    await _checkInternetConnection();
     final response = await _client.post(urlEncoded, body: body);
 
     if (response.statusCode == 200) {
@@ -127,5 +124,13 @@ class ShopListDataSource {
             throw Exception("Error body is empty");
         }
     }
+  }
+
+  String _encodeUrl(String method) => Uri.encodeFull("$_baseUrl/$method");
+
+  Future _checkInternetConnection() async {
+    var connectivityResult = await _connectivity.checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none)
+      throw NoConnectivityException();
   }
 }

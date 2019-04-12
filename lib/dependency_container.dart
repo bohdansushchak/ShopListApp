@@ -8,16 +8,19 @@ import 'package:shop_list_app/ui/add_products/add_products_bloc.dart';
 import 'package:shop_list_app/ui/login/login_bloc.dart';
 import 'package:shop_list_app/ui/order_detail/order_detail_bloc.dart';
 import 'package:shop_list_app/ui/order_list/order_list_bloc.dart';
+import 'package:connectivity/connectivity.dart';
+
 
 void initKiwi() {
   kiwi.Container()
-  ..registerInstance(http.Client())
-  ..registerSingleton((c) => SharedPreferences.getInstance())
-  ..registerSingleton((c) => TokenManager(c.resolve()))
-  ..registerFactory((c) => ShopListDataSource(c.resolve()))
-  ..registerFactory((c) => Repository(c.resolve(), c.resolve()))
-  ..registerFactory((c) => LoginBloc(c.resolve()))
-  ..registerFactory((c) => OrderListBloc(c.resolve()))
-  ..registerFactory((c) => AddProductsBloc(c.resolve()))
-  ..registerFactory((c) => OrderDetailBloc(c.resolve()));
+    ..registerInstance(http.Client())
+    ..registerSingleton((c) => Connectivity())
+    ..registerSingleton((c) => SharedPreferences.getInstance())
+    ..registerSingleton((c) => TokenManager(c.resolve()))
+    ..registerFactory((c) => ShopListDataSource(c.resolve(), c.resolve()))
+    ..registerFactory((c) => Repository(c.resolve(), c.resolve()))
+    ..registerFactory((c) => LoginBloc(c.resolve()))
+    ..registerFactory((c) => OrderListBloc(c.resolve()))
+    ..registerFactory((c) => AddProductsBloc(c.resolve()))
+    ..registerFactory((c) => OrderDetailBloc(c.resolve()));
 }

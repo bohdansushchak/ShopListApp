@@ -4,10 +4,15 @@ import 'package:built_value/built_value.dart';
 
 part 'login_state.g.dart';
 
-abstract class LoginState implements Built<LoginState, LoginStateBuilder> {
-  bool get isHasToken;
+abstract class BaseState {
+  bool get isHasInternetConnection;
   bool get isLoading;
   String get error;
+}
+
+abstract class LoginState
+    implements Built<LoginState, LoginStateBuilder>, BaseState {
+  bool get isHasToken;
 
   LoginState._();
 
@@ -19,32 +24,33 @@ abstract class LoginState implements Built<LoginState, LoginStateBuilder> {
 
   factory LoginState.initial() {
     return LoginState((b) => b
-          ..isLoading = false
-          ..error = ''
-          ..isHasToken = false
-        );
+      ..isLoading = false
+      ..error = ''
+      ..isHasToken = false
+      ..isHasInternetConnection = true);
   }
 
   factory LoginState.loading() {
     return LoginState((b) => b
-          ..isLoading = true
-          ..error = ''
-          ..isHasToken = false 
-        );
+      ..isLoading = true
+      ..error = ''
+      ..isHasToken = false
+      ..isHasInternetConnection = true);
   }
 
-    factory LoginState.failure(String error) {
+  factory LoginState.failure(String error, [bool isHasConnectivity = true]) {
     return LoginState((b) => b
       ..isLoading = false
       ..error = error
       ..isHasToken = false
-      );
+      ..isHasInternetConnection = isHasConnectivity);
   }
 
   factory LoginState.success(String token) {
     return LoginState((b) => b
       ..isLoading = false
       ..error = ''
-      ..isHasToken = token.isNotEmpty);
+      ..isHasToken = token.isNotEmpty
+      ..isHasInternetConnection = true);
   }
 }

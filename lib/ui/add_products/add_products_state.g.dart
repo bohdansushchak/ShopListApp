@@ -10,30 +10,40 @@ class _$AddProductsState extends AddProductsState {
   @override
   final BuiltList<String> products;
   @override
-  final String error;
+  final bool isOrdesHasBeenCreated;
+  @override
+  final bool isHasInternetConnection;
   @override
   final bool isLoading;
   @override
-  final bool isOrdesHasBeenCreated;
+  final String error;
 
   factory _$AddProductsState([void updates(AddProductsStateBuilder b)]) =>
       (new AddProductsStateBuilder()..update(updates)).build();
 
   _$AddProductsState._(
-      {this.products, this.error, this.isLoading, this.isOrdesHasBeenCreated})
+      {this.products,
+      this.isOrdesHasBeenCreated,
+      this.isHasInternetConnection,
+      this.isLoading,
+      this.error})
       : super._() {
     if (products == null) {
       throw new BuiltValueNullFieldError('AddProductsState', 'products');
     }
-    if (error == null) {
-      throw new BuiltValueNullFieldError('AddProductsState', 'error');
+    if (isOrdesHasBeenCreated == null) {
+      throw new BuiltValueNullFieldError(
+          'AddProductsState', 'isOrdesHasBeenCreated');
+    }
+    if (isHasInternetConnection == null) {
+      throw new BuiltValueNullFieldError(
+          'AddProductsState', 'isHasInternetConnection');
     }
     if (isLoading == null) {
       throw new BuiltValueNullFieldError('AddProductsState', 'isLoading');
     }
-    if (isOrdesHasBeenCreated == null) {
-      throw new BuiltValueNullFieldError(
-          'AddProductsState', 'isOrdesHasBeenCreated');
+    if (error == null) {
+      throw new BuiltValueNullFieldError('AddProductsState', 'error');
     }
   }
 
@@ -50,25 +60,30 @@ class _$AddProductsState extends AddProductsState {
     if (identical(other, this)) return true;
     return other is AddProductsState &&
         products == other.products &&
-        error == other.error &&
+        isOrdesHasBeenCreated == other.isOrdesHasBeenCreated &&
+        isHasInternetConnection == other.isHasInternetConnection &&
         isLoading == other.isLoading &&
-        isOrdesHasBeenCreated == other.isOrdesHasBeenCreated;
+        error == other.error;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, products.hashCode), error.hashCode), isLoading.hashCode),
-        isOrdesHasBeenCreated.hashCode));
+        $jc(
+            $jc($jc($jc(0, products.hashCode), isOrdesHasBeenCreated.hashCode),
+                isHasInternetConnection.hashCode),
+            isLoading.hashCode),
+        error.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AddProductsState')
           ..add('products', products)
-          ..add('error', error)
+          ..add('isOrdesHasBeenCreated', isOrdesHasBeenCreated)
+          ..add('isHasInternetConnection', isHasInternetConnection)
           ..add('isLoading', isLoading)
-          ..add('isOrdesHasBeenCreated', isOrdesHasBeenCreated))
+          ..add('error', error))
         .toString();
   }
 }
@@ -82,27 +97,33 @@ class AddProductsStateBuilder
       _$this._products ??= new ListBuilder<String>();
   set products(ListBuilder<String> products) => _$this._products = products;
 
-  String _error;
-  String get error => _$this._error;
-  set error(String error) => _$this._error = error;
+  bool _isOrdesHasBeenCreated;
+  bool get isOrdesHasBeenCreated => _$this._isOrdesHasBeenCreated;
+  set isOrdesHasBeenCreated(bool isOrdesHasBeenCreated) =>
+      _$this._isOrdesHasBeenCreated = isOrdesHasBeenCreated;
+
+  bool _isHasInternetConnection;
+  bool get isHasInternetConnection => _$this._isHasInternetConnection;
+  set isHasInternetConnection(bool isHasInternetConnection) =>
+      _$this._isHasInternetConnection = isHasInternetConnection;
 
   bool _isLoading;
   bool get isLoading => _$this._isLoading;
   set isLoading(bool isLoading) => _$this._isLoading = isLoading;
 
-  bool _isOrdesHasBeenCreated;
-  bool get isOrdesHasBeenCreated => _$this._isOrdesHasBeenCreated;
-  set isOrdesHasBeenCreated(bool isOrdesHasBeenCreated) =>
-      _$this._isOrdesHasBeenCreated = isOrdesHasBeenCreated;
+  String _error;
+  String get error => _$this._error;
+  set error(String error) => _$this._error = error;
 
   AddProductsStateBuilder();
 
   AddProductsStateBuilder get _$this {
     if (_$v != null) {
       _products = _$v.products?.toBuilder();
-      _error = _$v.error;
-      _isLoading = _$v.isLoading;
       _isOrdesHasBeenCreated = _$v.isOrdesHasBeenCreated;
+      _isHasInternetConnection = _$v.isHasInternetConnection;
+      _isLoading = _$v.isLoading;
+      _error = _$v.error;
       _$v = null;
     }
     return this;
@@ -128,9 +149,10 @@ class AddProductsStateBuilder
       _$result = _$v ??
           new _$AddProductsState._(
               products: products.build(),
-              error: error,
+              isOrdesHasBeenCreated: isOrdesHasBeenCreated,
+              isHasInternetConnection: isHasInternetConnection,
               isLoading: isLoading,
-              isOrdesHasBeenCreated: isOrdesHasBeenCreated);
+              error: error);
     } catch (_) {
       String _$failedField;
       try {

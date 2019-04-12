@@ -8,25 +8,35 @@ part of order_detail_state;
 
 class _$OrderDetailState extends OrderDetailState {
   @override
-  final String error;
-  @override
   final Order order;
   @override
   final String urlToInvite;
   @override
+  final bool isHasInternetConnection;
+  @override
   final bool isLoading;
+  @override
+  final String error;
 
   factory _$OrderDetailState([void updates(OrderDetailStateBuilder b)]) =>
       (new OrderDetailStateBuilder()..update(updates)).build();
 
   _$OrderDetailState._(
-      {this.error, this.order, this.urlToInvite, this.isLoading})
+      {this.order,
+      this.urlToInvite,
+      this.isHasInternetConnection,
+      this.isLoading,
+      this.error})
       : super._() {
-    if (error == null) {
-      throw new BuiltValueNullFieldError('OrderDetailState', 'error');
+    if (isHasInternetConnection == null) {
+      throw new BuiltValueNullFieldError(
+          'OrderDetailState', 'isHasInternetConnection');
     }
     if (isLoading == null) {
       throw new BuiltValueNullFieldError('OrderDetailState', 'isLoading');
+    }
+    if (error == null) {
+      throw new BuiltValueNullFieldError('OrderDetailState', 'error');
     }
   }
 
@@ -42,26 +52,31 @@ class _$OrderDetailState extends OrderDetailState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is OrderDetailState &&
-        error == other.error &&
         order == other.order &&
         urlToInvite == other.urlToInvite &&
-        isLoading == other.isLoading;
+        isHasInternetConnection == other.isHasInternetConnection &&
+        isLoading == other.isLoading &&
+        error == other.error;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, error.hashCode), order.hashCode), urlToInvite.hashCode),
-        isLoading.hashCode));
+        $jc(
+            $jc($jc($jc(0, order.hashCode), urlToInvite.hashCode),
+                isHasInternetConnection.hashCode),
+            isLoading.hashCode),
+        error.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('OrderDetailState')
-          ..add('error', error)
           ..add('order', order)
           ..add('urlToInvite', urlToInvite)
-          ..add('isLoading', isLoading))
+          ..add('isHasInternetConnection', isHasInternetConnection)
+          ..add('isLoading', isLoading)
+          ..add('error', error))
         .toString();
   }
 }
@@ -69,10 +84,6 @@ class _$OrderDetailState extends OrderDetailState {
 class OrderDetailStateBuilder
     implements Builder<OrderDetailState, OrderDetailStateBuilder> {
   _$OrderDetailState _$v;
-
-  String _error;
-  String get error => _$this._error;
-  set error(String error) => _$this._error = error;
 
   OrderBuilder _order;
   OrderBuilder get order => _$this._order ??= new OrderBuilder();
@@ -82,18 +93,28 @@ class OrderDetailStateBuilder
   String get urlToInvite => _$this._urlToInvite;
   set urlToInvite(String urlToInvite) => _$this._urlToInvite = urlToInvite;
 
+  bool _isHasInternetConnection;
+  bool get isHasInternetConnection => _$this._isHasInternetConnection;
+  set isHasInternetConnection(bool isHasInternetConnection) =>
+      _$this._isHasInternetConnection = isHasInternetConnection;
+
   bool _isLoading;
   bool get isLoading => _$this._isLoading;
   set isLoading(bool isLoading) => _$this._isLoading = isLoading;
+
+  String _error;
+  String get error => _$this._error;
+  set error(String error) => _$this._error = error;
 
   OrderDetailStateBuilder();
 
   OrderDetailStateBuilder get _$this {
     if (_$v != null) {
-      _error = _$v.error;
       _order = _$v.order?.toBuilder();
       _urlToInvite = _$v.urlToInvite;
+      _isHasInternetConnection = _$v.isHasInternetConnection;
       _isLoading = _$v.isLoading;
+      _error = _$v.error;
       _$v = null;
     }
     return this;
@@ -118,10 +139,11 @@ class OrderDetailStateBuilder
     try {
       _$result = _$v ??
           new _$OrderDetailState._(
-              error: error,
               order: _order?.build(),
               urlToInvite: urlToInvite,
-              isLoading: isLoading);
+              isHasInternetConnection: isHasInternetConnection,
+              isLoading: isLoading,
+              error: error);
     } catch (_) {
       String _$failedField;
       try {

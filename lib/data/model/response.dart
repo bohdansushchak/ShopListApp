@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:shop_list_app/data/model/error_response.dart';
-import 'package:shop_list_app/data/model/login_result.dart';
 import 'package:shop_list_app/data/model/serializer/serializers.dart';
 
 part 'response.g.dart';

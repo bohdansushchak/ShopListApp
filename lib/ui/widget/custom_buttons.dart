@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
 
 class MyButton extends StatelessWidget {
-  VoidCallback onPressed;
-  String buttonText;
-  EdgeInsets padding;
+  final VoidCallback onPressed;
+  final String buttonText;
+  final EdgeInsets padding;
 
   MyButton(
       {@required this.onPressed,

@@ -108,9 +108,14 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   }
 
   void _blocListener(BuildContext context, OrderDetailState state) {
-    if (!state.isSuccesfull) {
-      showMyAlertDialog(
-          context: context, title: AppLocalizations.of(context).errTitleDialog, content: state.error);
+    if (!state.isHasInternetConnection) {
+      showNoConnectivityDialog(context,
+          title: AppLocalizations.of(context).errTitleDialog,
+          message: AppLocalizations.of(context).errCheckInternetConn);
+    } else if (!state.isSuccesfull) {
+      showMyAlertDialog(context,
+          title: AppLocalizations.of(context).errTitleDialog,
+          content: state.error);
     }
   }
 

@@ -36,9 +36,7 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       setState(() {
         _emailError =
-            email.isEmpty 
-            ? AppLocalizations.of(context).errEmailIsEmpty 
-            : null;
+            email.isEmpty ? AppLocalizations.of(context).errEmailIsEmpty : null;
 
         _passwordError = password.isEmpty
             ? AppLocalizations.of(context).errPasswordIsEmpty
@@ -104,9 +102,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _blocListener(BuildContext context, LoginState state) {
-    if (state.isHasError) {
-      showMyAlertDialog(
-          context: context,
+    if (!state.isHasInternetConnection) {
+      showNoConnectivityDialog(context,
+          title: AppLocalizations.of(context).errTitleDialog,
+          message: AppLocalizations.of(context).errCheckInternetConn);
+    } else if (state.isHasError) {
+      showMyAlertDialog(context,
           title: AppLocalizations.of(context).errTitleDialog,
           content: state.error);
     }

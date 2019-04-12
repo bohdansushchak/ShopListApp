@@ -117,9 +117,10 @@ class _AddProductsPageState extends State<AddProductsPage> {
                     new Align(
                       alignment: Alignment.center,
                       child: state.isLoading
-                      ? CircularProgressIndicator()
-                      : Container(),
-                    )                  ],
+                          ? CircularProgressIndicator()
+                          : Container(),
+                    )
+                  ],
                 );
               },
             )));
@@ -129,6 +130,7 @@ class _AddProductsPageState extends State<AddProductsPage> {
     final product = _productTextController.text;
     if (product.isNotEmpty) {
       _addProductBloc.addProduct(product);
+      _productTextController.clear();
     } else {
       setState(() {
         _productError = product.isEmpty
@@ -165,9 +167,13 @@ class _AddProductsPageState extends State<AddProductsPage> {
         child: ListView.builder(
           itemCount: state.products.length,
           itemBuilder: (context, index) {
+            final product = state.products[index];
             return new Padding(
                 padding: EdgeInsets.only(bottom: 5),
-                child: ProductItem(product: state.products[index]));
+                child: new ProductItem(
+                  product: product,
+                  onTap: () => {_addProductBloc.removeProduct(product)},
+                ));
           },
         ));
   }
@@ -201,8 +207,12 @@ class _AddProductsPageState extends State<AddProductsPage> {
   }
 
   _blocListener(BuildContext context, AddProductsState state) {
-    if (state.isHasError) {
-      showMyAlertDialog(
+    if (!state.isHasInternetConnection) {
+      showNoConnectivityDialog(context,
+          title: AppLocalizations.of(context).errTitleDialog,
+          message: AppLocalizations.of(context).errCheckInternetConn);
+    } else if (state.isHasError) {
+      showMyAlertDialog(context,
           title: AppLocalizations.of(context).errTitleDialog,
           content: state.error);
     }

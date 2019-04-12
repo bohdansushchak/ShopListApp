@@ -10,6 +10,8 @@ class _$LoginState extends LoginState {
   @override
   final bool isHasToken;
   @override
+  final bool isHasInternetConnection;
+  @override
   final bool isLoading;
   @override
   final String error;
@@ -17,9 +19,18 @@ class _$LoginState extends LoginState {
   factory _$LoginState([void updates(LoginStateBuilder b)]) =>
       (new LoginStateBuilder()..update(updates)).build();
 
-  _$LoginState._({this.isHasToken, this.isLoading, this.error}) : super._() {
+  _$LoginState._(
+      {this.isHasToken,
+      this.isHasInternetConnection,
+      this.isLoading,
+      this.error})
+      : super._() {
     if (isHasToken == null) {
       throw new BuiltValueNullFieldError('LoginState', 'isHasToken');
+    }
+    if (isHasInternetConnection == null) {
+      throw new BuiltValueNullFieldError(
+          'LoginState', 'isHasInternetConnection');
     }
     if (isLoading == null) {
       throw new BuiltValueNullFieldError('LoginState', 'isLoading');
@@ -41,6 +52,7 @@ class _$LoginState extends LoginState {
     if (identical(other, this)) return true;
     return other is LoginState &&
         isHasToken == other.isHasToken &&
+        isHasInternetConnection == other.isHasInternetConnection &&
         isLoading == other.isLoading &&
         error == other.error;
   }
@@ -48,13 +60,16 @@ class _$LoginState extends LoginState {
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc(0, isHasToken.hashCode), isLoading.hashCode), error.hashCode));
+        $jc($jc($jc(0, isHasToken.hashCode), isHasInternetConnection.hashCode),
+            isLoading.hashCode),
+        error.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('LoginState')
           ..add('isHasToken', isHasToken)
+          ..add('isHasInternetConnection', isHasInternetConnection)
           ..add('isLoading', isLoading)
           ..add('error', error))
         .toString();
@@ -67,6 +82,11 @@ class LoginStateBuilder implements Builder<LoginState, LoginStateBuilder> {
   bool _isHasToken;
   bool get isHasToken => _$this._isHasToken;
   set isHasToken(bool isHasToken) => _$this._isHasToken = isHasToken;
+
+  bool _isHasInternetConnection;
+  bool get isHasInternetConnection => _$this._isHasInternetConnection;
+  set isHasInternetConnection(bool isHasInternetConnection) =>
+      _$this._isHasInternetConnection = isHasInternetConnection;
 
   bool _isLoading;
   bool get isLoading => _$this._isLoading;
@@ -81,6 +101,7 @@ class LoginStateBuilder implements Builder<LoginState, LoginStateBuilder> {
   LoginStateBuilder get _$this {
     if (_$v != null) {
       _isHasToken = _$v.isHasToken;
+      _isHasInternetConnection = _$v.isHasInternetConnection;
       _isLoading = _$v.isLoading;
       _error = _$v.error;
       _$v = null;
@@ -105,7 +126,10 @@ class LoginStateBuilder implements Builder<LoginState, LoginStateBuilder> {
   _$LoginState build() {
     final _$result = _$v ??
         new _$LoginState._(
-            isHasToken: isHasToken, isLoading: isLoading, error: error);
+            isHasToken: isHasToken,
+            isHasInternetConnection: isHasInternetConnection,
+            isLoading: isLoading,
+            error: error);
     replace(_$result);
     return _$result;
   }

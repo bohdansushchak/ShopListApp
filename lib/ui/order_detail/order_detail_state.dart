@@ -2,19 +2,16 @@ library order_detail_state;
 
 import 'package:built_value/built_value.dart';
 import 'package:shop_list_app/data/model/order.dart';
+import 'package:shop_list_app/ui/login/login_state.dart';
 part 'order_detail_state.g.dart';
 
 abstract class OrderDetailState
-    implements Built<OrderDetailState, OrderDetailStateBuilder> {
-  String get error;
-
+    implements Built<OrderDetailState, OrderDetailStateBuilder>, BaseState {
   @nullable
   Order get order;
 
   @nullable
   String get urlToInvite;
-
-  bool get isLoading;
 
   bool get isSuccesfull => error.isEmpty && urlToInvite.isNotEmpty;
 
@@ -27,6 +24,7 @@ abstract class OrderDetailState
     return OrderDetailState((b) => b
       ..error = ''
       ..isLoading = false
+      ..isHasInternetConnection = true
       ..urlToInvite = null);
   }
 
@@ -35,6 +33,7 @@ abstract class OrderDetailState
       ..order.replace(order)
       ..error = ''
       ..isLoading = false
+      ..isHasInternetConnection = true
       ..urlToInvite = null);
   }
 
@@ -43,14 +42,17 @@ abstract class OrderDetailState
       ..error = ''
       ..order.replace(order)
       ..isLoading = false
+      ..isHasInternetConnection = true
       ..urlToInvite = url);
   }
 
-  factory OrderDetailState.failure(String error, Order order) {
+  factory OrderDetailState.failure(String error, Order order,
+      [bool hasConnectivity = true]) {
     return OrderDetailState((b) => b
       ..error = error
       ..order.replace(order)
       ..isLoading = false
+      ..isHasInternetConnection = hasConnectivity
       ..urlToInvite = null);
   }
 
@@ -59,6 +61,7 @@ abstract class OrderDetailState
       ..error = ''
       ..order.replace(order)
       ..isLoading = true
+      ..isHasInternetConnection = true
       ..urlToInvite = null);
   }
 }

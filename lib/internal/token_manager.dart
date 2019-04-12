@@ -12,7 +12,7 @@ class TokenManager {
 
   String token = "";
 
-  Future<bool> saveToken(LoginResult loginResult) async {
+  Future saveToken(LoginResult loginResult) async {
     final prefs = await _preferences;
     token = loginResult.apiToken;
 
