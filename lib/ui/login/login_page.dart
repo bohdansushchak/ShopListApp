@@ -55,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Scaffold _buildScafold() {
     return Scaffold(
+        resizeToAvoidBottomPadding: false,
         body: new DecoratedContainer(
             child: new BlocListener(
                 bloc: _loginBloc,

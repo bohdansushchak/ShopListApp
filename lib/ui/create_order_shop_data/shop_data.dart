@@ -37,9 +37,15 @@ class _ShopDataPageState extends State<ShopDataPage> {
       Navigator.of(context).push(route);
     }
     setState(() {
-      _shopNameError = shopName.isEmpty ? AppLocalizations.of(context).errShopNameIsBlank : null;
-      _locationError = location.isEmpty ? AppLocalizations.of(context).errLocationIsBlank : null;
-      _shopDateError = _shopDate == null ? AppLocalizations.of(context).errDateIsBlank : null;
+      _shopNameError = shopName.isEmpty
+          ? AppLocalizations.of(context).errShopNameIsBlank
+          : null;
+      _locationError = location.isEmpty
+          ? AppLocalizations.of(context).errLocationIsBlank
+          : null;
+      _shopDateError = _shopDate == null
+          ? AppLocalizations.of(context).errDateIsBlank
+          : null;
     });
   }
 
@@ -60,6 +66,7 @@ class _ShopDataPageState extends State<ShopDataPage> {
 
   Scaffold _buildScaffold() {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: buildMyAppBar(AppLocalizations.of(context).appBarOrderData),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

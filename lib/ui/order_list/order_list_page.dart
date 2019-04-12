@@ -41,47 +41,47 @@ class _OrderListPageState extends State<OrderListPage> {
 
   Scaffold _buildScafold() {
     return new Scaffold(
-      body: new DecoratedContainer(
-          child: Center(
-              child: new BlocBuilder(
-                  bloc: _orderListBloc,
-                  builder: (context, OrderListState state) {
-                    if (state.isLoading) return CircularProgressIndicator();
-                    if (!state.isHasInternetConnection)
-                      return Center(
-                          child: new NoConnectivityWidget(
-                        message:
-                            AppLocalizations.of(context).errCheckInternetConn,
-                        onTap: () => {_orderListBloc.fetchOrderList()},
-                      ));
-                    if (state.isSuccessful) {
-                      return _buildOrderList(state);
-                    } else
-                      return Container();
-                  }))),
-      floatingActionButton: Container(
-        padding: EdgeInsets.only(right: 10, bottom: 20),
-        child: FloatingActionButton(
-          onPressed: _goToAddOrderPage,
-          backgroundColor: COLOR_ACCENT,
-          child: Icon(Icons.add),
-        ),
-      ),
-    );
+        body: new DecoratedContainer(
+            child: Center(
+                child: new BlocBuilder(
+                    bloc: _orderListBloc,
+                    builder: (context, OrderListState state) {
+                      if (state.isLoading) return CircularProgressIndicator();
+                      if (!state.isHasInternetConnection)
+                        return Center(
+                            child: new NoConnectivityWidget(
+                          message:
+                              AppLocalizations.of(context).errCheckInternetConn,
+                          onTap: () => {_orderListBloc.fetchOrderList()},
+                        ));
+                      if (state.isSuccessful) {
+                        return _buildOrderList(state);
+                      } else
+                        return Container();
+                    }))),
+        floatingActionButton: Container(
+          padding: EdgeInsets.only(right: 10, bottom: 20),
+          child: FloatingActionButton(
+            onPressed: _goToAddOrderPage,
+            backgroundColor: COLOR_ACCENT,
+            child: Icon(Icons.add),
+          ),
+        ));
   }
 
   Widget _buildOrderList(OrderListState state) {
     return NotificationListener<ScrollNotification>(
       onNotification: _handleScrollNotification,
-      child: ListView.builder(
-        itemCount: _calculateListItemCount(state),
-        controller: _scrollController,
-        itemBuilder: (context, index) {
-          return index >= state.orderList.length
-              ? _buildLoaderListItem()
-              : _buildClickableOrderItem(state.orderList[index]);
-        },
-      ),
+      child: new SafeArea(
+          child: ListView.builder(
+            itemCount: _calculateListItemCount(state),
+            controller: _scrollController,
+            itemBuilder: (context, index) {
+              return index >= state.orderList.length
+                  ? _buildLoaderListItem()
+                  : _buildClickableOrderItem(state.orderList[index]);
+            },
+          )),
     );
   }
 

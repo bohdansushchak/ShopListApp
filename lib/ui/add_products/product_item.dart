@@ -5,25 +5,31 @@ class ProductItem extends StatelessWidget {
   final String product;
   final VoidCallback onTap;
 
-  ProductItem({Key key, this.product, this.onTap}) : super(key: key);
+  ProductItem({Key key, @required this.product, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     assert(product != null);
-    return Row(
+    return new Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Container(
+        new Flexible(
+            child: new Container(
           color: COLOR_ITEM_BACKGROUND,
-          child: Row(
+          child: new Row(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               SizedBox(width: 10),
-              Text(
+              new Flexible(
+                  child: Text(
                 product,
+                overflow: TextOverflow.fade,
+                maxLines: 1,
+                softWrap: false,
                 style: TextStyle(
                   color: COLOR_TEXT_HINT,
                 ),
-              ),
+              )),
               IconButton(
                 icon: Icon(Icons.close),
                 color: Colors.grey.shade600,
@@ -31,7 +37,7 @@ class ProductItem extends StatelessWidget {
               )
             ],
           ),
-        )
+        ))
       ],
     );
   }
