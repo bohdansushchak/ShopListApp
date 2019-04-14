@@ -6,6 +6,7 @@ import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/internal/app_colors.dart';
 import 'package:shop_list_app/internal/helpers.dart';
 import 'package:shop_list_app/locale/locales.dart';
+import 'package:shop_list_app/main.dart';
 import 'package:shop_list_app/ui/order_detail/order_detail_bloc.dart';
 import 'package:shop_list_app/ui/order_detail/order_detail_state.dart';
 import 'package:shop_list_app/ui/widget/custom_buttons.dart';
@@ -108,7 +109,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   }
 
   void _blocListener(BuildContext context, OrderDetailState state) {
-    if (!state.isHasInternetConnection) {
+    if (!state.isAuthorized) {
+      Navigator.of(context).pushReplacementNamed(LOGIN_PAGE_ROUTE);
+    } else if (!state.isHasInternetConnection) {
       showNoConnectivityDialog(context,
           title: AppLocalizations.of(context).errTitleDialog,
           message: AppLocalizations.of(context).errCheckInternetConn);

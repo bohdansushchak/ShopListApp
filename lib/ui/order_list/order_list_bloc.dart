@@ -41,11 +41,13 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
 
       yield OrderListState.success(currentState.orderList + nextPageOrders);
     } on ServerException catch (e) {
-      yield OrderListState.failure(e.message);
+      yield OrderListState.failure(error: e.message);
     } on NoOrdersException {
       yield currentState.rebuild((b) => b..hasReachedEndOfResults = true);
-    } on UnauthorizedException catch (e) {} on NoConnectivityException catch (e) {
-      yield OrderListState.failure(e.message, false);
+    } on UnauthorizedException catch (e) {
+      yield OrderListState.failure(error: e.message, isAuthorized: false);
+    } on NoConnectivityException catch (e) {
+      yield OrderListState.failure(error: e.message, hasConnectivity: false);
     }
   }
 }

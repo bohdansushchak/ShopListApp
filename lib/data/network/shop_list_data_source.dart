@@ -108,20 +108,26 @@ class ShopListDataSource {
   }
 
   void _provideException(http.Response response) {
-    switch (response.statusCode) {
+    final map = json.decode(response.body);
+    if (!map.containsKey("error")) {
+      throw Exception("Error body is empty");
+    }
+
+    var message = map["error"]["message"];
+    var code = map["error"]["code"];
+
+    switch (code) {
       case 401:
         {
           throw UnauthorizedException();
         }
+      case 500:
+        {
+          throw ServerException(message);
+        }
       default:
         {
-          final map = json.decode(response.body);
-          if (map.containsKey("error")) {
-            var message = map["error"]["message"];
-            var code = map["error"]["code"];
-            throw ServerException(message: message, code: code);
-          } else
-            throw Exception("Error body is empty");
+          throw ServerException(message);
         }
     }
   }

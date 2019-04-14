@@ -17,6 +17,8 @@ class _$OrderDetailState extends OrderDetailState {
   final bool isLoading;
   @override
   final String error;
+  @override
+  final bool isAuthorized;
 
   factory _$OrderDetailState([void updates(OrderDetailStateBuilder b)]) =>
       (new OrderDetailStateBuilder()..update(updates)).build();
@@ -26,7 +28,8 @@ class _$OrderDetailState extends OrderDetailState {
       this.urlToInvite,
       this.isHasInternetConnection,
       this.isLoading,
-      this.error})
+      this.error,
+      this.isAuthorized})
       : super._() {
     if (isHasInternetConnection == null) {
       throw new BuiltValueNullFieldError(
@@ -37,6 +40,9 @@ class _$OrderDetailState extends OrderDetailState {
     }
     if (error == null) {
       throw new BuiltValueNullFieldError('OrderDetailState', 'error');
+    }
+    if (isAuthorized == null) {
+      throw new BuiltValueNullFieldError('OrderDetailState', 'isAuthorized');
     }
   }
 
@@ -56,17 +62,20 @@ class _$OrderDetailState extends OrderDetailState {
         urlToInvite == other.urlToInvite &&
         isHasInternetConnection == other.isHasInternetConnection &&
         isLoading == other.isLoading &&
-        error == other.error;
+        error == other.error &&
+        isAuthorized == other.isAuthorized;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, order.hashCode), urlToInvite.hashCode),
-                isHasInternetConnection.hashCode),
-            isLoading.hashCode),
-        error.hashCode));
+            $jc(
+                $jc($jc($jc(0, order.hashCode), urlToInvite.hashCode),
+                    isHasInternetConnection.hashCode),
+                isLoading.hashCode),
+            error.hashCode),
+        isAuthorized.hashCode));
   }
 
   @override
@@ -76,7 +85,8 @@ class _$OrderDetailState extends OrderDetailState {
           ..add('urlToInvite', urlToInvite)
           ..add('isHasInternetConnection', isHasInternetConnection)
           ..add('isLoading', isLoading)
-          ..add('error', error))
+          ..add('error', error)
+          ..add('isAuthorized', isAuthorized))
         .toString();
   }
 }
@@ -106,6 +116,10 @@ class OrderDetailStateBuilder
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
 
+  bool _isAuthorized;
+  bool get isAuthorized => _$this._isAuthorized;
+  set isAuthorized(bool isAuthorized) => _$this._isAuthorized = isAuthorized;
+
   OrderDetailStateBuilder();
 
   OrderDetailStateBuilder get _$this {
@@ -115,6 +129,7 @@ class OrderDetailStateBuilder
       _isHasInternetConnection = _$v.isHasInternetConnection;
       _isLoading = _$v.isLoading;
       _error = _$v.error;
+      _isAuthorized = _$v.isAuthorized;
       _$v = null;
     }
     return this;
@@ -143,7 +158,8 @@ class OrderDetailStateBuilder
               urlToInvite: urlToInvite,
               isHasInternetConnection: isHasInternetConnection,
               isLoading: isLoading,
-              error: error);
+              error: error,
+              isAuthorized: isAuthorized);
     } catch (_) {
       String _$failedField;
       try {

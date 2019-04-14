@@ -29,7 +29,8 @@ class Repository {
     return ordersBuiltList;
   }
 
-  Future<bool> _refreshToken(String token) async {
+  Future<bool> refreshToken() async {
+    final token = await _tokenManager.getSavedToken();
     final result = await _dataSource.refreshToken(token);
     return result;
   }

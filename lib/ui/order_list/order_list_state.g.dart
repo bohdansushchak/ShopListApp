@@ -17,6 +17,8 @@ class _$OrderListState extends OrderListState {
   final bool isLoading;
   @override
   final String error;
+  @override
+  final bool isAuthorized;
 
   factory _$OrderListState([void updates(OrderListStateBuilder b)]) =>
       (new OrderListStateBuilder()..update(updates)).build();
@@ -26,7 +28,8 @@ class _$OrderListState extends OrderListState {
       this.hasReachedEndOfResults,
       this.isHasInternetConnection,
       this.isLoading,
-      this.error})
+      this.error,
+      this.isAuthorized})
       : super._() {
     if (orderList == null) {
       throw new BuiltValueNullFieldError('OrderListState', 'orderList');
@@ -44,6 +47,9 @@ class _$OrderListState extends OrderListState {
     }
     if (error == null) {
       throw new BuiltValueNullFieldError('OrderListState', 'error');
+    }
+    if (isAuthorized == null) {
+      throw new BuiltValueNullFieldError('OrderListState', 'isAuthorized');
     }
   }
 
@@ -63,7 +69,8 @@ class _$OrderListState extends OrderListState {
         hasReachedEndOfResults == other.hasReachedEndOfResults &&
         isHasInternetConnection == other.isHasInternetConnection &&
         isLoading == other.isLoading &&
-        error == other.error;
+        error == other.error &&
+        isAuthorized == other.isAuthorized;
   }
 
   @override
@@ -71,11 +78,13 @@ class _$OrderListState extends OrderListState {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc(0, orderList.hashCode),
-                    hasReachedEndOfResults.hashCode),
-                isHasInternetConnection.hashCode),
-            isLoading.hashCode),
-        error.hashCode));
+                $jc(
+                    $jc($jc(0, orderList.hashCode),
+                        hasReachedEndOfResults.hashCode),
+                    isHasInternetConnection.hashCode),
+                isLoading.hashCode),
+            error.hashCode),
+        isAuthorized.hashCode));
   }
 
   @override
@@ -85,7 +94,8 @@ class _$OrderListState extends OrderListState {
           ..add('hasReachedEndOfResults', hasReachedEndOfResults)
           ..add('isHasInternetConnection', isHasInternetConnection)
           ..add('isLoading', isLoading)
-          ..add('error', error))
+          ..add('error', error)
+          ..add('isAuthorized', isAuthorized))
         .toString();
   }
 }
@@ -117,6 +127,10 @@ class OrderListStateBuilder
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
 
+  bool _isAuthorized;
+  bool get isAuthorized => _$this._isAuthorized;
+  set isAuthorized(bool isAuthorized) => _$this._isAuthorized = isAuthorized;
+
   OrderListStateBuilder();
 
   OrderListStateBuilder get _$this {
@@ -126,6 +140,7 @@ class OrderListStateBuilder
       _isHasInternetConnection = _$v.isHasInternetConnection;
       _isLoading = _$v.isLoading;
       _error = _$v.error;
+      _isAuthorized = _$v.isAuthorized;
       _$v = null;
     }
     return this;
@@ -154,7 +169,8 @@ class OrderListStateBuilder
               hasReachedEndOfResults: hasReachedEndOfResults,
               isHasInternetConnection: isHasInternetConnection,
               isLoading: isLoading,
-              error: error);
+              error: error,
+              isAuthorized: isAuthorized);
     } catch (_) {
       String _$failedField;
       try {

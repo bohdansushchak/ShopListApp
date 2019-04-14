@@ -6,13 +6,16 @@ import 'package:shop_list_app/ui/login/login_state.dart';
 
 part 'add_products_state.g.dart';
 
+abstract class AuthorizedState {
+  bool get isAuthorized;
+}
+
 abstract class AddProductsState
-    implements Built<AddProductsState, AddProductsStateBuilder>, BaseState {
+    implements
+        Built<AddProductsState, AddProductsStateBuilder>,
+        BaseState,
+        AuthorizedState {
   BuiltList<String> get products;
-
-  //String get error;
-
-  //bool get isLoading;
 
   bool get isOrdesHasBeenCreated;
 
@@ -29,6 +32,7 @@ abstract class AddProductsState
       ..isOrdesHasBeenCreated = false
       ..error = ''
       ..isHasInternetConnection = true
+      ..isAuthorized = true
       ..products.replace(BuiltList<String>()));
   }
 
@@ -38,15 +42,17 @@ abstract class AddProductsState
       ..isLoading = true
       ..isOrdesHasBeenCreated = false
       ..isHasInternetConnection = true
+      ..isAuthorized = true
       ..products.replace(products != null ? products : BuiltList<String>()));
   }
 
   factory AddProductsState.failure(BuiltList<String> productList, String error,
-      [bool isHasConnectivity = true]) {
+      {bool isHasConnectivity = true, bool isAuthorized = true}) {
     return AddProductsState((b) => b
       ..error = error != null ? error : ''
       ..isLoading = false
       ..isOrdesHasBeenCreated = false
+      ..isAuthorized = isAuthorized
       ..isHasInternetConnection = isHasConnectivity
       ..products.replace(productList));
   }
@@ -57,6 +63,7 @@ abstract class AddProductsState
       ..isLoading = false
       ..isOrdesHasBeenCreated = false
       ..isHasInternetConnection = true
+      ..isAuthorized = true
       ..products.replace(productList));
   }
 
@@ -66,6 +73,7 @@ abstract class AddProductsState
       ..isLoading = false
       ..isOrdesHasBeenCreated = true
       ..isHasInternetConnection = true
+      ..isAuthorized = true
       ..products.replace(productList));
   }
 }

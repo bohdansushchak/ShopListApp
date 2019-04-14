@@ -43,22 +43,27 @@ class _OrderListPageState extends State<OrderListPage> {
     return new Scaffold(
         body: new DecoratedContainer(
             child: Center(
-                child: new BlocBuilder(
+                child: new BlocListener(
+                    listener: (BuildContext context, OrderListState state) =>
+                        _blocLitener(context, state),
                     bloc: _orderListBloc,
-                    builder: (context, OrderListState state) {
-                      if (state.isLoading) return CircularProgressIndicator();
-                      if (!state.isHasInternetConnection)
-                        return Center(
-                            child: new NoConnectivityWidget(
-                          message:
-                              AppLocalizations.of(context).errCheckInternetConn,
-                          onTap: () => {_orderListBloc.fetchOrderList()},
-                        ));
-                      if (state.isSuccessful) {
-                        return _buildOrderList(state);
-                      } else
-                        return Container();
-                    }))),
+                    child: new BlocBuilder(
+                        bloc: _orderListBloc,
+                        builder: (BuildContext context, OrderListState state) {
+                          if (state.isLoading)
+                            return CircularProgressIndicator();
+                          if (!state.isHasInternetConnection)
+                            return Center(
+                                child: new NoConnectivityWidget(
+                              message: AppLocalizations.of(context)
+                                  .errCheckInternetConn,
+                              onTap: () => {_orderListBloc.fetchOrderList()},
+                            ));
+                          if (state.isSuccessful) {
+                            return _buildOrderList(state);
+                          } else
+                            return Container();
+                        })))),
         floatingActionButton: Container(
           padding: EdgeInsets.only(right: 10, bottom: 20),
           child: FloatingActionButton(
@@ -74,14 +79,14 @@ class _OrderListPageState extends State<OrderListPage> {
       onNotification: _handleScrollNotification,
       child: new SafeArea(
           child: ListView.builder(
-            itemCount: _calculateListItemCount(state),
-            controller: _scrollController,
-            itemBuilder: (context, index) {
-              return index >= state.orderList.length
-                  ? _buildLoaderListItem()
-                  : _buildClickableOrderItem(state.orderList[index]);
-            },
-          )),
+        itemCount: _calculateListItemCount(state),
+        controller: _scrollController,
+        itemBuilder: (context, index) {
+          return index >= state.orderList.length
+              ? _buildLoaderListItem()
+              : _buildClickableOrderItem(state.orderList[index]);
+        },
+      )),
     );
   }
 
@@ -118,6 +123,12 @@ class _OrderListPageState extends State<OrderListPage> {
     return Center(
       child: CircularProgressIndicator(),
     );
+  }
+
+  void _blocLitener(BuildContext context, OrderListState state) {
+    if (!state.isAuthorized) {
+      Navigator.of(context).pushReplacementNamed(LOGIN_PAGE_ROUTE);
+    }
   }
 
   @override

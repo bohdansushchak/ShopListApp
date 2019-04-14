@@ -2,11 +2,15 @@ library order_detail_state;
 
 import 'package:built_value/built_value.dart';
 import 'package:shop_list_app/data/model/order.dart';
+import 'package:shop_list_app/ui/add_products/add_products_state.dart';
 import 'package:shop_list_app/ui/login/login_state.dart';
 part 'order_detail_state.g.dart';
 
 abstract class OrderDetailState
-    implements Built<OrderDetailState, OrderDetailStateBuilder>, BaseState {
+    implements
+        Built<OrderDetailState, OrderDetailStateBuilder>,
+        BaseState,
+        AuthorizedState {
   @nullable
   Order get order;
 
@@ -25,6 +29,7 @@ abstract class OrderDetailState
       ..error = ''
       ..isLoading = false
       ..isHasInternetConnection = true
+      ..isAuthorized = true
       ..urlToInvite = null);
   }
 
@@ -33,6 +38,7 @@ abstract class OrderDetailState
       ..order.replace(order)
       ..error = ''
       ..isLoading = false
+      ..isAuthorized = true
       ..isHasInternetConnection = true
       ..urlToInvite = null);
   }
@@ -42,17 +48,19 @@ abstract class OrderDetailState
       ..error = ''
       ..order.replace(order)
       ..isLoading = false
+      ..isAuthorized = true
       ..isHasInternetConnection = true
       ..urlToInvite = url);
   }
 
   factory OrderDetailState.failure(String error, Order order,
-      [bool hasConnectivity = true]) {
+      {bool hasConnectivity = true, bool isAuthorized = true}) {
     return OrderDetailState((b) => b
       ..error = error
       ..order.replace(order)
       ..isLoading = false
       ..isHasInternetConnection = hasConnectivity
+      ..isAuthorized = isAuthorized
       ..urlToInvite = null);
   }
 
@@ -61,6 +69,7 @@ abstract class OrderDetailState
       ..error = ''
       ..order.replace(order)
       ..isLoading = true
+      ..isAuthorized = true
       ..isHasInternetConnection = true
       ..urlToInvite = null);
   }

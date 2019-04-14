@@ -17,6 +17,8 @@ class _$AddProductsState extends AddProductsState {
   final bool isLoading;
   @override
   final String error;
+  @override
+  final bool isAuthorized;
 
   factory _$AddProductsState([void updates(AddProductsStateBuilder b)]) =>
       (new AddProductsStateBuilder()..update(updates)).build();
@@ -26,7 +28,8 @@ class _$AddProductsState extends AddProductsState {
       this.isOrdesHasBeenCreated,
       this.isHasInternetConnection,
       this.isLoading,
-      this.error})
+      this.error,
+      this.isAuthorized})
       : super._() {
     if (products == null) {
       throw new BuiltValueNullFieldError('AddProductsState', 'products');
@@ -44,6 +47,9 @@ class _$AddProductsState extends AddProductsState {
     }
     if (error == null) {
       throw new BuiltValueNullFieldError('AddProductsState', 'error');
+    }
+    if (isAuthorized == null) {
+      throw new BuiltValueNullFieldError('AddProductsState', 'isAuthorized');
     }
   }
 
@@ -63,17 +69,22 @@ class _$AddProductsState extends AddProductsState {
         isOrdesHasBeenCreated == other.isOrdesHasBeenCreated &&
         isHasInternetConnection == other.isHasInternetConnection &&
         isLoading == other.isLoading &&
-        error == other.error;
+        error == other.error &&
+        isAuthorized == other.isAuthorized;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, products.hashCode), isOrdesHasBeenCreated.hashCode),
-                isHasInternetConnection.hashCode),
-            isLoading.hashCode),
-        error.hashCode));
+            $jc(
+                $jc(
+                    $jc($jc(0, products.hashCode),
+                        isOrdesHasBeenCreated.hashCode),
+                    isHasInternetConnection.hashCode),
+                isLoading.hashCode),
+            error.hashCode),
+        isAuthorized.hashCode));
   }
 
   @override
@@ -83,7 +94,8 @@ class _$AddProductsState extends AddProductsState {
           ..add('isOrdesHasBeenCreated', isOrdesHasBeenCreated)
           ..add('isHasInternetConnection', isHasInternetConnection)
           ..add('isLoading', isLoading)
-          ..add('error', error))
+          ..add('error', error)
+          ..add('isAuthorized', isAuthorized))
         .toString();
   }
 }
@@ -115,6 +127,10 @@ class AddProductsStateBuilder
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
 
+  bool _isAuthorized;
+  bool get isAuthorized => _$this._isAuthorized;
+  set isAuthorized(bool isAuthorized) => _$this._isAuthorized = isAuthorized;
+
   AddProductsStateBuilder();
 
   AddProductsStateBuilder get _$this {
@@ -124,6 +140,7 @@ class AddProductsStateBuilder
       _isHasInternetConnection = _$v.isHasInternetConnection;
       _isLoading = _$v.isLoading;
       _error = _$v.error;
+      _isAuthorized = _$v.isAuthorized;
       _$v = null;
     }
     return this;
@@ -152,7 +169,8 @@ class AddProductsStateBuilder
               isOrdesHasBeenCreated: isOrdesHasBeenCreated,
               isHasInternetConnection: isHasInternetConnection,
               isLoading: isLoading,
-              error: error);
+              error: error,
+              isAuthorized: isAuthorized);
     } catch (_) {
       String _$failedField;
       try {

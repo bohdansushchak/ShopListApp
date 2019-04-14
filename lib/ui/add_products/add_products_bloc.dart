@@ -78,7 +78,11 @@ class AddProductsBloc extends Bloc<ProductsEvent, AddProductsState> {
     } on ServerException catch (e) {
       yield AddProductsState.failure(currentState.products, e.message);
     } on NoConnectivityException catch (e) {
-      yield AddProductsState.failure(currentState.products, e.message, false);
+      yield AddProductsState.failure(currentState.products, e.message,
+          isHasConnectivity: false);
+    } on UnauthorizedException catch (e) {
+      yield AddProductsState.failure(currentState.products, e.message,
+          isAuthorized: false);
     }
   }
 

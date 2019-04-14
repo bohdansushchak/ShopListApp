@@ -208,7 +208,9 @@ class _AddProductsPageState extends State<AddProductsPage> {
   }
 
   _blocListener(BuildContext context, AddProductsState state) {
-    if (!state.isHasInternetConnection) {
+    if (!state.isAuthorized) {
+      Navigator.of(context).pushReplacementNamed(LOGIN_PAGE_ROUTE);
+    } else if (!state.isHasInternetConnection) {
       showNoConnectivityDialog(context,
           title: AppLocalizations.of(context).errTitleDialog,
           message: AppLocalizations.of(context).errCheckInternetConn);
