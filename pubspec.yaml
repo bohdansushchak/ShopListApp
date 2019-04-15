@@ -19,6 +19,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   built_value: ^6.3.0
   built_collection: ^4.1.0
   http: ^0.12.0+1
@@ -26,7 +28,7 @@ dependencies:
   kiwi: ^0.1.0
   flutter_svg: ^0.12.1
   shared_preferences: ^0.5.1+2
-  intl: ^0.15.8
+  intl: ^0.15.7
   connectivity: ^0.4.2
 
 

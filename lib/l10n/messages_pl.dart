@@ -20,7 +20,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "appBarOrderData" : MessageLookupByLibrary.simpleMessage("Dane zamówienia"),
+    "appBarOrderData" : MessageLookupByLibrary.simpleMessage("Dane zamówienia"), 
     "appBarOrderList" : MessageLookupByLibrary.simpleMessage("Lista zakupów"),
     "appBarStoreData" : MessageLookupByLibrary.simpleMessage("Dane sklepu"),
     "appName" : MessageLookupByLibrary.simpleMessage("Shop application"),

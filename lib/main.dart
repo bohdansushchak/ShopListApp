@@ -7,6 +7,7 @@ import 'package:shop_list_app/ui/create_order_shop_data/shop_data.dart';
 import 'package:shop_list_app/ui/login/login_page.dart';
 import 'package:shop_list_app/ui/order_list/order_list_page.dart';
 import 'package:shop_list_app/ui/splash/splash_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 const ORDER_LIST_PAGE_ROUTE = "/OrderListPage";
 const LOGIN_PAGE_ROUTE = "/LoginPage";
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
         AppLocalizationDelegates(),
       ],
       supportedLocales: [

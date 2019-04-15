@@ -41,7 +41,6 @@ class _AddProductsPageState extends State<AddProductsPage> {
 
   Scaffold _buildScaffold() {
     return new Scaffold(
-        resizeToAvoidBottomPadding: false,
         appBar: buildMyAppBar(AppLocalizations.of(context).appBarOrderList),
         body: BlocListener(
             bloc: _addProductBloc,

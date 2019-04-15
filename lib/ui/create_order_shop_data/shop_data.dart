@@ -61,10 +61,10 @@ class _ShopDataPageState extends State<ShopDataPage> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildScaffold();
+    return _buildScaffold(context);
   }
 
-  Scaffold _buildScaffold() {
+  Scaffold _buildScaffold(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: buildMyAppBar(AppLocalizations.of(context).appBarOrderData),

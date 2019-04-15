@@ -8,7 +8,6 @@ part of serializers;
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AddOrderModel.serializer)
-      ..add(ErrorResponse.serializer)
       ..add(Order.serializer)
       ..add(Product.serializer)
       ..add(TokenExpires.serializer)
