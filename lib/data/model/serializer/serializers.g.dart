@@ -9,9 +9,9 @@ part of serializers;
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AddOrderModel.serializer)
       ..add(ErrorResponse.serializer)
-      ..add(MyResponse.serializer)
       ..add(Order.serializer)
       ..add(Product.serializer)
+      ..add(TokenExpires.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Product)]),
           () => new ListBuilder<Product>())

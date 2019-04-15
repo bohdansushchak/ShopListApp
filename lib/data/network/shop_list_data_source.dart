@@ -12,7 +12,7 @@ class ShopListDataSource {
   final http.Client _client;
   final Connectivity _connectivity;
 
-  final String _baseUrl = "https://test.elementzone.uk";
+  final String _baseUrl = 'https://test.elementzone.uk';
 
   ShopListDataSource(this._client, this._connectivity);
 
@@ -25,16 +25,16 @@ class ShopListDataSource {
     assert(limit != null);
     final urlEncoded = _encodeUrl('orders');
     final body = {
-      "api_token": token,
-      "offset": offset.toString(),
-      "limit": limit.toString(),
+      'api_token': token,
+      'offset': offset.toString(),
+      'limit': limit.toString(),
     };
     await _checkInternetConnection();
     final response = await _client.post(urlEncoded, body: body);
 
     if (response.statusCode == 200) {
       final mapResponse = json.decode(response.body);
-      var orderList = (mapResponse["data"] as List);
+      var orderList = (mapResponse['data'] as List);
 
       if (orderList.length == 0) throw NoOrdersException();
 
@@ -46,13 +46,13 @@ class ShopListDataSource {
 
   Future<LoginResult> login(String email, String password) async {
     final urlEncoded = _encodeUrl('login');
-    final body = {"email": email, "password": password};
+    final body = {'email': email, 'password': password};
     await _checkInternetConnection();
     final response = await _client.post(urlEncoded, body: body);
 
     if (response.statusCode == 200) {
       final mapResponse = json.decode(response.body);
-      return LoginResult.fromJson(mapResponse["data"]);
+      return LoginResult.fromJson(mapResponse['data']);
     } else {
       _provideException(response);
     }
@@ -79,29 +79,29 @@ class ShopListDataSource {
 
   Future<bool> refreshToken(String token) async {
     final urlEncoded = _encodeUrl('refresh');
-    final body = {"api_token": token};
+    final body = {'api_token': token};
 
     await _checkInternetConnection();
     final response = await _client.post(urlEncoded, body: body);
 
     if (response.statusCode == 200) {
       final mapResponse = json.decode(response.body);
-      return mapResponse["data"];
+      return mapResponse['data'];
     } else
       _provideException(response);
   }
 
   Future<String> generateLink(String token, int orderId) async {
     final urlEncoded = _encodeUrl('generate');
-    final body = {"api_token": token, "id": orderId.toString()};
+    final body = {'api_token': token, 'id': orderId.toString()};
 
     await _checkInternetConnection();
     final response = await _client.post(urlEncoded, body: body);
 
     if (response.statusCode == 200) {
       final mapResponse = json.decode(response.body);
-      final subUrl = mapResponse["data"]["link"];
-      final url = "$_baseUrl/order/$subUrl";
+      final subUrl = mapResponse['data']['link'];
+      final url = '$_baseUrl/order/$subUrl';
       return url;
     } else
       _provideException(response);
@@ -109,12 +109,12 @@ class ShopListDataSource {
 
   void _provideException(http.Response response) {
     final map = json.decode(response.body);
-    if (!map.containsKey("error")) {
-      throw Exception("Error body is empty");
+    if (!map.containsKey('error')) {
+      throw Exception('Error body is empty');
     }
 
-    var message = map["error"]["message"];
-    var code = map["error"]["code"];
+    var message = map['error']['message'];
+    var code = map['error']['code'];
 
     switch (code) {
       case 401:
@@ -132,7 +132,7 @@ class ShopListDataSource {
     }
   }
 
-  String _encodeUrl(String method) => Uri.encodeFull("$_baseUrl/$method");
+  String _encodeUrl(String method) => Uri.encodeFull('$_baseUrl/$method');
 
   Future _checkInternetConnection() async {
     var connectivityResult = await _connectivity.checkConnectivity();

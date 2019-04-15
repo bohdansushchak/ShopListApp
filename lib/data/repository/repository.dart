@@ -5,6 +5,7 @@ import 'package:shop_list_app/data/model/add_order_model.dart';
 import 'package:shop_list_app/data/model/login_result.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/data/network/shop_list_data_source.dart';
+import 'package:shop_list_app/internal/exeptions.dart';
 import 'package:shop_list_app/internal/token_manager.dart';
 import 'package:intl/intl.dart';
 
@@ -22,6 +23,8 @@ class Repository {
 
   Future<BuiltList<Order>> getOrders(int offset, int limit) async {
     final token = await _tokenManager.getSavedToken();
+    final isTokenValid = await _tokenManager.isTokenValid();
+    if (!isTokenValid) refreshToken();
     final ordersResult =
         await _dataSource.getOrders(token: token, offset: offset, limit: limit);
 
@@ -29,10 +32,13 @@ class Repository {
     return ordersBuiltList;
   }
 
-  Future<bool> refreshToken() async {
+  Future refreshToken() async {
     final token = await _tokenManager.getSavedToken();
-    final result = await _dataSource.refreshToken(token);
-    return result;
+    final isTokenRefreshed = await _dataSource.refreshToken(token);
+    if (isTokenRefreshed)
+      await _tokenManager.refreshToken();
+    else
+      throw UnauthorizedException();
   }
 
   Future<bool> saveOrder(
@@ -56,6 +62,9 @@ class Repository {
       ..shopName = shopName
       ..price = price);
 
+    final isTokenValid = await _tokenManager.isTokenValid();
+    if (!isTokenValid) refreshToken();
+
     final result = await _dataSource.addOrder(model);
 
     return result;
@@ -63,8 +72,9 @@ class Repository {
 
   Future<String> generateUrlToOrdfer(int orderId) async {
     final token = await _tokenManager.getSavedToken();
+    final isTokenValid = await _tokenManager.isTokenValid();
+    if (!isTokenValid) refreshToken();
     final result = await _dataSource.generateLink(token, orderId);
     return result;
   }
-
 }

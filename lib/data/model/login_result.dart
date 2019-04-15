@@ -1,23 +1,41 @@
 library login_result;
 
-class LoginResult {
+import 'package:built_value/built_value.dart';
+import 'package:shop_list_app/data/model/token_expires.dart';
 
-  int id;
-  String email;
-  String updatedAt;
-  String createdAt;
-  String apiToken;
+part 'login_result.g.dart';
 
-  LoginResult._(
-      {this.id, this.email, this.updatedAt, this.createdAt, this.apiToken});
+abstract class LoginResult implements Built<LoginResult, LoginResultBuilder> {
+  @BuiltValueField(wireName: 'id')
+  int get id;
+
+  @BuiltValueField(wireName: 'email')
+  String get email;
+
+  @BuiltValueField(wireName: 'updated_at')
+  String get updatedAt;
+
+  @BuiltValueField(wireName: 'created_at')
+  String get createdAt;
+
+  @BuiltValueField(wireName: 'api_token')
+  String get apiToken;
+
+  @BuiltValueField(wireName: 'api_token_expires')
+  TokenExpires get tokenExpires;
+
+  LoginResult._();
+
+  factory LoginResult([updates(LoginResultBuilder b)]) = _$LoginResult;
 
   factory LoginResult.fromJson(Map<String, dynamic> mapJson) {
-    return new LoginResult._(
-      id: mapJson["id"],
-      email: mapJson["email"],
-      apiToken: mapJson["api_token"],
-      createdAt: mapJson["created_at"],
-      updatedAt: mapJson["updated_at"],
-    );
+    return new LoginResult((b) => b
+      ..id = mapJson['id']
+      ..email = mapJson['email']
+      ..apiToken = mapJson['api_token']
+      ..createdAt = mapJson['created_at']
+      ..updatedAt = mapJson['updated_at']
+      ..tokenExpires = TokenExpires.fromMapJson(mapJson['api_token_expires']).toBuilder()
+      );
   }
 }

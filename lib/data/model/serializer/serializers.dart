@@ -8,7 +8,7 @@ import 'package:shop_list_app/data/model/error_response.dart';
 import 'package:shop_list_app/data/model/login_result.dart';
 import 'package:shop_list_app/data/model/order.dart';
 import 'package:shop_list_app/data/model/product.dart';
-import 'package:shop_list_app/data/model/response.dart';
+import 'package:shop_list_app/data/model/token_expires.dart';
 
 part 'serializers.g.dart';
 
@@ -17,8 +17,8 @@ part 'serializers.g.dart';
   Product,
   LoginResult,
   ErrorResponse,
-  MyResponse,
   AddOrderModel,
+  TokenExpires,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
