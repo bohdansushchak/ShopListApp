@@ -1,16 +1,7 @@
-# shop_list_app
+# ShopingListApp
 
-A new Flutter project.
+#### Flutter project. 
+Simple application to relief managing your shopping list. Using this app you can share a link and invite your friends to shop with you. 
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+![Новый проект](https://user-images.githubusercontent.com/23574179/56352085-2d74c100-61d7-11e9-828d-b6bd1ed2432a.png)
